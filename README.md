@@ -1,0 +1,1 @@
+# pride-art-walk
