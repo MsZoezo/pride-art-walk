@@ -1,0 +1,46 @@
+.navigation {
+    height: 7rem;
+    width: 100%;
+
+    position: absolute;
+    z-index: 1000;
+
+    padding: 1rem;
+
+    display: flex;
+    justify-content: end;
+}
+
+.hamburger {
+    position: relative;
+
+    height: 5rem;
+    width: 5rem;
+
+    background: none;
+    border: none;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.hamburger .background {
+    position: absolute;
+
+    width: 7.5rem;
+    height: 7.5rem;
+    left: -30%;
+
+    fill: rgb(208, 235, 252, 0.85);
+    z-index: -1;
+}
+
+.hamburger .icon {
+    width: 100%;
+    height: 100%;
+
+    stroke: white;
+}
+
