@@ -7,5 +7,5 @@ export async function getExhibitions() {
 }
 
 export async function showExhibition() {
-
+    // TODO
 }

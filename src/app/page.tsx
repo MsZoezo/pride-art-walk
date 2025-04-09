@@ -21,15 +21,15 @@ export default function Home() {
   const changeModal = () => {
     setModal(!modalOpen);
   }
-  
+
   return (
-    <>
+    <section style={{ position: 'relative' }}>
       {
         mapContent && mapContent.length > 0 && (
           <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
         )
       }
-      <ExhibitionModal open={modalOpen}/>
-    </>
+      <ExhibitionModal open={modalOpen} onClose={changeModal}/>
+    </section>
   )
 }
