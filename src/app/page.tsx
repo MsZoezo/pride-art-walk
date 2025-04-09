@@ -1,24 +1,35 @@
 "use client"
 
 import Map from '@/components/map'
-import { useMemo } from 'react'
+import ExhibitionModal from '@/components/exhibitions/exhibitionModal';
+import { useEffect, useState } from 'react'
+import { getExhibitions } from '@/util/fetch/map/exhibitions';
+import { Exhibition } from '@/types/Exhibition';
 
 export default function Home() {
-  const mapContent = [
-    {
-      position: [52.22, 55.22],
-      content: 'nice'
-    },
-    {
-      position: [55.22, 51.22],
-      content: 'nice'
-    },
-    {
-      position: [55.22, 52.22],
-      content: 'nice'
-    },
-  ]
+  const [mapContent, setMapContent] = useState<Exhibition[] | null>(null);
+  const [modalOpen, setModal] = useState(false)
+
+  useEffect(() => {
+    async function fetchMap() {
+      const { data } = await getExhibitions();
+      setMapContent(data);
+    }
+    fetchMap();
+  }, [])
+
+  const changeModal = () => {
+    setModal(!modalOpen);
+  }
+  
   return (
-    <Map markers={mapContent}></Map>
+    <>
+      {
+        mapContent && mapContent.length > 0 && (
+          <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
+        )
+      }
+      <ExhibitionModal open={modalOpen}/>
+    </>
   )
 }
