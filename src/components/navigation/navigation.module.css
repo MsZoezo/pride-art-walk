@@ -11,6 +11,32 @@
     justify-content: end;
 }
 
+.logo {
+    display: none;
+
+    height: 100%;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.links {
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.links a {
+    transition: transform 100ms ease-in-out;
+}
+
+.links a:hover {
+    transform: scale(1.1);
+}
+
 .hamburger {
     position: relative;
 
@@ -44,3 +70,24 @@
     stroke: white;
 }
 
+@media screen and (min-width: 1000px) {
+    .navigation {
+        position: initial;
+
+        justify-content: space-between;
+
+        padding: 1rem 2rem;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .logo {
+        display: initial;
+    }
+
+    .links {
+        display: flex;
+    }
+}

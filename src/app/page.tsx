@@ -2,6 +2,7 @@
 
 import Map from '@/components/map'
 import Navigation from '@/components/navigation/navigation'
+import Link from 'next/link'
 import { useMemo } from 'react'
 
 export default function Home() {
@@ -22,7 +23,12 @@ export default function Home() {
 
   return (
     <>
-      <Navigation />
+      <Navigation>
+        <Link href="/">Home</Link>
+        <Link href="/">Expositions</Link>
+        <Link href="/">News</Link>
+      </Navigation>
+
       <Map markers={mapContent}></Map>
     </>
   )

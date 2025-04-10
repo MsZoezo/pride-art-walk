@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import BaseModal from "../baseModal/baseModal";
 import styles from "./navigationModal.module.css";
 import Link from "next/link";
@@ -6,9 +6,11 @@ import Link from "next/link";
 interface Props {
     isOpen: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
+
+    children: ReactNode;
 }
 
-export default function NavigationModal({ isOpen, setOpen }: Props) {
+export default function NavigationModal({ isOpen, setOpen, children }: Props) {
     return(
         <BaseModal isOpen={isOpen} setOpen={setOpen}>
             <svg className={styles.blobGreen} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -29,10 +31,7 @@ export default function NavigationModal({ isOpen, setOpen }: Props) {
 
 
             <nav className={styles.navigation}>
-                <Link href="/">Home</Link>
-                <Link href="/">Expositions</Link>
-                <Link href="/">News</Link>
-                <Link href="/">About</Link>
+                {children}
             </nav>
         </BaseModal>
     );
