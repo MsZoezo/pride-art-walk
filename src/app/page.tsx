@@ -27,22 +27,20 @@ export default function Home() {
 
   return (
     <>
-       <Navigation>
+      <Navigation>
         <Link href="/">Home</Link>
         <Link href="/">Expositions</Link>
         <Link href="/">News</Link>
       </Navigation>
 
-      <Map markers={mapContent}></Map>
-    
-    <section style={{ position: 'relative' }}>
-      {
-        mapContent && mapContent.length > 0 && (
-          <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
-        )
-      }
-      <ExhibitionModal open={modalOpen} onClose={changeModal}/>
-    </section>
-   </>
+      <section style={{ position: 'relative' }}>
+        {
+          mapContent && mapContent.length > 0 && (
+            <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
+          )
+        }
+        <ExhibitionModal open={modalOpen} onClose={changeModal} />
+      </section>
+    </>
   )
 }
