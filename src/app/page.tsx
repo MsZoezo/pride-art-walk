@@ -1,8 +1,11 @@
 "use client"
 
 import Map from '@/components/map'
+
+import Navigation from '@/components/navigation/navigation'
+import Link from 'next/link'
 import ExhibitionModal from '@/components/exhibitions/exhibitionModal';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { Exhibition } from '@/types/Exhibition';
 
@@ -23,6 +26,15 @@ export default function Home() {
   }
 
   return (
+    <>
+       <Navigation>
+        <Link href="/">Home</Link>
+        <Link href="/">Expositions</Link>
+        <Link href="/">News</Link>
+      </Navigation>
+
+      <Map markers={mapContent}></Map>
+    
     <section style={{ position: 'relative' }}>
       {
         mapContent && mapContent.length > 0 && (
@@ -31,5 +43,6 @@ export default function Home() {
       }
       <ExhibitionModal open={modalOpen} onClose={changeModal}/>
     </section>
+   </>
   )
 }

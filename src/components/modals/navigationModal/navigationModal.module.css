@@ -1,0 +1,63 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    flex-grow: 1;
+
+    gap: 1.6rem;
+}
+
+.navigation a {
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.blobGreen {
+    position: absolute;
+    top: 36px;
+    right: 39px;
+    transform: translate(50%, -50%) rotate(-69deg);
+    width: 50rem;
+    height: 50rem;
+    z-index: -1;
+    fill: hsla(143, 100%, 30%, 0.4);
+}
+
+.blobLightGreen {
+    position: absolute;
+    top: 76px;
+    right: 118px;
+    transform: translate(50%, -50%);
+    width: 30rem;
+    height: 30rem;
+    z-index: -1;
+    fill: hsla(138, 33%, 82%, 0.4);
+}
+
+.blobRed {
+    position: absolute;
+    bottom: 11px;
+    left: 50%;
+    transform: translate(-75%, 50%);
+    width: 40rem;
+    height: 40rem;
+    z-index: -1;
+    fill: rgb(227, 6, 19, 0.4);
+}
+
+.blobOrange {
+    position: absolute;
+    bottom: -30px;
+    right:  50%;
+    transform: translate(75%, 50%) rotate(30deg);
+    width: 40rem;
+    height: 40rem;
+    z-index: -1;
+    fill: rgb(241, 133, 0.4);   
+}
