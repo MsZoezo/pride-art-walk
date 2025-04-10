@@ -1,0 +1,21 @@
+.background {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.card {
+    background: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    border-radius: 2rem;
+    min-width: 10rem;
+    min-height: 10rem;
+}

@@ -1,35 +1,48 @@
 "use client"
 
 import Map from '@/components/map'
+
 import Navigation from '@/components/navigation/navigation'
 import Link from 'next/link'
-import { useMemo } from 'react'
+import ExhibitionModal from '@/components/exhibitions/exhibitionModal';
+import { useEffect, useState, useMemo } from 'react'
+import { getExhibitions } from '@/util/fetch/map/exhibitions';
+import { Exhibition } from '@/types/Exhibition';
 
 export default function Home() {
-  const mapContent = [
-    {
-      position: [52.3944447, 4.8357725],
-      content: 'Locatie 1'
-    },
-    {
-      position: [52.3855491, 4.876251],
-      content: 'Locatie 2'
-    },
-    {
-      position: [52.3605599, 4.8813251],
-      content: 'Locatie 3'
-    },
-  ]
+  const [mapContent, setMapContent] = useState<Exhibition[] | null>(null);
+  const [modalOpen, setModal] = useState(false)
+
+  useEffect(() => {
+    async function fetchMap() {
+      const { data } = await getExhibitions();
+      setMapContent(data);
+    }
+    fetchMap();
+  }, [])
+
+  const changeModal = () => {
+    setModal(!modalOpen);
+  }
 
   return (
     <>
-      <Navigation>
+       <Navigation>
         <Link href="/">Home</Link>
         <Link href="/">Expositions</Link>
         <Link href="/">News</Link>
       </Navigation>
 
       <Map markers={mapContent}></Map>
-    </>
+    
+    <section style={{ position: 'relative' }}>
+      {
+        mapContent && mapContent.length > 0 && (
+          <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
+        )
+      }
+      <ExhibitionModal open={modalOpen} onClose={changeModal}/>
+    </section>
+   </>
   )
 }
