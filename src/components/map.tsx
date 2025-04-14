@@ -9,7 +9,7 @@ import { getAvgPosition } from '@/util/map';
 interface Props {
     markers: { location: number[], title: string, }[]
     zoom?: number,
-    onMarkerClick: (event: LeafletMouseEvent) => void;
+    onMarkerClick: (title: string) => void;
 }
 
 const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
@@ -31,12 +31,12 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
                     key={index} 
                     position={marker.location} 
                     eventHandlers={{
-                        click: onMarkerClick,
+                        click: () => onMarkerClick(marker.title),
                     }}
                 >
-                    <Popup>
+                    {/* <Popup>
                         <span dangerouslySetInnerHTML={{ __html: marker.title }}/>
-                    </Popup>
+                    </Popup> */}
                 </Marker>
             ))}
         </MapContainer>

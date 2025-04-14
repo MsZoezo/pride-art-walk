@@ -4,14 +4,15 @@ import Map from '@/components/map'
 
 import Navigation from '@/components/navigation/navigation'
 import Link from 'next/link'
-import ExhibitionModal from '@/components/exhibitions/exhibitionModal';
 import { useEffect, useState, useMemo } from 'react'
 import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { Exhibition } from '@/types/Exhibition';
+import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal'
 
 export default function Home() {
   const [mapContent, setMapContent] = useState<Exhibition[] | null>(null);
-  const [modalOpen, setModal] = useState(false)
+  const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
+  const [modalOpen, setModal] = useState<boolean>(false)
 
   useEffect(() => {
     async function fetchMap() {
@@ -21,8 +22,15 @@ export default function Home() {
     fetchMap();
   }, [])
 
-  const changeModal = () => {
-    setModal(!modalOpen);
+  const changeModal = (title: string) => {
+    if(!mapContent) return;
+
+    const exhibition = mapContent.find(exhibition => exhibition.title === title);
+
+    if(!exhibition) return;
+
+    setCurrentExhibition(exhibition);
+    setModal(true);
   }
 
   return (
@@ -33,13 +41,13 @@ export default function Home() {
         <Link href="/">News</Link>
       </Navigation>
 
-      <section style={{ position: 'relative' }}>
+      <section>
         {
           mapContent && mapContent.length > 0 && (
             <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
           )
         }
-        <ExhibitionModal open={modalOpen} onClose={changeModal} />
+        <ExhibitionModal isOpen={modalOpen} setOpen={setModal} exhibition={currentExhibition}/>
       </section>
     </>
   )
