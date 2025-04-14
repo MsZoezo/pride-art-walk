@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LeafletMouseEvent } from 'leaflet';
-import { latLngBounds } from 'leaflet';
+import { latLng, LeafletMouseEvent, latLngBounds } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -21,7 +20,7 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
         // dont need to make exception for navigator.geolocation.
         // such exception already exists in getUserLocation
         async function getUserPosition() {
-            const position = await getUserLocation()
+            const position: any = await getUserLocation()
             if(!position) return
             setUserPosition([position.lat, position.long]);
         }
@@ -29,12 +28,12 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
         getUserPosition();
     }, [navigator.geolocation])
     
-    const avgPosition = useMemo(() => {
+    const avgPosition: number[] = useMemo(() => {
         const positions = markers.map((marker) => {
             return marker.location
         });
         if(userPosition) {
-            return positions.push(userPosition)
+            positions.push(userPosition)
         }
         return getAvgPosition(positions)
     }, [markers, userPosition])
@@ -48,12 +47,12 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
             bounds = JSON.parse(process.env.NEXT_PUBLIC_MAP_BOUNDS)
         }
 
-        return latLngBounds(...bounds);
+        return latLngBounds(bounds[0], bounds[1]);
     }, [])
 
     return (
         <MapContainer 
-            center={avgPosition} 
+            center={latLng(avgPosition[0], avgPosition[1])}
             zoom={zoom} 
             style={{ height: '100vh', width: '100%' }}
             maxBounds={amsterdamBounds}
@@ -66,7 +65,7 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
             {markers.map((marker, index) => (
                 <Marker 
                     key={index} 
-                    position={marker.location} 
+                    position={latLng(marker.location[0], marker.location[1])} 
                     eventHandlers={{
                         click: () => onMarkerClick(marker.title),
                     }}
@@ -79,8 +78,9 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
             {
                 userPosition && (
                     <Marker 
+                        
                         key={'user'} 
-                        position={userPosition} 
+                        position={latLng(userPosition[0], userPosition[1])} 
                     >
                     </Marker>
                 )
