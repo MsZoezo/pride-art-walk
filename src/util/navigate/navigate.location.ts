@@ -6,4 +6,4 @@ export function generateMapsLink(lat:string | number, long:string | number) {
         return `https://www.google.com/maps/dir/${userLocation.lat},${userLocation.long}/${lat},${long}`;
     }
     return `https://www.google.com/maps/dir/${lat},${long}`;
-}
+}   
