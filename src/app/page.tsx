@@ -1,7 +1,6 @@
 "use client"
 
 import styles from "./page.module.css";
-import Map from '@/components/map'
 
 import Navigation from '@/components/navigation/navigation'
 import Link from 'next/link'
@@ -9,11 +8,14 @@ import { useEffect, useState, useMemo } from 'react'
 import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { Exhibition } from '@/types/Exhibition';
 import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal'
+import dynamic from "next/dynamic";
 
 export default function Home() {
   const [mapContent, setMapContent] = useState<Exhibition[] | null>(null);
   const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
   const [modalOpen, setModal] = useState<boolean>(false)
+
+  const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
   useEffect(() => {
     async function fetchMap() {

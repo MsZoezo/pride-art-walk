@@ -1,7 +1,7 @@
 import { getUserLocation } from "../location/user.location"
 
 export async function generateMapsLink(lat:string | number, long:string | number) {
-    const userLocation = await getUserLocation();
+    const userLocation: any = await getUserLocation();
     if(userLocation) {
         return `https://www.google.com/maps/dir/${userLocation.lat},${userLocation.long}/${lat},${long}`;
     }
