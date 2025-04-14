@@ -22,12 +22,13 @@
 
 .tags {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 0.5rem;
 
     list-style: none;
 
-    margin: 1rem auto;
+    margin: 1rem 0;
 }
 
 .tags li {
@@ -37,7 +38,8 @@
 
     font-size: 1.4rem;
 
-    background-color: #e1f2fd;
+    background-color: #839faf;
+    color: white;
 }
 
 .artists {
@@ -49,7 +51,9 @@
     list-style: none;
 
     margin-bottom: 1rem;
+}
 
+.artists li {
     font-weight: 500;
 }
 
