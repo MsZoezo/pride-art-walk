@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, useMemo } from "react";
+import { Dispatch, ReactNode, SetStateAction, useEffect, useMemo, useState } from "react";
 import BaseModal from "../baseModal/baseModal";
 import styles from "./exhibitionModal.module.css";
 import { Exhibition } from "@/types/Exhibition";
@@ -14,10 +14,20 @@ interface Props {
 
 export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) {
     if(!exhibition) return;
-    
+    const [mapLink, setMapLink] = useState<string | null>(null)
+    useEffect(() => {
+        async function getUserPosition() {
+            if(!exhibition) return;
+            const link = await generateMapsLink(exhibition.location[0], exhibition.location[1])
+            setMapLink(link);
+        }
+
+        getUserPosition();
+    }, [navigator.geolocation])
+/* 
     const mapLink = useMemo(()=> {
-        return generateMapsLink(exhibition.location[0], exhibition.location[1])
-    }, [exhibition])
+        return await generateMapsLink(exhibition.location[0], exhibition.location[1])
+    }, [exhibition]) */
 
     return(
         <BaseModal isOpen={isOpen} setOpen={setOpen}>
@@ -70,7 +80,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
             <div className={styles.description} dangerouslySetInnerHTML={{__html: exhibition.description}} />
         
             <div className={styles.cta}>
-                <Link href={mapLink}>How to get there</Link>
+                <Link href={mapLink ? mapLink:'#'}>How to get there</Link>
             </div>
         </BaseModal>
     );

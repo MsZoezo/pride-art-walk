@@ -17,9 +17,11 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
     const [userPosition, setUserPosition] = useState<any[] | null>(null);
     
     useEffect(() => {
-        if(!navigator.geolocation) return
+        // dont need to make exception for navigator.geolocation.
+        // such exception already exists in getUserLocation
         async function getUserPosition() {
             const position = await getUserLocation()
+            if(!position) return
             setUserPosition([position.lat, position.long]);
         }
 
@@ -30,8 +32,11 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
         const positions = markers.map((marker) => {
             return marker.location
         });
+        if(userPosition) {
+            return positions.push(userPosition)
+        }
         return getAvgPosition(positions)
-    }, [markers])
+    }, [markers, userPosition])
 
     return (
         <MapContainer center={avgPosition} zoom={zoom} style={{ height: '100vh', width: '100%' }}>
