@@ -3,8 +3,9 @@ import { LeafletMouseEvent } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getAvgPosition } from '@/util/map';
+import { getUserLocation } from '@/util/location/user.location';
 
 interface Props {
     markers: { location: number[], title: string, }[]
@@ -13,6 +14,18 @@ interface Props {
 }
 
 const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
+    const [userPosition, setUserPosition] = useState<any[] | null>(null);
+    
+    useEffect(() => {
+        if(!navigator.geolocation) return
+        async function getUserPosition() {
+            const position = await getUserLocation()
+            setUserPosition([position.lat, position.long]);
+        }
+
+        getUserPosition();
+    }, [navigator.geolocation])
+    
     const avgPosition = useMemo(() => {
         const positions = markers.map((marker) => {
             return marker.location
@@ -39,6 +52,15 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
                     </Popup> */}
                 </Marker>
             ))}
+            {
+                userPosition && (
+                    <Marker 
+                        key={'user'} 
+                        position={userPosition} 
+                    >
+                    </Marker>
+                )
+            }
         </MapContainer>
     );
 };
