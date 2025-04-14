@@ -1,4 +1,4 @@
-export function getAvgPosition(positions: any) {
+export function getAvgPosition(positions: any): number[] {
     let length = positions.length
     let lat = 0;
     let lang = 0;
