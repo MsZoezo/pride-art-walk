@@ -14,7 +14,6 @@ interface Props {
 export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) {
     if(!exhibition) return;
 
-    console.log(exhibition);
     return(
         <BaseModal isOpen={isOpen} setOpen={setOpen}>
             <svg className={styles.blobPink} width="206" height="203" viewBox="0 0 206 203" fill="none" xmlns="http://www.w3.org/2000/svg">
