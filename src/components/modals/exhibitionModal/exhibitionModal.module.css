@@ -39,6 +39,26 @@
     background-color: #e1f2fd;
 }
 
+.route {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    margin: 0 auto;
+
+    text-decoration: underline;
+}
+
+.route .icon {
+    width: 3rem;
+    height: 3rem;
+
+    & svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
 .cta {
     margin-top: auto;
 
@@ -67,4 +87,25 @@
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+.blobPink, .blobBlue {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.blobGreen {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.blobBrown {
+    position: absolute;
+    bottom: 0;
+    left: 75px;
+    z-index: -1;
 }
