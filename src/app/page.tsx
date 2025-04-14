@@ -1,5 +1,6 @@
 "use client"
 
+import styles from "./page.module.css";
 import Map from '@/components/map'
 
 import Navigation from '@/components/navigation/navigation'
@@ -34,21 +35,19 @@ export default function Home() {
   }
 
   return (
-    <>
+    <section className={styles.content}>
       <Navigation>
         <Link href="/">Home</Link>
         <Link href="/">Expositions</Link>
         <Link href="/">News</Link>
       </Navigation>
 
-      <section>
         {
           mapContent && mapContent.length > 0 && (
             <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
           )
         }
         <ExhibitionModal isOpen={modalOpen} setOpen={setModal} exhibition={currentExhibition}/>
-      </section>
-    </>
+    </section>
   )
 }
