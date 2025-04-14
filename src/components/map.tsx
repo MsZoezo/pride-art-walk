@@ -1,9 +1,10 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
+import { latLngBounds } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import { useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { getAvgPosition } from '@/util/map';
 import { getUserLocation } from '@/util/location/user.location';
 
@@ -15,7 +16,7 @@ interface Props {
 
 const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
     const [userPosition, setUserPosition] = useState<any[] | null>(null);
-    
+
     useEffect(() => {
         // dont need to make exception for navigator.geolocation.
         // such exception already exists in getUserLocation
@@ -38,8 +39,26 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
         return getAvgPosition(positions)
     }, [markers, userPosition])
 
+    const amsterdamBounds = useMemo(() => {
+        let bounds: any[]
+        if(!process.env.NEXT_PUBLIC_MAP_BOUNDS) {
+            // base amsterdam
+            bounds = [[52.2782, 4.7285], [52.4312, 5.0792]]
+        } else {
+            bounds = JSON.parse(process.env.NEXT_PUBLIC_MAP_BOUNDS)
+        }
+
+        return latLngBounds(...bounds);
+    }, [])
+
     return (
-        <MapContainer center={avgPosition} zoom={zoom} style={{ height: '100vh', width: '100%' }}>
+        <MapContainer 
+            center={avgPosition} 
+            zoom={zoom} 
+            style={{ height: '100vh', width: '100%' }}
+            maxBounds={amsterdamBounds}
+            maxBoundsViscosity={1.0}
+        >
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -70,4 +89,4 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
     );
 };
   
-export default Map;
+export default memo(Map);
