@@ -7,6 +7,7 @@
 }
 
 .image {
+    margin-top: 2.4rem;
     width: 100%;
 }
 
@@ -21,11 +22,13 @@
 
 .tags {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
 
     list-style: none;
 
-    margin: 1rem auto;
+    margin: 1rem 0;
 }
 
 .tags li {
@@ -33,20 +36,98 @@
 
     border-radius: 2.4rem;
 
-    font-size: 80%;
+    font-size: 1.4rem;
 
-    background-color: #e1f2fd;
+    background-color: #839faf;
+    color: white;
+}
+
+.artists {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    list-style: none;
+
+    margin-bottom: 1rem;
+}
+
+.artists li {
+    font-weight: 500;
+}
+
+.route {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    margin: 0 auto;
+
+    text-decoration: underline;
+}
+
+.route .icon {
+    width: 3rem;
+    height: 3rem;
+
+    & svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.description {
+    margin-top: 1.2rem;
 }
 
 .cta {
-    margin: auto auto 1.5rem auto;
+    margin-top: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+.cta a {
+    margin: 1.2rem 1.2rem 1rem 1.2rem;
 
     padding: 0.8rem 1.2rem;
 
     background: #f18500;
     color: #fff;
 
-    font-weight: bold;
+    font-weight: 700;
 
     border-radius: 1.2rem;
+}
+
+@media screen and (min-width: 500px) {
+    .image {
+        min-width: 47.6rem;
+        width: 50vw;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.blobPink, .blobBlue {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.blobGreen {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.blobBrown {
+    position: absolute;
+    bottom: 0;
+    left: 75px;
+    z-index: -1;
 }

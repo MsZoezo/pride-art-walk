@@ -35,6 +35,6 @@ function showPosition(position: any) {
 }
 
 function logError(error) {
-    console.log(error)
-    return null
+  console.log(error)
+  return null
 }
