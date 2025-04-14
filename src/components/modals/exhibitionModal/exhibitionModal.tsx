@@ -14,6 +14,8 @@ interface Props {
 export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) {
     if(!exhibition) return;
 
+    console.log(exhibition)
+
     return(
         <BaseModal isOpen={isOpen} setOpen={setOpen}>
             <svg className={styles.blobPink} width="206" height="203" viewBox="0 0 206 203" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +43,10 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
                 {exhibition.tags.map((tag, i) => <li key={`${exhibition.title}-tags-${i}`}>{tag}</li>)}
             </ul>
 
+            <ul className={styles.artists}>
+                {exhibition.artist_name.map((artist, i) => <li key={`${exhibition.title}-artists-${i}`}>{artist}</li>)}
+            </ul>
+
             <Link href="/" className={styles.route}>
                 <figure className={styles.icon}>
                     <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,9 +57,12 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
                 Route
             </Link>
 
-            <figure className={styles.image}>
-                <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt="" />
-            </figure>
+            { exhibition.image ?
+                <figure className={styles.image}>
+                    <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt="" />
+                </figure>
+            : null}
+
 
             <div className={styles.description} dangerouslySetInnerHTML={{__html: exhibition.description}} />
         
