@@ -1,42 +1,42 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { latLng, LeafletMouseEvent, latLngBounds } from 'leaflet';
+import { latLng, latLngBounds } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import { memo, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getAvgPosition } from '@/util/map';
-import { getUserLocation } from '@/util/location/user.location';
+import { getUserLocation, UserLocation } from '@/util/location/user.location';
+import { Exhibition } from '@/types/Exhibition';
 
 interface Props {
-    markers: { location: number[], title: string, }[]
+    exhibitions: Exhibition[]
     zoom?: number,
-    onMarkerClick: (title: string) => void;
+    onMarkerClick: (id: number) => void;
 }
 
-const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
-    const [userPosition, setUserPosition] = useState<any[] | null>(null);
+const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
+    const [userPosition, setUserPosition] = useState<UserLocation | null>(null);
 
     useEffect(() => {
         // dont need to make exception for navigator.geolocation.
         // such exception already exists in getUserLocation
-        async function getUserPosition() {
-            const position: any = await getUserLocation()
-            if(!position) return
-            setUserPosition([position.lat, position.long]);
-        }
+        (async () => {
+            const position: UserLocation | null = await getUserLocation();
 
-        getUserPosition();
+            if (!position) return;
+            setUserPosition(position);
+        })();
     }, [navigator.geolocation])
-    
+
     const avgPosition: number[] = useMemo(() => {
-        const positions = markers.map((marker) => {
-            return marker.location
+        const positions = exhibitions.map((exhibition) => {
+            return exhibition.location;
         });
-        if(userPosition) {
-            positions.push(userPosition)
+        if (userPosition) {
+            positions.push([userPosition.lat, userPosition.long]);
         }
-        return getAvgPosition(positions)
-    }, [markers, userPosition])
+        return getAvgPosition(positions);
+    }, [exhibitions, userPosition])
 
     const amsterdamBounds = useMemo(() => {
         let bounds: any[]
@@ -62,17 +62,14 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {markers.map((marker, index) => (
+            {exhibitions.map((exhibition, index) => (
                 <Marker 
-                    key={index} 
-                    position={latLng(marker.location[0], marker.location[1])} 
+                    key={`exhibition-marker-${exhibition.id}`}
+                    position={latLng(exhibition.location[0], exhibition.location[1])} 
                     eventHandlers={{
-                        click: () => onMarkerClick(marker.title),
+                        click: () => onMarkerClick(exhibition.id),
                     }}
                 >
-                    {/* <Popup>
-                        <span dangerouslySetInnerHTML={{ __html: marker.title }}/>
-                    </Popup> */}
                 </Marker>
             ))}
             {
@@ -80,7 +77,7 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
                     <Marker 
                         
                         key={'user'} 
-                        position={latLng(userPosition[0], userPosition[1])} 
+                        position={latLng(userPosition.lat, userPosition.long)} 
                     >
                     </Marker>
                 )
@@ -88,5 +85,5 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
         </MapContainer>
     );
 };
-  
-export default memo(Map);
+
+export default Map;

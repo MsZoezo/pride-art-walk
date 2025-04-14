@@ -2,54 +2,59 @@
 
 import styles from "./page.module.css";
 
-import Navigation from '@/components/navigation/navigation'
-import Link from 'next/link'
-import { useEffect, useState, useMemo } from 'react'
-import { getExhibitions } from '@/util/fetch/map/exhibitions';
-import { Exhibition } from '@/types/Exhibition';
+import MapNavigation from '@/components/mapNavigation/mapNavigation'
 import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal'
+
+import Link from 'next/link'
 import dynamic from "next/dynamic";
 
+import { useEffect, useState } from 'react'
+import { getExhibitions } from '@/util/fetch/map/exhibitions';
+import { Exhibition } from '@/types/Exhibition';
+
 export default function Home() {
-  const [mapContent, setMapContent] = useState<Exhibition[] | null>(null);
-  const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
-  const [modalOpen, setModal] = useState<boolean>(false)
+    const [exhibitions, setExhibitions] = useState<Exhibition[] | null>(null);
+    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
-  const Map = dynamic(() => import("@/components/map"), { ssr: false });
+    const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
-  useEffect(() => {
-    async function fetchMap() {
-      const { data } = await getExhibitions();
-      setMapContent(data);
+    useEffect(() => {
+        (async () => {
+            const exhibitions: Exhibition[] = await getExhibitions();
+            setExhibitions(exhibitions);
+        })();
+    }, [])
+
+    /** Changes the modal to the exhibition identified by id.
+     * @param id the exhibition id.
+    */
+    const changeModal = (id: number) => {
+        if (!exhibitions) return;
+
+        const exhibition = exhibitions.find(exhibition => exhibition.id === id);
+
+        if (!exhibition) return;
+
+        setCurrentExhibition(exhibition);
+        setIsModalOpen(true);
     }
-    fetchMap();
-  }, [])
 
-  const changeModal = (title: string) => {
-    if(!mapContent) return;
+    return (
+        <section className={styles.content}>
+            <MapNavigation>
+                <Link href="/">Home</Link>
+                <Link href="/">Expositions</Link>
+                <Link href="/">News</Link>
+            </MapNavigation>
 
-    const exhibition = mapContent.find(exhibition => exhibition.title === title);
-
-    if(!exhibition) return;
-
-    setCurrentExhibition(exhibition);
-    setModal(true);
-  }
-
-  return (
-    <section className={styles.content}>
-      <Navigation>
-        <Link href="/">Home</Link>
-        <Link href="/">Expositions</Link>
-        <Link href="/">News</Link>
-      </Navigation>
-
-        {
-          mapContent && mapContent.length > 0 && (
-            <Map markers={mapContent} zoom={13} onMarkerClick={changeModal}></Map>
-          )
-        }
-        <ExhibitionModal isOpen={modalOpen} setOpen={setModal} exhibition={currentExhibition}/>
-    </section>
-  )
+            {
+                exhibitions && exhibitions.length > 0 && (
+                    <Map exhibitions={exhibitions} zoom={13} onMarkerClick={changeModal}></Map>
+                )
+            }
+            
+            <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
+        </section>
+    )
 }

@@ -1,16 +1,46 @@
+/**
+ * This interface describes the data available in an exhibition.
+ */
 export interface Exhibition {
-    title: string,
-    artist_name: string[],
-    venue_name: string,
-    address: string,
-    description: string,
-    tags: string[],
-    special_event: boolean,
-    image: string | null,
-    location: number[],
-    is_active: boolean | 0 | 1,
-    image_alt?: string,
-    date?: string | Date,
+    /** Unique id to identify the exhibition. */
+    id: number;
 
+    /** Title of the exhibition */
+    title: string,
+
+    /** List of descriptive tags relevant to the exhibition. */
+    tags: string[],
+
+    /** Indicates if this exhibition is a special event. */
+    special_event: boolean,
+
+    /** Name of the venue where the exhibition is held */
+    venue_name: string,
+
+    /** List of one or multiple artists involved with the exhibition. */
+    artist_name: string[],
+
+    /** Description of the exhibition, raw html. */
+    description: string,
+
+    /** The image url of the exhibition. */
+    image?: string,
+
+    /** The alt text of the exhibition image. */
+    image_alt?: string,
+
+    /** Exhibition's address. */
+    address?: string,
+
+    /** Latitude & longtitude of the exhibition in order. */
+    location: number[],
+
+    /** If the exhibition is active & should be displayed. */
+    is_active: boolean | 0 | 1,
+
+    /** When this exhibition was created. */
     created_at?: string | Date,
+
+    /** When this exhibition was last updated. */
+    updated_at?: string | Date,
 }
