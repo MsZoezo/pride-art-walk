@@ -30,7 +30,9 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
 
             <div className={styles.description} dangerouslySetInnerHTML={{__html: exhibition.description}} />
         
-            <Link className={styles.cta} href="/">How to get there</Link>
+            <div className={styles.cta}>
+                <Link href="/">How to get there</Link>
+            </div>
         </BaseModal>
     );
 }

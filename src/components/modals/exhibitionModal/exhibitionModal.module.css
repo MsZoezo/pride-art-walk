@@ -7,6 +7,7 @@
 }
 
 .image {
+    margin: 2.4rem 0 1.2rem 0;
     width: 100%;
 }
 
@@ -39,7 +40,14 @@
 }
 
 .cta {
-    margin: auto auto 1.5rem auto;
+    margin-top: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+.cta a {
+    margin: 1.2rem 1.2rem 1rem 1.2rem;
 
     padding: 0.8rem 1.2rem;
 
@@ -49,4 +57,14 @@
     font-weight: bold;
 
     border-radius: 1.2rem;
+}
+
+@media screen and (min-width: 500px) {
+    .image {
+        min-width: 47.6rem;
+        width: 50vw;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
