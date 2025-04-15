@@ -1,13 +1,4 @@
-/**
- * This interface describes the coordinates of the users location.
- */
-export interface UserLocation {
-    /** User latitude. */
-    lat: number;
-
-    /** User longtitude */
-    long: number;
-}
+import { UserLocation } from "@/types/UserLocation";
 
 /** Gets the user location if available */
 export async function getUserLocation(): Promise<UserLocation | null> {

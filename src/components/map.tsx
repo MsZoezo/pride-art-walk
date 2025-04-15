@@ -5,8 +5,10 @@ import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import { useEffect, useMemo, useState } from 'react';
 import { getAvgPosition } from '@/util/map';
-import { getUserLocation, UserLocation } from '@/util/location/user.location';
+import { getUserLocation } from '@/util/location/user.location';
 import { Exhibition } from '@/types/Exhibition';
+import { UserLocation } from '@/types/UserLocation';
+import { useUserLocationContext } from '@/context/UserLocationContextProvider';
 
 interface Props {
     exhibitions: Exhibition[]
@@ -15,28 +17,16 @@ interface Props {
 }
 
 const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
-    const [userPosition, setUserPosition] = useState<UserLocation | null>(null);
-
-    useEffect(() => {
-        // dont need to make exception for navigator.geolocation.
-        // such exception already exists in getUserLocation
-        (async () => {
-            const position: UserLocation | null = await getUserLocation();
-
-            if (!position) return;
-            setUserPosition(position);
-        })();
-    }, [navigator.geolocation])
-
+    const { position } = useUserLocationContext();
     const avgPosition: number[] = useMemo(() => {
-        const positions = exhibitions.map((exhibition) => {
+        const markerPositions = exhibitions.map((exhibition) => {
             return exhibition.location;
         });
-        if (userPosition) {
-            positions.push([userPosition.lat, userPosition.long]);
+        if (position) {
+            markerPositions.push([position.lat, position.long]);
         }
-        return getAvgPosition(positions);
-    }, [exhibitions, userPosition])
+        return getAvgPosition(markerPositions);
+    }, [exhibitions, position])
 
     const amsterdamBounds = useMemo(() => {
         let bounds: any[]
@@ -74,11 +64,11 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
                 </Marker>
             ))}
             {
-                userPosition && (
+                position && (
                     <Marker 
                         
                         key={'user'} 
-                        position={latLng(userPosition.lat, userPosition.long)} 
+                        position={latLng(position.lat, position.long)} 
                     >
                     </Marker>
                 )

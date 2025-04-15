@@ -1,3 +1,4 @@
+import { UserLocationProvider } from "@/context/UserLocationContextProvider";
 import "./globals.css";
 
 import type { Metadata } from "next";
@@ -15,7 +16,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {children}
+                <UserLocationProvider>
+                    {children}
+                </UserLocationProvider>
             </body>
         </html>
     );

@@ -8,7 +8,8 @@ import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal
 import Link from 'next/link'
 import dynamic from "next/dynamic";
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { Exhibition } from '@/types/Exhibition';
 
@@ -16,7 +17,7 @@ export default function Home() {
     const [exhibitions, setExhibitions] = useState<Exhibition[] | null>(null);
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
+    
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
     useEffect(() => {

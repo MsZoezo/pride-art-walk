@@ -4,6 +4,7 @@ import styles from "./exhibitionModal.module.css";
 import { Exhibition } from "@/types/Exhibition";
 import Link from "next/link";
 import { generateMapsLink } from "@/util/navigate/navigate.location";
+import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 
 interface Props {
     isOpen: boolean;
@@ -14,20 +15,11 @@ interface Props {
 
 export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) {
     if (!exhibition) return;
-    const [mapLink, setMapLink] = useState<string | null>(null)
-    useEffect(() => {
-        async function getUserPosition() {
-            if (!exhibition) return;
-            const link = await generateMapsLink(exhibition.location[0], exhibition.location[1])
-            setMapLink(link);
-        }
+    const { position } = useUserLocationContext();
 
-        getUserPosition();
-    }, [navigator.geolocation])
-    /* 
-        const mapLink = useMemo(()=> {
-            return await generateMapsLink(exhibition.location[0], exhibition.location[1])
-        }, [exhibition]) */
+    const mapLink = useMemo(()=> {
+        return generateMapsLink(exhibition.location[0], exhibition.location[1], position)
+    }, [exhibition]) 
 
     return (
         <BaseModal isOpen={isOpen} setOpen={setOpen}>
