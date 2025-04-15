@@ -15,5 +15,5 @@ export function generateMapsLink(lat:string | number, long:string | number, user
         return `https://www.google.com/maps/dir/${userPosition.lat},${userPosition.long}/${lat},${long}`;
     }
 
-    return `https://www.google.com/maps/dir/${lat},${long}`;
+    return `https://www.google.com/maps/dir//${lat},${long}`;
 }   
