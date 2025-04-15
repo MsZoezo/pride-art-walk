@@ -1,9 +1,16 @@
+import { Exhibition } from "@/types/Exhibition";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getExhibitions() {
+/**
+ * Gets all exhibitions from rest api.
+ * @returns All exhibitions available
+ */
+export async function getExhibitions(): Promise<Exhibition[]> {
     const response = await fetch(`${API_URL}/exhibitions`);
-    const data = await response.json();
-    return data
+
+    const { data: exhibitions} = await response.json();
+    return exhibitions;
 }
 
 export async function showExhibition() {

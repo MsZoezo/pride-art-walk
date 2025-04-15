@@ -1,16 +1,17 @@
-import { ReactNode, useState } from "react";
-import styles from "./navigation.module.css";
+import styles from "./mapNavigation.module.css";
+
 import NavigationModal from "../modals/navigationModal/navigationModal";
-import Link from "next/link";
+import { ReactNode, useState } from "react";
 
 interface Props {
     children: ReactNode;
 }
 
-export default function Navigation({ children }: Props) {
-    const [ isOpen, setOpen ] = useState<boolean>(false);
+/** This component handles navigation for on the map,Behaving differently from the base navigation. */
+export default function MapNavigation({ children }: Props) {
+    const [isOpen, setOpen] = useState<boolean>(false);
 
-    return(
+    return (
         <>
             <div className={styles.navigation}>
 
@@ -28,13 +29,13 @@ export default function Navigation({ children }: Props) {
                     </svg>
 
                     <svg className={styles.icon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 7L4 7" stroke="inherit" strokeWidth="2" strokeLinecap="round"/>
-                        <path d="M20 12L4 12" stroke="inherit" strokeWidth="2" strokeLinecap="round"/>
-                        <path d="M20 17L4 17" stroke="inherit" strokeWidth="2" strokeLinecap="round"/>
+                        <path d="M20 7L4 7" stroke="inherit" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M20 12L4 12" stroke="inherit" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M20 17L4 17" stroke="inherit" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                 </button>
             </div>
-            
+
             <NavigationModal isOpen={isOpen} setOpen={setOpen}>
                 {children}
             </NavigationModal>
