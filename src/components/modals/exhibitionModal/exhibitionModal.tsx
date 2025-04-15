@@ -15,10 +15,11 @@ interface Props {
 
 export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) {
     if (!exhibition) return;
-    const { position } = useUserLocationContext();
+    const position = useUserLocationContext();
 
     const mapLink = useMemo(()=> {
-        return generateMapsLink(exhibition.location[0], exhibition.location[1], position)
+        if(position) return generateMapsLink(exhibition.location[0], exhibition.location[1], position.position);
+        return generateMapsLink(exhibition.location[0], exhibition.location[1]);
     }, [exhibition]) 
 
     return (

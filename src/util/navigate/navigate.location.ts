@@ -10,7 +10,7 @@ import { UserLocation } from "@/types/UserLocation";
  * @returns Google maps link.
  */
 
-export function generateMapsLink(lat:string | number, long:string | number, userPosition?: UserLocation): string {
+export function generateMapsLink(lat:string | number, long:string | number, userPosition?: UserLocation | null): string {
     if(userPosition) {
         return `https://www.google.com/maps/dir/${userPosition.lat},${userPosition.long}/${lat},${long}`;
     }

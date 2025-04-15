@@ -17,13 +17,13 @@ interface Props {
 }
 
 const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
-    const { position } = useUserLocationContext();
+    const position = useUserLocationContext();
     const avgPosition: number[] = useMemo(() => {
         const markerPositions = exhibitions.map((exhibition) => {
             return exhibition.location;
         });
-        if (position) {
-            markerPositions.push([position.lat, position.long]);
+        if (position?.position) {
+            markerPositions.push([position.position.lat, position.position.long]);
         }
         return getAvgPosition(markerPositions);
     }, [exhibitions, position])
@@ -64,11 +64,11 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
                 </Marker>
             ))}
             {
-                position && (
+                position?.position && (
                     <Marker 
                         
                         key={'user'} 
-                        position={latLng(position.lat, position.long)} 
+                        position={latLng(position.position.lat, position.position.long)} 
                     >
                     </Marker>
                 )

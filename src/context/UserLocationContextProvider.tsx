@@ -23,6 +23,6 @@ export function UserLocationProvider({ children }: Props) {
     );
 }
 
-export function useUserLocationContext() {
+export function useUserLocationContext(): UserLocationContextType | null {
     return useContext(UserLocationContext);
 }
