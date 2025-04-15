@@ -9,7 +9,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getExhibitions(): Promise<Exhibition[]> {
     const response = await fetch(`${API_URL}/exhibitions`);
 
-    const { data: exhibitions} = await response.json();
+    const { data: exhibitions } = await response.json();
     return exhibitions;
 }
 
