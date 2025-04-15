@@ -54,6 +54,7 @@ const Map = ({ markers, zoom = 13, onMarkerClick  }:Props) => {
         <MapContainer 
             center={latLng(avgPosition[0], avgPosition[1])}
             zoom={zoom} 
+            minZoom={zoom} 
             style={{ height: '100vh', width: '100%' }}
             maxBounds={amsterdamBounds}
             maxBoundsViscosity={1.0}
