@@ -9,6 +9,7 @@ import { getUserLocation } from '@/util/location/user.location';
 import { Exhibition } from '@/types/Exhibition';
 import { UserLocation } from '@/types/UserLocation';
 import { useUserLocationContext } from '@/context/UserLocationContextProvider';
+import ExhibitionMarker from './exhibitionMarker/exhibitionMarker';
 
 interface Props {
     exhibitions: Exhibition[]
@@ -54,14 +55,7 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             {exhibitions.map((exhibition, index) => (
-                <Marker 
-                    key={`exhibition-marker-${exhibition.id}`}
-                    position={latLng(exhibition.location[0], exhibition.location[1])} 
-                    eventHandlers={{
-                        click: () => onMarkerClick(exhibition.id),
-                    }}
-                >
-                </Marker>
+                <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} color="#FFDE00" exhibition={exhibition} onClick={onMarkerClick} />
             ))}
             {
                 position?.position && (
