@@ -10,6 +10,7 @@ import { Exhibition } from '@/types/Exhibition';
 import { UserLocation } from '@/types/UserLocation';
 import { useUserLocationContext } from '@/context/UserLocationContextProvider';
 import ExhibitionMarker from './exhibitionMarker/exhibitionMarker';
+import GpsMarker from './gpsMarker/gpsMarker';
 
 interface Props {
     exhibitions: Exhibition[]
@@ -26,6 +27,7 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
         if (position?.position) {
             markerPositions.push([position.position.lat, position.position.long]);
         }
+        
         return getAvgPosition(markerPositions);
     }, [exhibitions, position])
 
@@ -57,16 +59,8 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
             {exhibitions.map((exhibition, index) => (
                 <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} color="#FFDE00" exhibition={exhibition} onClick={onMarkerClick} />
             ))}
-            {
-                position?.position && (
-                    <Marker 
-                        
-                        key={'user'} 
-                        position={latLng(position.position.lat, position.position.long)} 
-                    >
-                    </Marker>
-                )
-            }
+
+            <GpsMarker />
         </MapContainer>
     );
 };
