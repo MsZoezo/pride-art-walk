@@ -7,10 +7,15 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
  * @returns All exhibitions available
  */
 export async function getExhibitions(): Promise<Exhibition[]> {
-    const response = await fetch(`${API_URL}/exhibitions`);
+    try {
+        const response = await fetch(`${API_URL}/exhibitions`);
 
-    const { data: exhibitions } = await response.json();
-    return exhibitions;
+        const { data: exhibitions } = await response.json();
+        return exhibitions;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
 }
 
 export async function showExhibition() {
