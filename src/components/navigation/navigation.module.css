@@ -1,0 +1,65 @@
+.navigation {
+    height: 7rem;
+    width: 100%;
+
+    padding: 1rem 1rem 1rem 2rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 100%;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.links {
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.links a {
+    transition: transform 100ms ease-in-out;
+}
+
+.links a:hover {
+    transform: scale(1.1);
+}
+
+.hamburger {
+    position: relative;
+
+    height: 5rem;
+    width: 5rem;
+
+    background: none;
+    border: none;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.hamburger .icon {
+    width: 100%;
+    height: 100%;
+
+    stroke: black;
+}
+
+@media screen and (min-width: 500px) {
+    .hamburger {
+        display: none;
+    }
+
+    .links {
+        display: flex;
+    }
+}
