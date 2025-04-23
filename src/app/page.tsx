@@ -45,7 +45,7 @@ export default function Home() {
         <section className={styles.content}>
             <MapNavigation>
                 <Link href="/">Home</Link>
-                <Link href="/">Expositions</Link>
+                <Link href="/exhibitions">Exhibitions</Link>
                 <Link href="/">News</Link>
             </MapNavigation>
 
