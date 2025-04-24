@@ -1,3 +1,5 @@
+import { Tag } from "./Tag";
+
 /**
  * This interface describes the data available in an exhibition.
  */
@@ -9,7 +11,7 @@ export interface Exhibition {
     title: string,
 
     /** List of descriptive tags relevant to the exhibition. */
-    tags: string[],
+    tags: Tag[],
 
     /** Indicates if this exhibition is a special event. */
     special_event: boolean,

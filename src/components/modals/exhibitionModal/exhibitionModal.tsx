@@ -46,7 +46,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
             <h3 className={styles.venue}>{exhibition.venue_name}</h3>
 
             <ul className={styles.tags}>
-                {exhibition.tags.map((tag, i) => <li key={`${exhibition.title}-tags-${i}`}>{tag}</li>)}
+                {exhibition.tags.map((tag, i) => <li key={`${exhibition.title}-tags-${i}`}>{tag.name}</li>)}
             </ul>
 
             <ul className={styles.artists}>

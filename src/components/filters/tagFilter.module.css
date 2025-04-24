@@ -1,0 +1,22 @@
+.button {
+    border: none;
+    background: aliceblue;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    cursor: pointer;
+}
+.selected {
+    background: aquamarine !important;
+}
+
+.container {
+    display: flex;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
