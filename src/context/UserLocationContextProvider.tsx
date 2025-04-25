@@ -14,7 +14,7 @@ interface Props {
 const UserLocationContext = createContext<UserLocationContextType | null>(null);
 
 export function UserLocationProvider({ children }: Props) {
-    const { position, error } = useUserLocation({ enableHighAccuracy: true });
+    const { position, error } = useUserLocation({ enableHighAccuracy: true, timeout: 500 });
 
     return (
         <UserLocationContext.Provider value={{ position, error }}>

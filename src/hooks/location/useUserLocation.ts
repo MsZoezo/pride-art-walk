@@ -6,6 +6,7 @@ export function useUserLocation(options?: PositionOptions) {
     const [error, setError] = useState<string | null>(null);
 
     function updatePosition(pos: GeolocationPosition) {
+        if(pos.coords.latitude === position?.lat && pos.coords.longitude === position?.long) return;
         setPosition(
             {
                 lat: pos.coords.latitude,
