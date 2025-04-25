@@ -13,9 +13,10 @@ import { Exhibition } from '@/types/Exhibition';
 import { Tag } from "@/types/Tag";
 import styles from "./page.module.css"
 import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
+import { useExhibitionsContext } from "@/context/ExhibitionsContextProvider";
 
 export default function Exhibitions() {
-    const [exhibitions, setExhibitions] = useState<Exhibition[] | null>(null);
+    const exhibitions = useExhibitionsContext();
     const [tags, setTags] = useState<any>([]);
     const [showTags, setTagVisibility] = useState(false);
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
@@ -25,20 +26,8 @@ export default function Exhibitions() {
         (async () => {
             const allTags = await getTags();
             setTags(allTags);
-            await fetchData()
         })();
     }, [])
-
-    async function fetchData(Tags?: Tag[]) {
-        console.log(Tags)
-        const exhibitions: Exhibition[] | null = await getExhibitions(Tags);
-
-        if(!exhibitions) return;
-
-        exhibitions.sort((a, b) => a.title.localeCompare(b.title));
-
-        setExhibitions(exhibitions);
-    }
     
     const showModal = (exhibition: Exhibition) => {
         setCurrentExhibition(exhibition)

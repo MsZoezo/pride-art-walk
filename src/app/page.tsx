@@ -12,20 +12,14 @@ import { useContext, useEffect, useState } from 'react'
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { Exhibition } from '@/types/Exhibition';
+import { useExhibitionsContext } from "@/context/ExhibitionsContextProvider";
 
 export default function Home() {
-    const [exhibitions, setExhibitions] = useState<Exhibition[] | null>(null);
+    const exhibitions = useExhibitionsContext();
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
-
-    useEffect(() => {
-        (async () => {
-            const exhibitions: Exhibition[] | null = await getExhibitions();
-            setExhibitions(exhibitions);
-        })();
-    }, [])
 
     /** Changes the modal to the exhibition identified by id.
      * @param id the exhibition id.
