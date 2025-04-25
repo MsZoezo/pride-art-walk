@@ -17,10 +17,13 @@ import { useExhibitionsContext } from "@/context/ExhibitionsContextProvider";
 
 export default function Exhibitions() {
     const exhibitions = useExhibitionsContext();
+    const [shownExhibitions, setShownExhibitions] = useState<Exhibition[] | null>(null);
     const [tags, setTags] = useState<any>([]);
     const [showTags, setTagVisibility] = useState(false);
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+
+    useEffect(() => setShownExhibitions(exhibitions ? [...exhibitions] : null), [exhibitions]);
 
     useEffect(() => {
         (async () => {
@@ -28,6 +31,33 @@ export default function Exhibitions() {
             setTags(allTags);
         })();
     }, [])
+
+    async function filterExhibitions(Tags?: number[]) {
+        console.log(Tags);
+        if(!exhibitions) return;
+
+        const allExhibitions = [...exhibitions];
+
+        if(!Tags || Tags.length == 0) {
+            setShownExhibitions(allExhibitions);
+            return;
+        }
+
+        const filteredExhibitions = allExhibitions.filter(exhibition => {
+            for(let i = 0; i < Tags.length; i++) {
+                console.log(exhibition.tags, Tags[i])
+                if(!exhibition.tags.find(tag => tag.id === Tags[i])) continue;
+
+                return true;
+            }
+
+            return false;
+        });
+
+        console.log(allExhibitions, filteredExhibitions);
+
+        setShownExhibitions(filteredExhibitions);
+    }
     
     const showModal = (exhibition: Exhibition) => {
         setCurrentExhibition(exhibition)
@@ -48,14 +78,14 @@ export default function Exhibitions() {
                 <button onClick={() => setTagVisibility(!showTags)}>show/hide</button>
                 {
                     showTags && (
-                        <TagFilter tags={tags} onSelected={fetchData}/>
+                        <TagFilter tags={tags} onSelected={filterExhibitions}/>
                     )
                 }
             </section>
 
             <section className={styles.exhibitions}>
                 {
-                    exhibitions?.map((exhibition) => (
+                    shownExhibitions?.map((exhibition) => (
                         <ExhibitionCard key={exhibition.id} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
                     ))
                 }
