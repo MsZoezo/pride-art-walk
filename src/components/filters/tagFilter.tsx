@@ -17,8 +17,8 @@ export default function TagFilter({ tags, setSelectedTags, selectedTags }: Props
     return (
         <div className={styles.container}>
             {
-                tags.map(tag => (
-                    <button onClick={() => onClick(tag.id)} className={`${styles.button} ${selectedTags.includes(tag.id) ? styles.selected:''}`}>
+                tags.map((tag, i) => (
+                    <button key={`filter-${i}`} onClick={() => onClick(tag.id)} className={`${styles.button} ${selectedTags.includes(tag.id) ? styles.selected:''}`}>
                         { tag.name }
                     </button>
                 ))
