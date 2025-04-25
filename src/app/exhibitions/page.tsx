@@ -45,13 +45,10 @@ export default function Exhibitions() {
 
         const filteredExhibitions = allExhibitions.filter(exhibition => {
             for(let i = 0; i < Tags.length; i++) {
-                console.log(exhibition.tags, Tags[i])
-                if(!exhibition.tags.find(tag => tag.id === Tags[i])) continue;
-
-                return true;
+                if(!exhibition.tags.find(tag => tag.id === Tags[i])) return false;
             }
 
-            return false;
+            return true;
         });
 
         console.log(allExhibitions, filteredExhibitions);
