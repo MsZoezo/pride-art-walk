@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, AttributionControl } from 'react-leaflet';
 import { latLng, latLngBounds, LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
@@ -57,6 +57,7 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
             style={{ height: '100vh', width: '100%' }}
             maxBounds={amsterdamBounds}
             maxBoundsViscosity={1.0}
+            attributionControl={false}
         >
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -67,6 +68,7 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
             ))}
 
             <GpsMarker />
+            <AttributionControl position="bottomleft" />
         </MapContainer>
     );
 };

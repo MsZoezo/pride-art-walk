@@ -13,6 +13,7 @@ import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { Exhibition } from '@/types/Exhibition';
 import { useExhibitionsContext } from "@/context/ExhibitionsContextProvider";
+import Mascot from "@/components/mascot/mascot";
 
 export default function Home() {
     const exhibitions = useExhibitionsContext();
@@ -46,6 +47,8 @@ export default function Home() {
             <Map exhibitions={exhibitions} zoom={13} onMarkerClick={changeModal}></Map>
             
             <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
+
+            <Mascot />
         </section>
     )
 }
