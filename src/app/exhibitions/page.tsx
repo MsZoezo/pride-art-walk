@@ -32,6 +32,11 @@ export default function Exhibitions() {
     async function fetchData(Tags?: Tag[]) {
         console.log(Tags)
         const exhibitions: Exhibition[] | null = await getExhibitions(Tags);
+
+        if(!exhibitions) return;
+
+        exhibitions.sort((a, b) => a.title.localeCompare(b.title));
+
         setExhibitions(exhibitions);
     }
     
