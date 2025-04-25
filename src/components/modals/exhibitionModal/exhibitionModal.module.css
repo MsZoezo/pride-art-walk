@@ -31,17 +31,6 @@
     margin: 1rem 0;
 }
 
-.tags li {
-    padding: 0.4rem 0.8rem;
-
-    border-radius: 2.4rem;
-
-    font-size: 1.4rem;
-
-    background-color: #839faf;
-    color: white;
-}
-
 .artists {
     display: flex;
     justify-content: center;

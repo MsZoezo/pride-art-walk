@@ -11,8 +11,8 @@ import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { getTags } from "@/util/fetch/tags";
 import { Exhibition } from '@/types/Exhibition';
 import { Tag } from "@/types/Tag";
-import ExhibitionListItem from "@/components/exhibitionList/exhibitionListItem";
 import styles from "./page.module.css"
+import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
 
 export default function Exhibitions() {
     const [exhibitions, setExhibitions] = useState<Exhibition[] | null>(null);
@@ -31,9 +31,10 @@ export default function Exhibitions() {
 
     async function fetchData(Tags?: Tag[]) {
         console.log(Tags)
-        const exhibitions: Exhibition[] = await getExhibitions(Tags);
+        const exhibitions: Exhibition[] | null = await getExhibitions(Tags);
         setExhibitions(exhibitions);
     }
+    
     const showModal = (exhibition: Exhibition) => {
         setCurrentExhibition(exhibition)
         setIsModalOpen(true)
@@ -46,7 +47,9 @@ export default function Exhibitions() {
                 <Link href="/exhibitions">Exhibitions</Link>
                 <Link href="/">News</Link>
             </Navigation>
+
             <h1>Exhibitions</h1>
+
             <section>
                 <button onClick={() => setTagVisibility(!showTags)}>show/hide</button>
                 {
@@ -56,11 +59,10 @@ export default function Exhibitions() {
                 }
             </section>
 
-            <br />
-            <section>
+            <section className={styles.exhibitions}>
                 {
                     exhibitions?.map((exhibition) => (
-                        <ExhibitionListItem key={exhibition.id} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
+                        <ExhibitionCard key={exhibition.id} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
                     ))
                 }
             </section>

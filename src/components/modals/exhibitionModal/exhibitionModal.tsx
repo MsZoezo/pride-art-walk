@@ -5,6 +5,7 @@ import { Exhibition } from "@/types/Exhibition";
 import Link from "next/link";
 import { generateMapsLink } from "@/util/navigate/navigate.location";
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
+import Tag from "@/components/tag/tag";
 
 interface Props {
     isOpen: boolean;
@@ -46,7 +47,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
             <h3 className={styles.venue}>{exhibition.venue_name}</h3>
 
             <ul className={styles.tags}>
-                {exhibition.tags.map((tag, i) => <li key={`${exhibition.title}-tags-${i}`}>{tag.name}</li>)}
+                {exhibition.tags.map((tag, i) => <Tag key={`${exhibition.title}-tags-${i}`} text={tag.name} index={i} />)}
             </ul>
 
             <ul className={styles.artists}>
