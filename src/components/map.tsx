@@ -63,7 +63,7 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             {exhibitions?.map((exhibition, index) => (
-                <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} color="#FFDE00" exhibition={exhibition} onClick={onMarkerClick} />
+                <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} exhibition={exhibition} onClick={onMarkerClick} />
             ))}
 
             <GpsMarker />

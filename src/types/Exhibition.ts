@@ -1,3 +1,4 @@
+import { ScheduleDate } from "./ScheduleDate";
 import { Tag } from "./Tag";
 
 /**
@@ -36,6 +37,8 @@ export interface Exhibition {
 
     /** Latitude & longtitude of the exhibition in order. */
     location: number[],
+
+    schedules: ScheduleDate[],
 
     /** If the exhibition is active & should be displayed. */
     is_active: boolean | 0 | 1,
