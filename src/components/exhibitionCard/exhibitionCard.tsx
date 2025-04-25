@@ -5,10 +5,12 @@ import Tag from "../tag/tag";
 interface Props {
     exhibition: Exhibition,
     onClick?: any
+    selectedTags?: number[];
 }
 
 export default function ExhibitionCard({ exhibition, onClick }: Props) {
     const description = exhibition.description.replaceAll(/<\/?[^>]+(>|$)/g, "").split(/\s+/).slice(0, 25).join(' ') + '...';
+
     return (
         <article onClick={onClick} className={styles.card}>
 
@@ -22,7 +24,7 @@ export default function ExhibitionCard({ exhibition, onClick }: Props) {
                 <h3 className={styles.title}>{exhibition.title}</h3>
 
                 <ul className={styles.tags}>
-                    {exhibition.tags.map((tag, i) => <Tag key={`${exhibition.title}-tags-${i}`} text={tag.name} index={i} />)}
+                    {exhibition.tags.map((tag, i) => <Tag key={`${exhibition.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
                 </ul>
 
                 <p>{description}</p>

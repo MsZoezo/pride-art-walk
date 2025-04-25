@@ -1,7 +1,9 @@
+import { useSelectedTagsContext } from "@/context/SelectedTagsContextProvider";
 import styles from "./tag.module.css";
 
 interface Props {
     text: string;
+    id: number;
     index?: number;
 }
 
@@ -12,11 +14,15 @@ const colours = [
     '#829FAE66'
 ];
 
-export default function Tag({ text, index }: Props) {
+export default function Tag({ text, id, index }: Props) {
+    const selectedTags = useSelectedTagsContext();
+
     const background = colours[(index ?? 0) % colours.length];
 
+    const isSelected = selectedTags?.includes(id);
+
     return(
-        <li className={styles.tag} style={{background: background}}>
+        <li className={`${styles.tag} ${isSelected ? styles.selected : ''}`} style={{background: background}}>
             {text}
         </li>
     );

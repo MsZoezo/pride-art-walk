@@ -5,7 +5,7 @@ import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal
 import TagFilter from "@/components/filters/tagFilter";
 import Link from "next/link";
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { getTags } from "@/util/fetch/tags";
@@ -14,51 +14,43 @@ import { Tag } from "@/types/Tag";
 import styles from "./page.module.css"
 import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
 import { useExhibitionsContext } from "@/context/ExhibitionsContextProvider";
+import { SelectedTagsContextProvider } from "@/context/SelectedTagsContextProvider";
 
 export default function Exhibitions() {
     const exhibitions = useExhibitionsContext();
-    const [shownExhibitions, setShownExhibitions] = useState<Exhibition[] | null>(null);
     const [tags, setTags] = useState<any>([]);
+    const [selectedTags, setSelectedTags] = useState<number[]>([]);
     const [showTags, setTagVisibility] = useState(false);
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
-    useEffect(() => setShownExhibitions(exhibitions ? [...exhibitions] : null), [exhibitions]);
 
     useEffect(() => {
         (async () => {
             const allTags = await getTags();
             setTags(allTags);
         })();
-    }, [])
+    }, []);
 
-    async function filterExhibitions(Tags?: number[]) {
-        console.log(Tags);
+    const shownExhibitions = useMemo(() => {
         if(!exhibitions) return;
 
         const allExhibitions = [...exhibitions];
 
-        if(!Tags || Tags.length == 0) {
-            setShownExhibitions(allExhibitions);
-            return;
+        if(selectedTags.length == 0) {
+            return allExhibitions;
         }
 
         const filteredExhibitions = allExhibitions.filter(exhibition => {
-            for(let i = 0; i < Tags.length; i++) {
-                if(!exhibition.tags.find(tag => tag.id === Tags[i])) return false;
-            }
-
+            for(let i = 0; i < selectedTags.length; i++) if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) return false;
             return true;
         });
 
-        console.log(allExhibitions, filteredExhibitions);
-
-        setShownExhibitions(filteredExhibitions);
-    }
+        return filteredExhibitions;
+    }, [exhibitions, selectedTags]);
     
     const showModal = (exhibition: Exhibition) => {
         setCurrentExhibition(exhibition)
-        setIsModalOpen(true)
+        setIsModalOpen(true);
     }
 
     return(
@@ -75,18 +67,20 @@ export default function Exhibitions() {
                 <button onClick={() => setTagVisibility(!showTags)}>show/hide</button>
                 {
                     showTags && (
-                        <TagFilter tags={tags} onSelected={filterExhibitions}/>
+                        <TagFilter tags={tags} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
                     )
                 }
             </section>
 
-            <section className={styles.exhibitions}>
-                {
-                    shownExhibitions?.map((exhibition) => (
-                        <ExhibitionCard key={exhibition.id} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
-                    ))
-                }
-            </section>
+            <SelectedTagsContextProvider selectedTags={selectedTags}>
+                <section className={styles.exhibitions}>
+                    {
+                        shownExhibitions?.map((exhibition) => (
+                            <ExhibitionCard key={exhibition.id} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
+                        ))
+                    }
+                </section>
+            </SelectedTagsContextProvider>
 
             <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
         </main>
