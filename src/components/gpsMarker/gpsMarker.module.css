@@ -1,3 +1,8 @@
+.icon {
+    cursor: grab;
+}
+
+
 #circle {
     transform: scale(2);
     transform-origin: center;
