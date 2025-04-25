@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { latLng, latLngBounds } from 'leaflet';
+import { latLng, latLngBounds, LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -13,23 +13,13 @@ import ExhibitionMarker from './exhibitionMarker/exhibitionMarker';
 import GpsMarker from './gpsMarker/gpsMarker';
 
 interface Props {
-    exhibitions: Exhibition[]
-    zoom?: number,
+    exhibitions: Exhibition[] | null;
+    zoom?: number;
     onMarkerClick: (id: number) => void;
 }
 
 const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
     const position = useUserLocationContext();
-    const avgPosition: number[] = useMemo(() => {
-        const markerPositions = exhibitions.map((exhibition) => {
-            return exhibition.location;
-        });
-        if (position?.position) {
-            markerPositions.push([position.position.lat, position.position.long]);
-        }
-        
-        return getAvgPosition(markerPositions);
-    }, [exhibitions, position])
 
     const amsterdamBounds = useMemo(() => {
         let bounds: any[]
@@ -43,9 +33,25 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
         return latLngBounds(bounds[0], bounds[1]);
     }, [])
 
+    const avgPosition: LatLngExpression = useMemo(() => {
+        if(!exhibitions) {
+            return amsterdamBounds.getCenter();
+        };
+
+        const markerPositions = exhibitions.map((exhibition) => {
+            return exhibition.location;
+        });
+
+        if (position?.position) {
+            markerPositions.push([position.position.lat, position.position.long]);
+        }
+        
+        return getAvgPosition(markerPositions);
+    }, [exhibitions, position])
+
     return (
         <MapContainer 
-            center={latLng(avgPosition[0], avgPosition[1])}
+            center={avgPosition}
             zoom={zoom} 
             minZoom={zoom} 
             style={{ height: '100vh', width: '100%' }}
@@ -56,7 +62,7 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {exhibitions.map((exhibition, index) => (
+            {exhibitions?.map((exhibition, index) => (
                 <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} color="#FFDE00" exhibition={exhibition} onClick={onMarkerClick} />
             ))}
 

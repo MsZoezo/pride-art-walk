@@ -1,10 +1,12 @@
+import { LatLng, latLng } from "leaflet";
+
 /**
  * This helper function gets the average of all positions given.
  * 
  * @param positions All of the positions to average out
  * @returns Average position
  */
-export function getAvgPosition(positions: number[][]): number[] {
+export function getAvgPosition(positions: number[][]): LatLng {
     const length = positions.length
 
     let lat = 0;
@@ -15,5 +17,5 @@ export function getAvgPosition(positions: number[][]): number[] {
         lang += positions[i][1];
     }
 
-    return [lat / length, lang / length];
+    return latLng(lat / length, lang / length);
 }

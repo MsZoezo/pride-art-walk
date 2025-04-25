@@ -10,7 +10,7 @@ interface Tag {
  * Gets all exhibitions from rest api.
  * @returns All exhibitions available
  */
-export async function getExhibitions(tags?: Tag[]): Promise<Exhibition[]> {
+export async function getExhibitions(tags?: Tag[]): Promise<Exhibition[] | null> {
     let url = `${API_URL}/exhibitions`;
     if(tags) {
         url = url + `?${createQueryStringFromArray(tags, 'tags')}`
@@ -18,11 +18,13 @@ export async function getExhibitions(tags?: Tag[]): Promise<Exhibition[]> {
     try {
         const response = await fetch(url);
 
+        if(!response.ok) return null;
+
         const { data: exhibitions } = await response.json();
         return exhibitions;
     } catch (error) {
         console.error(error);
-        return [];
+        return null;
     }
 }
 

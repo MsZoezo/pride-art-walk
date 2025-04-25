@@ -22,7 +22,7 @@ export default function Home() {
 
     useEffect(() => {
         (async () => {
-            const exhibitions: Exhibition[] = await getExhibitions();
+            const exhibitions: Exhibition[] | null = await getExhibitions();
             setExhibitions(exhibitions);
         })();
     }, [])
@@ -49,11 +49,7 @@ export default function Home() {
                 <Link href="/">News</Link>
             </MapNavigation>
 
-            {
-                exhibitions && exhibitions.length > 0 && (
-                    <Map exhibitions={exhibitions} zoom={13} onMarkerClick={changeModal}></Map>
-                )
-            }
+            <Map exhibitions={exhibitions} zoom={13} onMarkerClick={changeModal}></Map>
             
             <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
         </section>
