@@ -1,7 +1,7 @@
 import { Exhibition } from "@/types/Exhibition";
 import styles from "./exhibitionMarker.module.css";
 import L, { latLng } from "leaflet";
-import { Marker } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import isOpen from "@/util/datetime/isOpen";
 
 interface Props {

@@ -17,24 +17,10 @@ import useExhibitions from "@/hooks/useExhibitions";
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
     const { exhibitions, isError, isLoading } = useExhibitions();
-    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
-    /** Changes the modal to the exhibition identified by id.
-     * @param id the exhibition id.
-    */
-    const changeModal = (id: number) => {
-        if (!exhibitions) return;
 
-        const exhibition = exhibitions.find(exhibition => exhibition.id === id);
-
-        if (!exhibition) return;
-
-        setCurrentExhibition(exhibition);
-        setIsModalOpen(true);
-    }
 
     return (
         <section className={styles.content}>
@@ -44,9 +30,8 @@ export default function Home() {
                 <Link href="/">News</Link>
             </MapNavigation>
 
-            <Map exhibitions={exhibitions} zoom={13} onMarkerClick={changeModal}></Map>
+            <Map exhibitions={exhibitions} zoom={13} ></Map>
             
-            <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
 
             <Mascot />
         </section>
