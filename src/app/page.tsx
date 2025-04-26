@@ -13,6 +13,8 @@ import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { Exhibition } from '@/types/Exhibition';
 import Mascot from "@/components/mascot/mascot";
 import useExhibitions from "@/hooks/useExhibitions";
+import maplibregl from "maplibre-gl";
+import { Protocol } from "pmtiles";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
@@ -21,6 +23,16 @@ export default function Home() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
+
+    useEffect(() => {
+        let protocol = new Protocol();
+
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+        
+        return () => {
+          maplibregl.removeProtocol("pmtiles");
+        };
+    }, []);
 
     /** Changes the modal to the exhibition identified by id.
      * @param id the exhibition id.
