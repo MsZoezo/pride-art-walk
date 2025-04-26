@@ -10,13 +10,13 @@ import dynamic from "next/dynamic";
 
 import { useContext, useEffect, useState } from 'react'
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
-import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { Exhibition } from '@/types/Exhibition';
-import { useExhibitionsContext } from "@/context/ExhibitionsContextProvider";
 import Mascot from "@/components/mascot/mascot";
+import useExhibitions from "@/hooks/useExhibitions";
 
 export default function Home() {
-    const exhibitions = useExhibitionsContext();
+    // const exhibitions = useExhibitionsContext();
+    const { exhibitions, isError, isLoading } = useExhibitions();
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     

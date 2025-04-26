@@ -6,18 +6,18 @@ import TagFilter from "@/components/filters/tagFilter";
 import Link from "next/link";
 
 import { useContext, useEffect, useMemo, useState } from 'react'
-
-import { getExhibitions } from '@/util/fetch/map/exhibitions';
 import { getTags } from "@/util/fetch/tags";
 import { Exhibition } from '@/types/Exhibition';
 import { Tag } from "@/types/Tag";
 import styles from "./page.module.css"
 import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
-import { useExhibitionsContext } from "@/context/ExhibitionsContextProvider";
 import { SelectedTagsContextProvider } from "@/context/SelectedTagsContextProvider";
+import useExhibitions from "@/hooks/useExhibitions";
 
 export default function Exhibitions() {
-    const exhibitions = useExhibitionsContext();
+    // const exhibitions = useExhibitionsContext();
+    const { exhibitions, isError, isLoading } = useExhibitions();
+
     const [tags, setTags] = useState<any>([]);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
     const [showTags, setTagVisibility] = useState(false);

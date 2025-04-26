@@ -13,7 +13,7 @@ import ExhibitionMarker from './exhibitionMarker/exhibitionMarker';
 import GpsMarker from './gpsMarker/gpsMarker';
 
 interface Props {
-    exhibitions: Exhibition[] | null;
+    exhibitions: Exhibition[] | undefined;
     zoom?: number;
     onMarkerClick: (id: number) => void;
 }
@@ -37,6 +37,8 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
         if(!exhibitions) {
             return amsterdamBounds.getCenter();
         };
+
+        console.log(exhibitions);
 
         const markerPositions = exhibitions.map((exhibition) => {
             return exhibition.location;
