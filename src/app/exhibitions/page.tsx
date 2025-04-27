@@ -19,8 +19,6 @@ export default function Exhibitions() {
     // const exhibitions = useExhibitionsContext();
     const { exhibitions, isError, isLoading } = useExhibitions();
 
-    if(isLoading) return <LoadingScreen />;
-
     const [tags, setTags] = useState<any>([]);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
     const [showTags, setTagVisibility] = useState(false);
@@ -55,6 +53,8 @@ export default function Exhibitions() {
         setCurrentExhibition(exhibition)
         setIsModalOpen(true);
     }
+
+    if(isLoading) return <LoadingScreen />;
 
     return(
         <main className={styles.main}>
