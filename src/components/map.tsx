@@ -13,6 +13,7 @@ import GpsMarker from './gpsMarker/gpsMarker';
 import { theme } from '../util/theme';
 import maplibregl, { LngLat } from 'maplibre-gl';
 import ExhibitionModal from './modals/exhibitionModal/exhibitionModal';
+import { env } from 'process';
 
 interface Props {
     exhibitions: Exhibition[] | undefined;
@@ -99,7 +100,7 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
                     sources: {
                     protomaps: {
                         type: "vector",
-                        url: "pmtiles://vienna.pmtiles",
+                        url: `pmtiles://maps/${process.env.NEXT_PUBLIC_MAP}.pmtiles`,
                     },
                     },
                     layers: layers("protomaps", theme, {lang: undefined }),
