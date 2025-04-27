@@ -12,15 +12,31 @@ import ExhibitionMarker from './exhibitionMarker/exhibitionMarker';
 import GpsMarker from './gpsMarker/gpsMarker';
 import { theme } from '../util/theme';
 import maplibregl, { LngLat } from 'maplibre-gl';
+import ExhibitionModal from './modals/exhibitionModal/exhibitionModal';
 
 interface Props {
     exhibitions: Exhibition[] | undefined;
     zoom?: number;
-    onMarkerClick: (id: number) => void;
 }
 
-const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
+const Map = ({ exhibitions, zoom = 13 }: Props) => {
     const position = useUserLocationContext();
+    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    /** Changes the modal to the exhibition identified by id.
+     * @param id the exhibition id.
+    */
+        const changeModal = (id: number) => {
+            if (!exhibitions) return;
+    
+            const exhibition = exhibitions.find(exhibition => exhibition.id === id);
+    
+            if (!exhibition) return;
+    
+            setCurrentExhibition(exhibition);
+            setIsModalOpen(true);
+        }
 
     const bounds: LngLatBounds  = useMemo(() => {
         let bounds: any[]
@@ -53,45 +69,52 @@ const Map = ({ exhibitions, zoom = 13, onMarkerClick }: Props) => {
         }
         
         return getAvgPosition(markerPositions);
-    }, [exhibitions, position])
+    }, []);
 
     return (
-        <ReactMap
+        <>
+            <ReactMap
 
-            initialViewState={{
-                longitude: avgPosition.lng, 
-                latitude: avgPosition.lat,
-                zoom: zoom
-            }}
+                initialViewState={{
+                    longitude: avgPosition.lng, 
+                    latitude: avgPosition.lat,
+                    zoom: 0
+                }}
 
-            maxZoom={zoom}
+                minZoom={0}
+                maxZoom={20}
 
-            style={{ height: '100vh', width: '100%' }}
+                style={{ height: '100vh', width: '100%' }}
 
-            maxBounds={bounds}
+                maxBounds={bounds}
 
-            attributionControl={false}
+                attributionControl={false}
 
-            mapStyle={{
-                version: 8,
-                glyphs:'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
-                sprite: "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
-                sources: {
-                protomaps: {
-                    type: "vector",
-                    url: "https://api.protomaps.com/tiles/v4.json?key=ec50e877033148c0",
-                },
-                },
-                layers: layers("protomaps", theme, {lang: undefined }),
-            }}
-        >
-            
-            {exhibitions?.map((exhibition, index) => (
-                <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} exhibition={exhibition} onClick={onMarkerClick} />
-            ))}
+                reuseMaps={true}
 
-            <GpsMarker />
-        </ReactMap>
+                mapStyle={{
+                    version: 8,
+                    glyphs:'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
+                    sprite: "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
+                    sources: {
+                    protomaps: {
+                        type: "vector",
+                        url: "pmtiles://vienna.pmtiles",
+                    },
+                    },
+                    layers: layers("protomaps", theme, {lang: undefined }),
+                }}
+            >
+                
+                {exhibitions?.map((exhibition, index) => (
+                    <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} exhibition={exhibition} onClick={changeModal} />
+                ))}
+
+                <GpsMarker />
+            </ReactMap>
+            <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
+        </>
+
     );
 };
 
