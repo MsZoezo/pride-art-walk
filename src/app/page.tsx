@@ -13,6 +13,7 @@ import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { Exhibition } from '@/types/Exhibition';
 import Mascot from "@/components/mascot/mascot";
 import useExhibitions from "@/hooks/useExhibitions";
+import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
@@ -20,7 +21,7 @@ export default function Home() {
     
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
-
+    if(isLoading) return <LoadingScreen />;
 
     return (
         <section className={styles.content}>
@@ -30,7 +31,7 @@ export default function Home() {
                 <Link href="/">News</Link>
             </MapNavigation>
 
-            <Map exhibitions={exhibitions} zoom={13} ></Map>
+            <Map exhibitions={exhibitions} zoom={13}></Map>
             
 
             <Mascot />

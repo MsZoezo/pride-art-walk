@@ -13,10 +13,13 @@ import styles from "./page.module.css"
 import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
 import { SelectedTagsContextProvider } from "@/context/SelectedTagsContextProvider";
 import useExhibitions from "@/hooks/useExhibitions";
+import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 
 export default function Exhibitions() {
     // const exhibitions = useExhibitionsContext();
     const { exhibitions, isError, isLoading } = useExhibitions();
+
+    if(isLoading) return <LoadingScreen />;
 
     const [tags, setTags] = useState<any>([]);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
