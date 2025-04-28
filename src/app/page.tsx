@@ -23,8 +23,6 @@ export default function Home() {
     
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
-    if(isLoading) return <LoadingScreen />;
-
     useEffect(() => {
         let protocol = new Protocol();
 
@@ -34,6 +32,8 @@ export default function Home() {
           maplibregl.removeProtocol("pmtiles");
         };
     }, []);
+
+    if(isLoading) return <LoadingScreen />;
 
     return (
         <section className={styles.content}>
