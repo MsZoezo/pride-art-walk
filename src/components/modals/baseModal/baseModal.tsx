@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction, useEffect, useRef } from "react";
 import styles from "./baseModal.module.css"
 
 interface Props {
@@ -9,8 +9,32 @@ interface Props {
 }
 
 export default function BaseModal({ isOpen, setOpen, children }: Props) {
+    const modalRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if(!isOpen) return;
+
+        const controller = new AbortController();
+        const modal = modalRef.current!;
+
+        document.addEventListener('pointerdown', evt => {
+            if(modal.contains(evt.target as Node)) return;
+
+            setOpen(false);
+        }, { signal: controller.signal });
+
+        document.addEventListener('keydown', evt => {
+            if(evt.key !== 'Escape') return;
+
+            setOpen(false);
+        }, { signal: controller.signal });
+
+        return () => controller.abort();
+    }, [isOpen]);
+
     return (
-        <div className={`${styles.modal} ${isOpen ? styles.open : ''}`}>
+        <div className={`${styles.wrapper} ${isOpen ? styles.open : ''}`}>
+        <div className={styles.modal} ref={modalRef}>
             <div className={styles.inner}>
                 <div className={styles.bar}>
                     <button onClick={() => setOpen(false)} className={styles.closeButton}>
@@ -24,6 +48,7 @@ export default function BaseModal({ isOpen, setOpen, children }: Props) {
                     {children}
                 </div>
             </div>
+        </div>
         </div>
     );
 }
