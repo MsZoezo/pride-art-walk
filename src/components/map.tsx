@@ -20,6 +20,9 @@ interface Props {
     zoom?: number;
 }
 
+const mapBounds: [[number, number], [number, number]] = JSON.parse(process.env.NEXT_PUBLIC_MAP_BOUNDS);
+const mapCenter: [number, number] = JSON.parse(process.env.NEXT_PUBLIC_MAP_CENTER);
+
 const initialMapZoom = Number(process.env.NEXT_PUBLIC_MAP_INITIAL_ZOOM);
 const minMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MIN_ZOOM);
 const maxMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MAX_ZOOM);
@@ -43,39 +46,6 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
             setIsModalOpen(true);
         }
 
-    const bounds: LngLatBounds  = useMemo(() => {
-        let bounds: any[]
-        if (!process.env.NEXT_PUBLIC_MAP_BOUNDS) {
-            // base amsterdam
-            bounds = [[4.7285, 52.2782], [5.0792, 52.4312]]
-        } else {
-            bounds = JSON.parse(process.env.NEXT_PUBLIC_MAP_BOUNDS)
-        }
-
-        return new maplibregl.LngLatBounds(
-            [bounds[0],
-            bounds[1]]
-        );
-    }, []);
-
-    const avgPosition: LngLat = useMemo(() => {
-        if(!exhibitions) {
-            return bounds.getCenter();
-        };
-
-        console.log(exhibitions);
-
-        const markerPositions = exhibitions.map((exhibition) => {
-            return exhibition.location;
-        });
-
-        if (position?.position) {
-            markerPositions.push([position.position.lat, position.position.long]);
-        }
-
-        return getAvgPosition(markerPositions);
-    }, []);
-
     console.log(minMapZoom, maxMapZoom);
 
     return (
@@ -83,8 +53,8 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
             <ReactMap
 
                 initialViewState={{
-                    longitude: avgPosition.lng, 
-                    latitude: avgPosition.lat,
+                    longitude: mapCenter[0], 
+                    latitude: mapCenter[1],
                     zoom: initialMapZoom
                 }}
 
@@ -93,7 +63,7 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
 
                 style={{ height: '100vh', width: '100%' }}
 
-                maxBounds={bounds}
+                maxBounds={mapBounds}
 
                 attributionControl={false}
 
