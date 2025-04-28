@@ -12,6 +12,17 @@ export default function BaseModal({ isOpen, setOpen, children }: Props) {
     const modalRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
+        const html = document.documentElement;
+
+        const scrollBarWidth = window.innerWidth - html.clientWidth;
+        html.style.setProperty('--padding', `${scrollBarWidth}px`);
+
+        html.classList.toggle('modal', isOpen);
+
+        return () => html.classList.remove('modal');
+    }, [isOpen]);
+
+    useEffect(() => {
         if(!isOpen) return;
 
         const controller = new AbortController();
@@ -28,6 +39,9 @@ export default function BaseModal({ isOpen, setOpen, children }: Props) {
 
             setOpen(false);
         }, { signal: controller.signal });
+
+        /* Make sure we can't click through on touch devices */
+        modal.parentElement!.addEventListener('touchstart', evt => evt.preventDefault());
 
         return () => controller.abort();
     }, [isOpen]);
