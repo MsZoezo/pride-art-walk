@@ -109,6 +109,7 @@
 
 html:has(.wrapper.open) {
     overflow: hidden;
+    pointer-events: none;
 }
 
 .wrapper {
@@ -146,6 +147,8 @@ html:has(.wrapper.open) {
     flex-direction: column;
 
     z-index: 0;
+
+    pointer-events: all;
 }
 
 .bar {
