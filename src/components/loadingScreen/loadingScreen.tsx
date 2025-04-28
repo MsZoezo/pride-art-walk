@@ -14,6 +14,11 @@ export default function LoadingScreen({ render }: Props) {
     // This minimum loading time should help with images loading in the background (hopefully!)
     const [ minTimeElapsed, setMinTimeElapsed ] = useState<boolean>(false);
 
+    /* skip everything if we don't have to render at all */
+    useEffect(() => {
+        if(!render) setHidden(true);
+    }, []);
+
     useEffect(() => {
         setTimeout(() => setMinTimeElapsed(true), 1500);
     }, []);
@@ -21,7 +26,9 @@ export default function LoadingScreen({ render }: Props) {
     useEffect(() => {
         if(render || !minTimeElapsed) return;
 
-        const container = ref.current!;
+        const container = ref.current;
+
+        if(!container) return;
 
         container.classList.add('fading');
 
