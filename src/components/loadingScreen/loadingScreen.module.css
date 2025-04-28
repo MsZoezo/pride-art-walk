@@ -5,10 +5,12 @@
     background-color: white;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .logo {
-    max-width: 20   rem;
+    max-width: 25rem;
+    width: 50%;
 }
