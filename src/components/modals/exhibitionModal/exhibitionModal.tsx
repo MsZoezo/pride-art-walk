@@ -77,7 +77,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
 
                     <li className={styles.wwww}>
                         <h4 className={styles.type}>Where</h4>
-                        <Link href={mapLink} className={styles.route}>{exhibition.address ?? 'Adress'}</Link>
+                        <Link href={mapLink ? mapLink : ''} className={styles.route}>{exhibition.address ?? 'Adress'}</Link>
                     </li>
 
                     <li className={styles.wwww}>
