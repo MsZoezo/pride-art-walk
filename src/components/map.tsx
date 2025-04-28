@@ -20,7 +20,9 @@ interface Props {
     zoom?: number;
 }
 
-const initialMapZoom: number = process.env.NEXT_PUBLIC_MAP_INITIAL_ZOOM;
+const initialMapZoom = Number(process.env.NEXT_PUBLIC_MAP_INITIAL_ZOOM);
+const minMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MIN_ZOOM);
+const maxMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MAX_ZOOM);
 
 const Map = ({ exhibitions, zoom = 13 }: Props) => {
     const position = useUserLocationContext();
@@ -74,6 +76,8 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
         return getAvgPosition(markerPositions);
     }, []);
 
+    console.log(minMapZoom, maxMapZoom);
+
     return (
         <>
             <ReactMap
@@ -84,8 +88,8 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
                     zoom: initialMapZoom
                 }}
 
-                minZoom={0}
-                maxZoom={23}
+                minZoom={minMapZoom}
+                maxZoom={maxMapZoom}
 
                 style={{ height: '100vh', width: '100%' }}
 
