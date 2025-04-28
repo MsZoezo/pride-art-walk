@@ -50,7 +50,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
                 {exhibition.tags.map((tag, i) => <Tag key={`${exhibition.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
             </ul>
 
-            <ul className={styles.artists}>
+            {/* <ul className={styles.artists}>
                 {exhibition.artist_name.map((artist, i) => <li key={`${exhibition.title}-artists-${i}`}>{artist}</li>)}
             </ul>
 
@@ -62,16 +62,42 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
                 </figure>
 
                 Route
-            </Link>
+            </Link> */}
 
-            {exhibition.image &&
-                <figure className={styles.image}>
-                    <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt="" />
-                </figure>
-            }
+            <ul>
+                <li className={styles.wwww}>
+                    <h4 className={styles.type}>what</h4>
+                    <p>{exhibition.title}</p>
+                </li>
+
+                <li className={styles.wwww}>
+                    <h4 className={styles.type}>Who</h4>
+                    <ul className={styles.artists}>
+                    {exhibition.artist_name.map((artist, i) => <li key={`${exhibition.title}-artists-${i}`}>{artist}{exhibition.artist_name.length - 1 != i ? ',' : ''}</li>)}
+                    </ul>
+                </li>
+
+                <li className={styles.wwww}>
+                    <h4 className={styles.type}>Where</h4>
+                    <Link href={mapLink} className={styles.route}>{exhibition.address ?? 'Adress'}</Link>
+                </li>
+
+                <li className={styles.wwww}>
+                    <h4 className={styles.type}>When</h4>
+                    <p>TODO</p>
+                </li>
+            </ul>
+
+            <div className={styles.descriptionWrapper}>
+                {exhibition.image &&
+                    <figure className={styles.image}>
+                        <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt="" />
+                    </figure>
+                }
 
 
-            <div className={styles.description} dangerouslySetInnerHTML={{ __html: exhibition.description }} />
+                <div className={styles.description} dangerouslySetInnerHTML={{ __html: exhibition.description }} />
+            </div>
 
             <div className={styles.cta}>
                 {
