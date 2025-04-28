@@ -20,6 +20,8 @@ interface Props {
     zoom?: number;
 }
 
+const initialMapZoom: number = process.env.NEXT_PUBLIC_MAP_INITIAL_ZOOM;
+
 const Map = ({ exhibitions, zoom = 13 }: Props) => {
     const position = useUserLocationContext();
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
@@ -79,11 +81,11 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
                 initialViewState={{
                     longitude: avgPosition.lng, 
                     latitude: avgPosition.lat,
-                    zoom: 0
+                    zoom: initialMapZoom
                 }}
 
                 minZoom={0}
-                maxZoom={20}
+                maxZoom={23}
 
                 style={{ height: '100vh', width: '100%' }}
 
