@@ -64,31 +64,31 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
                 Route
             </Link> */}
 
-            <ul>
-                <li className={styles.wwww}>
-                    <h4 className={styles.type}>what</h4>
-                    <p>{exhibition.title}</p>
-                </li>
+            <div className={styles.content}>
+                <ul>
+                    <li className={styles.wwww}>
+                        <h4 className={styles.type}>what</h4>
+                        <p>{exhibition.title}</p>
+                    </li>
 
-                <li className={styles.wwww}>
-                    <h4 className={styles.type}>Who</h4>
-                    <ul className={styles.artists}>
-                    {exhibition.artist_name.map((artist, i) => <li key={`${exhibition.title}-artists-${i}`}>{artist}{exhibition.artist_name.length - 1 != i ? ',' : ''}</li>)}
-                    </ul>
-                </li>
+                    <li className={styles.wwww}>
+                        <h4 className={styles.type}>Who</h4>
+                        <ul className={styles.artists}>
+                        {exhibition.artist_name.map((artist, i) => <li key={`${exhibition.title}-artists-${i}`}>{artist}{exhibition.artist_name.length - 1 != i ? ',' : ''}</li>)}
+                        </ul>
+                    </li>
 
-                <li className={styles.wwww}>
-                    <h4 className={styles.type}>Where</h4>
-                    <Link href={mapLink} className={styles.route}>{exhibition.address ?? 'Adress'}</Link>
-                </li>
+                    <li className={styles.wwww}>
+                        <h4 className={styles.type}>Where</h4>
+                        <Link href={mapLink} className={styles.route}>{exhibition.address ?? 'Adress'}</Link>
+                    </li>
 
-                <li className={styles.wwww}>
-                    <h4 className={styles.type}>When</h4>
-                    <p>TODO</p>
-                </li>
-            </ul>
+                    <li className={styles.wwww}>
+                        <h4 className={styles.type}>When</h4>
+                        <p>TODO</p>
+                    </li>
+                </ul>
 
-            <div className={styles.descriptionWrapper}>
                 {exhibition.image &&
                     <figure className={styles.image}>
                         <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt="" />
