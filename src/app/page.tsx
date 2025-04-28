@@ -33,17 +33,18 @@ export default function Home() {
         };
     }, []);
 
-    if(isLoading) return <LoadingScreen />;
-
     return (
         <section className={styles.content}>
+
+            <LoadingScreen render={isLoading}/>;
+
             <MapNavigation>
                 <Link href="/">Home</Link>
                 <Link href="/exhibitions">Exhibitions</Link>
                 <Link href="/">News</Link>
             </MapNavigation>
 
-            <Map exhibitions={exhibitions} zoom={13}></Map>
+            { exhibitions && <Map exhibitions={exhibitions}></Map> }
             
             <Mascot />
         </section>

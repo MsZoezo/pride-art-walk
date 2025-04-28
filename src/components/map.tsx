@@ -1,8 +1,8 @@
-import { LngLatBounds, LngLatBoundsLike, Map as ReactMap } from 'react-map-gl/maplibre';
+import { LngLatBounds, LngLatBoundsLike, MapRef, Map as ReactMap } from 'react-map-gl/maplibre';
 import { DARK, layers, namedFlavor } from '@protomaps/basemaps';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getAvgPosition } from '@/util/map';
 import { getUserLocation } from '@/util/location/user.location';
 import { Exhibition } from '@/types/Exhibition';
@@ -16,8 +16,9 @@ import ExhibitionModal from './modals/exhibitionModal/exhibitionModal';
 import { env } from 'process';
 
 interface Props {
-    exhibitions: Exhibition[] | undefined;
-    zoom?: number;
+    exhibitions: Exhibition[];
+
+    setMapLoading: any;
 }
 
 const mapBounds: [[number, number], [number, number]] = JSON.parse(process.env.NEXT_PUBLIC_MAP_BOUNDS);
@@ -27,8 +28,7 @@ const initialMapZoom = Number(process.env.NEXT_PUBLIC_MAP_INITIAL_ZOOM);
 const minMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MIN_ZOOM);
 const maxMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MAX_ZOOM);
 
-const Map = ({ exhibitions, zoom = 13 }: Props) => {
-    const position = useUserLocationContext();
+const Map = ({ exhibitions, setMapLoading }: Props) => {
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -45,13 +45,9 @@ const Map = ({ exhibitions, zoom = 13 }: Props) => {
             setCurrentExhibition(exhibition);
             setIsModalOpen(true);
         }
-
-    console.log(minMapZoom, maxMapZoom);
-
     return (
         <>
             <ReactMap
-
                 initialViewState={{
                     longitude: mapCenter[0], 
                     latitude: mapCenter[1],

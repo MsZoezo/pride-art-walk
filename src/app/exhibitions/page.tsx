@@ -54,8 +54,6 @@ export default function Exhibitions() {
         setIsModalOpen(true);
     }
 
-    if(isLoading) return <LoadingScreen />;
-
     return(
         <main className={styles.main}>
             <Navigation>
@@ -63,6 +61,8 @@ export default function Exhibitions() {
                 <Link href="/exhibitions">Exhibitions</Link>
                 <Link href="/">News</Link>
             </Navigation>
+
+            <LoadingScreen render={isLoading} />
 
             <h1>Exhibitions</h1>
 
