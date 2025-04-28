@@ -1,3 +1,22 @@
+.spinner {
+    position: absolute;
+
+    inset: 0;
+
+    background-color: white;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10;
+
+}
+
+.spinner.visible {
+    display: flex;
+}
+
 .title {
     text-align: center;
 }
@@ -109,6 +128,10 @@
         width: 100%;
         max-width: 75rem;
     }
+}
+
+.blob:has(~ .spinner.visible) {
+    z-index: 100;
 }
 
 .blobPink,
