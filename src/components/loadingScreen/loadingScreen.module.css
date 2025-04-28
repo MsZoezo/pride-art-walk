@@ -11,11 +11,64 @@
 
     position: fixed;
     top: 0;
+    left: 0;
 
     z-index: 999999999999;
+}
+
+.container:global(.fading) {
+    animation: fadeOut 750ms ease-in forwards;
+}
+
+.container:global(.fading) .logo {
+    animation: fadeUp 500ms ease-out forwards;
+}
+
+.container:global(.fading) svg {
+    animation: quickFade 500ms ease-in 250ms forwards;
 }
 
 .logo {
     max-width: 25rem;
     width: 50%;
+}
+
+@keyframes quickFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    70% {
+      opacity: 0.5;
+      transform: scale(1.02);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+  }
+
+@keyframes fadeUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
 }
