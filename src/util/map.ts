@@ -1,4 +1,4 @@
-import { LatLng, latLng } from "leaflet";
+import maplibregl, { LngLat } from "maplibre-gl";
 
 /**
  * This helper function gets the average of all positions given.
@@ -6,7 +6,7 @@ import { LatLng, latLng } from "leaflet";
  * @param positions All of the positions to average out
  * @returns Average position
  */
-export function getAvgPosition(positions: number[][]): LatLng {
+export function getAvgPosition(positions: number[][]): LngLat {
     const length = positions.length
 
     let lat = 0;
@@ -17,5 +17,5 @@ export function getAvgPosition(positions: number[][]): LatLng {
         lang += positions[i][1];
     }
 
-    return latLng(lat / length, lang / length);
+    return new maplibregl.LngLat(lat / length, lang / length);
 }

@@ -13,6 +13,8 @@ import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { Exhibition } from '@/types/Exhibition';
 import Mascot from "@/components/mascot/mascot";
 import useExhibitions from "@/hooks/useExhibitions";
+import maplibregl from "maplibre-gl";
+import { Protocol } from "pmtiles";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 
 export default function Home() {
@@ -22,6 +24,16 @@ export default function Home() {
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
     if(isLoading) return <LoadingScreen />;
+
+    useEffect(() => {
+        let protocol = new Protocol();
+
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+        
+        return () => {
+          maplibregl.removeProtocol("pmtiles");
+        };
+    }, []);
 
     return (
         <section className={styles.content}>
@@ -33,7 +45,6 @@ export default function Home() {
 
             <Map exhibitions={exhibitions} zoom={13}></Map>
             
-
             <Mascot />
         </section>
     )
