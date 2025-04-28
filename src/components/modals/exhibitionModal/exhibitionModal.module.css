@@ -98,9 +98,13 @@
 }
 
 @media screen and (min-width: 600px) {
-    .image {
+    .image, .description {
         width: 90%;
         max-width: 75rem;
+    }
+
+    .description {
+        margin: 1rem auto;
     }
 }
 
