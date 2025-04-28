@@ -2,6 +2,7 @@ import styles from "./navigation.module.css";
 
 import NavigationModal from "../modals/navigationModal/navigationModal";
 import { ReactNode, useState } from "react";
+import Link from "next/link";
 
 interface Props {
     children: ReactNode;
@@ -24,9 +25,9 @@ export default function Navigation({ children }: Props) {
 
 
 
-                <figure className={styles.logo}>
+                <Link href="/" className={styles.logo}>
                     <img src="/logo.png" alt="" />
-                </figure>
+                </Link>
 
                 <nav className={styles.links}>
                     {children}
