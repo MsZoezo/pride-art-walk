@@ -42,8 +42,12 @@ export default function Exhibitions() {
         }
 
         const filteredExhibitions = allExhibitions.filter(exhibition => {
-            for(let i = 0; i < selectedTags.length; i++) if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) return false;
-            return true;
+            for(let i = 0; i < selectedTags.length; i++) {
+                if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+
+                return true;
+            }
+            return false;
         });
 
         return filteredExhibitions;
