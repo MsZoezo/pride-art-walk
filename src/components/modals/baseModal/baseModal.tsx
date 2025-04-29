@@ -41,7 +41,11 @@ export default function BaseModal({ isOpen, setOpen, children }: Props) {
         }, { signal: controller.signal });
 
         /* Make sure we can't click through on touch devices */
-        modal.parentElement!.addEventListener('touchstart', evt => evt.preventDefault());
+        modal.parentElement!.addEventListener('touchstart', evt => {
+            if(modal.contains(evt.target as Node)) return;
+
+            evt.preventDefault()
+        });
 
         return () => controller.abort();
     }, [isOpen]);
