@@ -3,6 +3,7 @@
 import Navigation from "@/components/navigation/navigation";
 import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal'
 import TagFilter from "@/components/filters/tagFilter";
+import TextFilter from "@/components/filters/textFilter";
 import Link from "next/link";
 
 import { useContext, useEffect, useMemo, useState } from 'react'
@@ -21,6 +22,7 @@ export default function Exhibitions() {
 
     const [tags, setTags] = useState<any>([]);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
+    const [titleSearchValue, setTitleSearchValue] = useState<string>('');
     const [showTags, setTagVisibility] = useState(false);
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -37,17 +39,18 @@ export default function Exhibitions() {
 
         const allExhibitions = [...exhibitions];
 
-        if(selectedTags.length == 0) {
+        if(selectedTags.length == 0 && titleSearchValue === '') {
             return allExhibitions;
         }
 
         const filteredExhibitions = allExhibitions.filter(exhibition => {
             for(let i = 0; i < selectedTags.length; i++) if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) return false;
+            if(!exhibition.title.toLowerCase().includes(titleSearchValue.toLowerCase())) return false
             return true;
         });
 
         return filteredExhibitions;
-    }, [exhibitions, selectedTags]);
+    }, [exhibitions, selectedTags, titleSearchValue]);
     
     const showModal = (exhibition: Exhibition) => {
         setCurrentExhibition(exhibition)
@@ -67,6 +70,7 @@ export default function Exhibitions() {
             <h1>Exhibitions</h1>
 
             <section>
+                <TextFilter onEnter={setTitleSearchValue}/>
                 <button onClick={() => setTagVisibility(!showTags)}>show/hide</button>
                 {
                     showTags && (
