@@ -3,5 +3,11 @@
 }
 
 .title {
-    
+    margin: 0 1rem;
+}
+
+@media screen and (min-width: 600px) {
+    .title {
+        text-align: center;
+    }
 }
