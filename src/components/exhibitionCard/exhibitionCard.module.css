@@ -18,6 +18,11 @@
     flex-direction: column;
 
     background-color: white;
+
+    animation: fadeIn 500ms ease-out forwards;
+    animation-delay: var(--stagger);
+
+    opacity: 0;
 }
 
 .card:has(.image) {
@@ -90,5 +95,17 @@
 @media screen and (min-width: 800px) {
     .image {
         height: 17.5rem;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

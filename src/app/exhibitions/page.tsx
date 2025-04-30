@@ -6,7 +6,7 @@ import TagFilter from "@/components/filters/tagFilter";
 import Link from "next/link";
 
 import { useContext, useEffect, useMemo, useState } from 'react'
-import { getTags } from "@/util/fetch/tags";
+import { getTags, showExhibition } from "@/util/fetch/tags";
 import { Exhibition } from '@/types/Exhibition';
 import { Tag } from "@/types/Tag";
 import styles from "./page.module.css"
@@ -62,7 +62,7 @@ export default function Exhibitions() {
 
             <LoadingScreen render={isLoading} />
 
-            <h1>Exhibitions</h1>
+            <h1 className={styles.title}>Exhibitions</h1>
 
             <section>
                 <button onClick={() => setTagVisibility(!showTags)}>show/hide</button>
@@ -74,7 +74,7 @@ export default function Exhibitions() {
             </section>
 
             <SelectedTagsContextProvider selectedTags={selectedTags}>
-                <ExhibitionList exhibitions={exhibitions} />
+                <ExhibitionList exhibitions={shownExhibitions} />
             </SelectedTagsContextProvider>
         </main>
     );

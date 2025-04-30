@@ -1,0 +1,23 @@
+.exhibitions {
+    margin: 2.4rem 1rem;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.6rem;
+
+    overflow: hidden;
+}
+
+@media screen and (min-width: 800px) {
+    .exhibitions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .exhibitions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

@@ -1,18 +1,20 @@
 import { Exhibition } from "@/types/Exhibition";
 import styles from "./exhibitionCard.module.css";
 import Tag from "../tag/tag";
+import { CSSProperties } from "react";
 
 interface Props {
     exhibition: Exhibition,
     onClick?: any
     selectedTags?: number[];
+    index: number;
 }
 
-export default function ExhibitionCard({ exhibition, onClick }: Props) {
+export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
     const description = exhibition.description.replaceAll(/<\/?[^>]+(>|$)/g, "").split(/\s+/).slice(0, 25).join(' ') + '...';
 
     return (
-        <article onClick={onClick} className={styles.card}>
+        <article onClick={onClick} className={styles.card} style={{'--stagger': `${index * 100}ms`} as CSSProperties}>
 
             {exhibition.image &&
                 <figure className={styles.image}>
