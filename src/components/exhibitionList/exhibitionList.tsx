@@ -11,7 +11,6 @@ interface Props {
 }
 
 export default function ExhibitionList({ exhibitions }: Props) {
-    const [key, setKey] = useState<number>(0);
     const { selectedTags, searchString } = useListContext();
 
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
@@ -24,8 +23,6 @@ export default function ExhibitionList({ exhibitions }: Props) {
 
     const shownExhibitions = useMemo(() => {
         if(!exhibitions) return;
-
-        setKey(prev => prev + 1);
 
         let shownExhibitions = [...exhibitions];
 
@@ -54,7 +51,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
             <section className={styles.exhibitions}>
                 {
                     shownExhibitions?.map((exhibition, i) => (
-                        <ExhibitionCard key={`${key}-${exhibition.id}`} index={i} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
+                        <ExhibitionCard key={`${i}-${exhibition.id}`} index={i} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
                     ))
                 }
             </section>
