@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import styles from "./tagFilter.module.css"
-import { useSelectedTagsContext } from "@/context/SelectedTagsContextProvider";
 import useTags from "@/hooks/useTags";
+import { useListContext } from "@/context/ListContextProvider";
 
 export default function TagFilter() {
     const { tags, isLoading, isError} = useTags();
-    const { selectedTags, setSelectedTags } = useSelectedTagsContext();
+    const { selectedTags, setSelectedTags } = useListContext();
 
     const [ open, setOpen ] = useState<boolean>(false);
 

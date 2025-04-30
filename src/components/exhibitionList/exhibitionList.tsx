@@ -3,7 +3,8 @@ import styles from "./exhibitionList.module.css";
 import ExhibitionCard from "../exhibitionCard/exhibitionCard";
 import { useEffect, useMemo, useState } from "react";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
-import { useSelectedTagsContext } from "@/context/SelectedTagsContextProvider";
+import { useListContext } from "@/context/ListContextProvider";
+
 
 interface Props {
     exhibitions?: Exhibition[];
@@ -11,7 +12,7 @@ interface Props {
 
 export default function ExhibitionList({ exhibitions }: Props) {
     const [key, setKey] = useState<number>(0);
-    const { selectedTags } = useSelectedTagsContext();
+    const { selectedTags, searchString } = useListContext();
 
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -26,23 +27,27 @@ export default function ExhibitionList({ exhibitions }: Props) {
 
         setKey(prev => prev + 1);
 
-        const allExhibitions = [...exhibitions];
+        let shownExhibitions = [...exhibitions];
 
-        if(!selectedTags || selectedTags.length == 0) {
-            return allExhibitions;
+        if(selectedTags.length == 0 && (!searchString || searchString.length == 0)) {
+            return shownExhibitions;
         }
 
-        const filteredExhibitions = allExhibitions.filter(exhibition => {
-            for(let i = 0; i < selectedTags.length; i++) {
-                if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+        if(selectedTags.length != 0) {
+            shownExhibitions = shownExhibitions.filter(exhibition => {
+                for(let i = 0; i < selectedTags.length; i++) {
+                    if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+    
+                    return true;
+                }
+                return false;
+            });
+        }
 
-                return true;
-            }
-            return false;
-        });
+        if(searchString) shownExhibitions = shownExhibitions.filter(exhibitions => exhibitions.title.toLowerCase().includes(searchString.toLowerCase()));
 
-        return filteredExhibitions;
-    }, [exhibitions, selectedTags]);
+        return shownExhibitions;
+    }, [exhibitions, selectedTags, searchString]);
 
     return(
         <>

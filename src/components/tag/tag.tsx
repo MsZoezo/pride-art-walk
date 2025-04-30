@@ -1,4 +1,4 @@
-import { useSelectedTagsContext } from "@/context/SelectedTagsContextProvider";
+import { useListContext } from "@/context/ListContextProvider";
 import styles from "./tag.module.css";
 
 interface Props {
@@ -15,7 +15,7 @@ const colours = [
 ];
 
 export default function Tag({ text, id, index }: Props) {
-    const { selectedTags } = useSelectedTagsContext();
+    const { selectedTags } = useListContext();
 
     const background = colours[(index ?? 0) % colours.length];
 

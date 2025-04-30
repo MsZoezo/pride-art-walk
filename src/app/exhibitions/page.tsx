@@ -12,49 +12,13 @@ import { Exhibition } from '@/types/Exhibition';
 import { Tag } from "@/types/Tag";
 import styles from "./page.module.css"
 import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
-import { SelectedTagsProvider } from "@/context/SelectedTagsContextProvider";
 import useExhibitions from "@/hooks/useExhibitions";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import ExhibitionList from "@/components/exhibitionList/exhibitionList";
+import { ListContextProvider } from "@/context/ListContextProvider";
 
 export default function Exhibitions() {
-    // const exhibitions = useExhibitionsContext();
     const { exhibitions, isError, isLoading } = useExhibitions();
-
-    const [tags, setTags] = useState<any>([]);
-    const [selectedTags, setSelectedTags] = useState<number[]>([]);
-    const [showTags, setTagVisibility] = useState(false);
-    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
-    useEffect(() => {
-        (async () => {
-            const allTags = await getTags();
-            setTags(allTags);
-        })();
-    }, []);
-
-    const shownExhibitions = useMemo(() => {
-        if(!exhibitions) return;
-
-        const allExhibitions = [...exhibitions];
-
-        if(selectedTags.length == 0) {
-            return allExhibitions;
-        }
-
-        const filteredExhibitions = allExhibitions.filter(exhibition => {
-            for(let i = 0; i < selectedTags.length; i++) if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) return false;
-            return true;
-        });
-
-        return filteredExhibitions;
-    }, [exhibitions, selectedTags]);
-    
-    const showModal = (exhibition: Exhibition) => {
-        setCurrentExhibition(exhibition)
-        setIsModalOpen(true);
-    }
 
     return(
         <main className={styles.main}>
@@ -68,23 +32,14 @@ export default function Exhibitions() {
 
             <h1>Exhibitions</h1>
 
-            <section>
-                <TextFilter onEnter={setTitleSearchValue}/>
-                <button onClick={() => setTagVisibility(!showTags)}>show/hide</button>
-                {
-                    showTags && (
-                        <TagFilter tags={tags} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
-                    )
-                }
-            </section>
-
-            <SelectedTagsProvider>
+            <ListContextProvider>
                 <section className={styles.filters}>
+                    <TextFilter />
                     <TagFilter />
                 </section>
 
                 <ExhibitionList exhibitions={exhibitions} />
-            </SelectedTagsProvider>
+            </ListContextProvider>
         </main>
     );
 }
