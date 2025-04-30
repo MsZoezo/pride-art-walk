@@ -4,7 +4,7 @@ import { useListContext } from "@/context/ListContextProvider"
 import { useState } from "react"
 
 export default function TextFilter() {
-    const { setSearchString } = useListContext();
+    const { setSearchString } = useListContext()!;
     const handleEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const string = event.currentTarget.value;
 

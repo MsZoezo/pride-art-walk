@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function ExhibitionList({ exhibitions }: Props) {
-    const { selectedTags, searchString } = useListContext();
+    const { selectedTags, searchString } = useListContext()!;
 
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)

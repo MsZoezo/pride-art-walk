@@ -26,12 +26,6 @@ export function ListContextProvider({ children }: Props) {
     );
 }
 
-export function useListContext(): ListContextType {
-    const context = useContext(listContext);
-
-    if(context === null) {
-        throw new Error("UseListContext must be used within a ListContextProvider");
-    }
-
-    return context;
+export function useListContext(): ListContextType | null {
+    return useContext(listContext);
 }

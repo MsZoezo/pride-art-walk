@@ -15,7 +15,7 @@ const colours = [
 ];
 
 export default function Tag({ text, id, index }: Props) {
-    const { selectedTags } = useListContext();
+    const { selectedTags } = useListContext() ?? {};
 
     const background = colours[(index ?? 0) % colours.length];
 
