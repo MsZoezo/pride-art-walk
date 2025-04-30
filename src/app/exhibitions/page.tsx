@@ -30,7 +30,7 @@ export default function Exhibitions() {
 
             <LoadingScreen render={isLoading} />
 
-            <h1>Exhibitions</h1>
+            <h1 className={styles.title}>Exhibitions</h1>
 
             <ListContextProvider>
                 <section className={styles.filters}>
