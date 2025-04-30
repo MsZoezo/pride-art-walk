@@ -14,6 +14,7 @@ import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
 import { SelectedTagsContextProvider } from "@/context/SelectedTagsContextProvider";
 import useExhibitions from "@/hooks/useExhibitions";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
+import ExhibitionList from "@/components/exhibitionList/exhibitionList";
 
 export default function Exhibitions() {
     // const exhibitions = useExhibitionsContext();
@@ -22,8 +23,6 @@ export default function Exhibitions() {
     const [tags, setTags] = useState<any>([]);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
     const [showTags, setTagVisibility] = useState(false);
-    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     useEffect(() => {
         (async () => {
@@ -52,11 +51,6 @@ export default function Exhibitions() {
 
         return filteredExhibitions;
     }, [exhibitions, selectedTags]);
-    
-    const showModal = (exhibition: Exhibition) => {
-        setCurrentExhibition(exhibition)
-        setIsModalOpen(true);
-    }
 
     return(
         <main className={styles.main}>
@@ -80,16 +74,8 @@ export default function Exhibitions() {
             </section>
 
             <SelectedTagsContextProvider selectedTags={selectedTags}>
-                <section className={styles.exhibitions}>
-                    {
-                        shownExhibitions?.map((exhibition) => (
-                            <ExhibitionCard key={exhibition.id} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
-                        ))
-                    }
-                </section>
+                <ExhibitionList exhibitions={exhibitions} />
             </SelectedTagsContextProvider>
-
-            <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
         </main>
     );
 }
