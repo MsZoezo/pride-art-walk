@@ -15,7 +15,7 @@ const colours = [
 ];
 
 export default function Tag({ text, id, index }: Props) {
-    const selectedTags = useSelectedTagsContext();
+    const { selectedTags } = useSelectedTagsContext();
 
     const background = colours[(index ?? 0) % colours.length];
 

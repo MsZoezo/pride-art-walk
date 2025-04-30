@@ -1,22 +1,34 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+
+interface SelectedTagsContextType {
+    selectedTags: Number[];
+    setSelectedTags: Dispatch<SetStateAction<Number[]>>;
+}
 
 interface Props {
     children: React.ReactNode;
-    selectedTags: Number[] | null;
 }
 
-const selectedTagsContext = createContext<Number[] | null>(null);
+const selectedTagsContext = createContext<SelectedTagsContextType | null>(null);
 
-export function SelectedTagsContextProvider({ children, selectedTags }: Props) {
+export function SelectedTagsProvider({ children }: Props) {
+    const [ selectedTags, setSelectedTags ] = useState<Number[]>([]);
+
     return(
-        <selectedTagsContext.Provider value={selectedTags}>
+        <selectedTagsContext.Provider value={{selectedTags, setSelectedTags}}>
             { children }
         </selectedTagsContext.Provider>
     );
 }
 
-export function useSelectedTagsContext(): Number[] | null {
-    return useContext(selectedTagsContext);
+export function useSelectedTagsContext(): SelectedTagsContextType {
+    const context = useContext(selectedTagsContext);
+
+    if(context === null) {
+        throw new Error("UseSelectedTagsContext must be used within a SelectedTagsProvider");
+    }
+
+    return context;
 }
