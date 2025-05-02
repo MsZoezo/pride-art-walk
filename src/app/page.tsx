@@ -19,7 +19,7 @@ import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
-    const { exhibitions, isError, isLoading } = useExhibitions();
+    const { exhibitions, isError, isLoading, retryTime } = useExhibitions();
     const [ isMapLoading, setIsMapLoading ] = useState<boolean>(true);
     
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
@@ -36,7 +36,7 @@ export default function Home() {
 
     return (
         <section className={styles.content}>
-            <LoadingScreen render={isLoading || isMapLoading} error={isError}/>
+            <LoadingScreen render={isLoading || isMapLoading} error={isError} retryTime={retryTime} />
 
             <MapNavigation>
                 <Link href="/">Home</Link>

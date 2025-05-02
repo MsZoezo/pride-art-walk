@@ -1,15 +1,16 @@
 import styles from "./loadingScreen.module.css";
 import Mascot from "../mascot/mascot";
 import Spinner from "../spinner/spinner";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
     render: boolean;
 
     error?: Error;
+    retryTime?: number;
 }
 
-export default function LoadingScreen({ render, error }: Props) {
+export default function LoadingScreen({ render, error, retryTime }: Props) {
     const [ hidden, setHidden ] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -48,7 +49,7 @@ export default function LoadingScreen({ render, error }: Props) {
 
             <Spinner color={error ? 'red': undefined} />
 
-            { error && <p className={styles.error}>{error.message}</p> }
+            { error && <p className={styles.error}>{error.message} {retryTime != undefined ? `Retrying in ${retryTime} seconds...` : ''}</p> }
 
             <Mascot />
         </div>
