@@ -1,10 +1,10 @@
 .exhibitions {
-    margin: 2.4rem 1rem;
+    margin: 2.4rem 0.5rem;
 
     display: flex;
     flex-direction: column;
 
-    gap: 1.6rem;
+    gap: 1rem;
 
     overflow: hidden;
 }

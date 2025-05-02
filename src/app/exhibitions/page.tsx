@@ -18,7 +18,7 @@ import ExhibitionList from "@/components/exhibitionList/exhibitionList";
 import { ListContextProvider } from "@/context/ListContextProvider";
 
 export default function Exhibitions() {
-    const { exhibitions, isError, isLoading } = useExhibitions();
+    const { exhibitions, isError, isLoading, retryTime } = useExhibitions();
 
     return(
         <main className={styles.main}>
@@ -28,7 +28,7 @@ export default function Exhibitions() {
                 <Link href="/">News</Link>
             </Navigation>
 
-            <LoadingScreen render={isLoading} error={isError} />
+            <LoadingScreen render={isLoading || isError} error={isError} retryTime={retryTime} />
 
             <h1 className={styles.title}>Exhibitions</h1>
 

@@ -26,16 +26,22 @@
 }
 
 .tags {
-    display: none;
+    display: grid;
 
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 0.5rem 1rem;
 
     margin-top: 0.5rem;
+
+    max-height: 0px;
+    overflow: hidden;
+
+    transition: max-height 250ms ease-out;
+    interpolate-size: allow-keywords;
 }
 
 .tags.open {
-    display: grid;
+    max-height: max-content;
 }
 
 .button {
@@ -49,6 +55,8 @@
     cursor: pointer;
 
     box-shadow: 0 4px 4px #00000030;
+
+    margin-bottom: 0.5rem;
 }
 .selected {
     background: #839faf;
@@ -60,7 +68,7 @@
         margin: 0 auto;
     }
 
-    .tags.open {
+    .tags {
         display: flex;
         justify-content: center;
 
