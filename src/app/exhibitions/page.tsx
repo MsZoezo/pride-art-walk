@@ -28,7 +28,7 @@ export default function Exhibitions() {
                 <Link href="/">News</Link>
             </Navigation>
 
-            <LoadingScreen render={isLoading} />
+            <LoadingScreen render={isLoading} error={isError} />
 
             <h1 className={styles.title}>Exhibitions</h1>
 

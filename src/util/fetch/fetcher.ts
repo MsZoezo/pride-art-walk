@@ -1,7 +1,12 @@
-export default async function fetcher<Type>(url: string): Promise<Type> {
-    const response = await fetch(url);
+export default async function fetcher<Type>(url: string): Promise<Type | null> {
+    let response;
+    try {
+        response = await fetch(url);
+    } catch (err: unknown) {
+        throw new Error(`Failed to connect to API!`);
+    }
 
-    if(!response.ok) throw new Error(`Fetcher failed to fetch '${url}'`);
+    if(!response.ok) throw new Error(`API returned an error!`);
 
     const json = await response.json();
 

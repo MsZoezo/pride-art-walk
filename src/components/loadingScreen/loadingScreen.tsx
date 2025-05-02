@@ -5,9 +5,11 @@ import { useEffect, useRef, useState } from "react";
 
 interface Props {
     render: boolean;
+
+    error?: Error;
 }
 
-export default function LoadingScreen({ render }: Props) {
+export default function LoadingScreen({ render, error }: Props) {
     const [ hidden, setHidden ] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -44,7 +46,9 @@ export default function LoadingScreen({ render }: Props) {
 
             <img className={styles.logo} src="/logo.png" alt="" />
 
-            <Spinner />
+            <Spinner color={error ? 'red': undefined} />
+
+            { error && <p className={styles.error}>{error.message}</p> }
 
             <Mascot />
         </div>
