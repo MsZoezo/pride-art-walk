@@ -20,6 +20,12 @@
 
 .wrapper.open {
     display: flex;
+
+    animation: open 250ms ease-in-out forwards;
+}
+
+.wrapper.close {
+    animation: close 500ms ease-out forwards;
 }
 
 .modal {
@@ -36,6 +42,12 @@
     flex-direction: column;
 
     z-index: 0;
+
+    animation: modalOpen 250ms ease-in forwards;
+}
+
+.wrapper.close .modal {
+    animation: modalClose 250ms ease-in forwards;
 }
 
 .bar {
@@ -96,5 +108,88 @@
 
     .content {
         margin: 0 auto;
+    }
+}
+
+@keyframes open {
+    0% {
+        background-color: #00000000;
+    }
+
+    100% {
+        background-color: #00000075;
+    }
+}
+
+@keyframes close {
+    0% {
+        background-color: #00000075;
+
+
+        display: flex;
+    }
+
+    99% {
+        display: flex;
+    }
+    
+    100% {
+        background-color: #00000000;
+
+        display: none;
+    }
+}
+
+@keyframes modalOpen {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes modalClose {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    @keyframes modalOpen {
+        0% {
+            opacity: 0;
+            transform: scale(0);
+        }
+    
+        75% {
+            transform: scale(1);
+        }
+    
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes modalClose {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    
+        75% {
+            transform: scale(0);
+        }
+    
+        100% {
+            opacity: 0;
+            transform: scale(0);
+        }
     }
 }

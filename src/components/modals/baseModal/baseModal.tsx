@@ -51,7 +51,7 @@ export default function BaseModal({ isOpen, setOpen, children }: Props) {
     }, [isOpen]);
 
     return (
-        <div className={`${styles.wrapper} ${isOpen ? styles.open : ''}`}>
+        <div className={`${styles.wrapper} ${isOpen ? styles.open : styles.close}`}>
         <div className={styles.modal} ref={modalRef}>
             <div className={styles.inner}>
                 <div className={styles.bar}>
