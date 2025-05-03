@@ -25,7 +25,7 @@ export default function Exhibitions() {
             <Navigation>
                 <Link href="/">Home</Link>
                 <Link href="/exhibitions">Exhibitions</Link>
-                <Link href="/">News</Link>
+                <Link href="/news">News</Link>
             </Navigation>
 
             <LoadingScreen render={isLoading || isError} error={isError} retryTime={retryTime} />

@@ -41,7 +41,7 @@ export default function Home() {
             <MapNavigation>
                 <Link href="/">Home</Link>
                 <Link href="/exhibitions">Exhibitions</Link>
-                <Link href="/">News</Link>
+                <Link href="/news">News</Link>
             </MapNavigation>
 
             { exhibitions && <Map exhibitions={exhibitions} setIsMapLoading={setIsMapLoading}></Map> }

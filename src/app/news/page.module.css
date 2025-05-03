@@ -1,0 +1,17 @@
+.main {
+    min-height: 100vh;
+}
+
+.title {
+    margin: 0 1rem;
+}
+
+.filters {
+    margin: 0 1rem;
+}
+
+@media screen and (min-width: 600px) {
+    .title {
+        text-align: center;
+    }
+}
