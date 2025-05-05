@@ -1,0 +1,39 @@
+.filterCard {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    
+    z-index: 444444;
+    padding: 1.5rem;
+}
+
+.tags {
+    width: 15rem;
+}
+
+.button {
+    border: 2px solid black;
+    border-radius: 12px;
+
+    background: white;
+
+    padding: 0.5rem 1rem;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 4px #00000030;
+
+    margin-bottom: 0.5rem;
+}
+.selected {
+    background: #839faf;
+    color: white;
+}
+
+.tags {
+    display: none;
+}
+
+.open {
+    display: flex;
+}
