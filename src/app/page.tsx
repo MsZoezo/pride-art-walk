@@ -8,21 +8,46 @@ import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal
 import Link from 'next/link'
 import dynamic from "next/dynamic";
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useMemo } from 'react'
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { Exhibition } from '@/types/Exhibition';
 import Mascot from "@/components/mascot/mascot";
+import MapFilter from "@/components/filters/mapFilter"
 import useExhibitions from "@/hooks/useExhibitions";
 import maplibregl from "maplibre-gl";
 import { Protocol } from "pmtiles";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
+import { Tag } from "@/types/Tag";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
     const { exhibitions, isError, isLoading, retryTime } = useExhibitions();
     const [ isMapLoading, setIsMapLoading ] = useState<boolean>(true);
+    const [selectedTags, setSelectedTags] = useState<number[]>([]);
     
     const Map = dynamic(() => import("@/components/map"), { ssr: false });
+
+    const shownExhibitions = useMemo(() => {
+        console.log(selectedTags)
+        if(!exhibitions) return;
+
+        let shownExhibitions = [...exhibitions];
+
+        if(selectedTags.length == 0) return shownExhibitions;
+
+        if(selectedTags.length != 0) {
+            shownExhibitions = shownExhibitions.filter(exhibition => {
+                for(let i = 0; i < selectedTags.length; i++) {
+                    if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+    
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        return shownExhibitions;
+    }, [exhibitions, selectedTags]);
 
     useEffect(() => {
         let protocol = new Protocol();
@@ -44,9 +69,10 @@ export default function Home() {
                 <Link href="/news">News</Link>
             </MapNavigation>
 
-            { exhibitions && <Map exhibitions={exhibitions} setIsMapLoading={setIsMapLoading}></Map> }
+            { exhibitions && <Map exhibitions={shownExhibitions ?? []} setIsMapLoading={setIsMapLoading}></Map> }
             
             <Mascot />
+            <MapFilter onSelect={val => setSelectedTags(val)}/>
         </section>
     )
 }
