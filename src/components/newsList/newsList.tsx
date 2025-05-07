@@ -47,7 +47,12 @@ export default function NewsList({ news }: Props) {
 
     return(
         <>
+            { (searchString?.length != 0 && shownNews?.length == 0) &&
+                <p className={styles.empty}>No news was found...</p>    
+            }
+
             <section className={styles.news}>
+
                 {
                     shownNews?.map((news, i) => (
                         <NewsCard key={`${i}-${news.id}`} index={i} news={news} onClick={() => showModal(news)}/>

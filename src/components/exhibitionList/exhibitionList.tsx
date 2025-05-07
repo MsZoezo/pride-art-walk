@@ -51,6 +51,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
             { (searchString?.length != 0 && shownExhibitions?.length == 0) &&
                 <p className={styles.empty}>No exhibitions were found...</p>
             }
+            
             <section className={styles.exhibitions}>
                 {
                     shownExhibitions?.map((exhibition, i) => (
