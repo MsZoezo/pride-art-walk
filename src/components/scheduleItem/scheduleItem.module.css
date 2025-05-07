@@ -1,0 +1,10 @@
+.item {
+    display: flex;
+    gap: 1rem;
+
+    padding-right: 1rem;
+}
+
+.day {
+    min-width: 9rem;
+}

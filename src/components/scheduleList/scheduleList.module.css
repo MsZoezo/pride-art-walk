@@ -1,0 +1,29 @@
+.list {
+    overflow: hidden;
+
+    max-height: calc(2rem * 5);
+
+    transition: max-height .25s ease-out;
+    interpolate-size: allow-keywords;
+}
+
+.list.open {
+    max-height: max-content;
+}
+
+.button {
+    display: block;
+
+    margin: 0 auto;
+    margin-top: 1rem;
+
+    border: none;
+    background: none;
+
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    color: hsl(202, 22%, 30%);
+}

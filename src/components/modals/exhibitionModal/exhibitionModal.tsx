@@ -7,6 +7,8 @@ import { generateMapsLink } from "@/util/navigate/navigate.location";
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import Tag from "@/components/tag/tag";
 import Spinner from "@/components/spinner/spinner";
+import ScheduleItem from "@/components/scheduleItem/scheduleItem";
+import ScheduleList from "@/components/scheduleList/scheduleList";
 
 interface Props {
     isOpen: boolean;
@@ -17,6 +19,8 @@ interface Props {
 
 export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) {
     const [ loaded, setLoaded ] = useState<boolean>(exhibition?.image ? false : true);
+
+    console.log(exhibition);
 
     useEffect(() => {
         setLoaded(exhibition?.image ? false : true);
@@ -64,7 +68,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
             <div className={styles.content}>
                 <ul>
                     <li className={styles.wwww}>
-                        <h4 className={styles.type}>what</h4>
+                        <h4 className={styles.type}>What</h4>
                         <p>{exhibition.title}</p>
                     </li>
 
@@ -82,7 +86,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
 
                     <li className={styles.wwww}>
                         <h4 className={styles.type}>When</h4>
-                        <p>TODO</p>
+                        <ScheduleList schedules={exhibition.schedules} />
                     </li>
                 </ul>
 
