@@ -6,5 +6,7 @@ namespace NodeJS {
         NEXT_PUBLIC_MAP_INITIAL_ZOOM: string,
         NEXT_PUBLIC_MAP_MIN_ZOOM: string,
         NEXT_PUBLIC_MAP_MAX_ZOOM: string,
+
+        NEXT_PUBLIC_LEGEND_OPEN: string,
     }
 }

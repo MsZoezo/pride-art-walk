@@ -18,6 +18,7 @@ import maplibregl from "maplibre-gl";
 import { Protocol } from "pmtiles";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import { Tag } from "@/types/Tag";
+import Legend from "@/components/legend/legend";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
@@ -73,6 +74,7 @@ export default function Home() {
             
             <Mascot />
             <MapFilter onSelect={val => setSelectedTags(val)}/>
+            <Legend />
         </section>
     )
 }

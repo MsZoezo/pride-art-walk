@@ -1,0 +1,17 @@
+.item {
+    display: flex;
+    align-items: center;
+
+    gap: 0.75rem;
+}
+
+.color {
+    width: 2.5rem;
+    aspect-ratio: 1/1;
+
+    border-radius: 50%;
+}
+
+.name {
+    font-weight: 500;
+}
