@@ -3,12 +3,12 @@ import styles from "./baseModal.module.css"
 
 interface Props {
     isOpen: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
+    onClose: () => void;
 
     children: ReactNode;
 }
 
-export default function BaseModal({ isOpen, setOpen, children }: Props) {
+export default function BaseModal({ isOpen, onClose, children }: Props) {
     const modalRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -31,13 +31,13 @@ export default function BaseModal({ isOpen, setOpen, children }: Props) {
         document.addEventListener('pointerdown', evt => {
             if(modal.contains(evt.target as Node)) return;
 
-            setOpen(false);
+            onClose();
         }, { signal: controller.signal });
 
         document.addEventListener('keydown', evt => {
             if(evt.key !== 'Escape') return;
 
-            setOpen(false);
+            onClose();
         }, { signal: controller.signal });
 
         /* Make sure we can't click through on touch devices */
@@ -55,7 +55,7 @@ export default function BaseModal({ isOpen, setOpen, children }: Props) {
         <div className={styles.modal} ref={modalRef}>
             <div className={styles.inner}>
                 <div className={styles.bar}>
-                    <button onClick={() => setOpen(false)} className={styles.closeButton}>
+                    <button onClick={onClose} className={styles.closeButton}>
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>

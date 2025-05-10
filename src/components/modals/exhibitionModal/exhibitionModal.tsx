@@ -12,15 +12,13 @@ import ScheduleList from "@/components/scheduleList/scheduleList";
 
 interface Props {
     isOpen: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
+    onClose: () => void;
 
     exhibition: Exhibition | null;
 }
 
-export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) {
+export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) {
     const [ loaded, setLoaded ] = useState<boolean>(exhibition?.image ? false : true);
-
-    console.log(exhibition);
 
     useEffect(() => {
         setLoaded(exhibition?.image ? false : true);
@@ -37,7 +35,7 @@ export default function ExhibitionModal({ isOpen, setOpen, exhibition }: Props) 
     if (!exhibition) return;
 
     return (
-        <BaseModal isOpen={isOpen} setOpen={setOpen}>
+        <BaseModal isOpen={isOpen} onClose={onClose}>
             <svg className={`${styles.blobPink} ${styles.blob}`} width="206" height="203" viewBox="0 0 206 203" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M124.861 -46.4092C159.857 -51.6795 185.405 -91.9403 207.936 -98.257C230.167 -104.574 249.38 -76.9461 252.674 -48.7117C255.967 -20.7777 243.79 7.9133 244.081 34.3466C244.22 60.9302 257.127 85.5563 259.218 116.795C261.458 147.883 253.033 185.735 230.65 197.909C208.267 210.383 171.926 197.18 146.1 179.468C120.275 161.756 105.264 139.533 79.587 126.177C54.0599 112.669 18.4668 108.027 6.15784 90.9105C-6.15108 73.7936 4.97453 44.0517 8.29202 9.80712C11.3091 -24.4373 6.36787 -63.0342 26.0444 -67.3974C45.8711 -71.6104 90.0152 -41.2892 124.861 -46.4092Z" fill="#F7C3DC" fillOpacity="0.4" />
             </svg>

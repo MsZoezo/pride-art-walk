@@ -93,7 +93,7 @@ const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
 
                 <GpsMarker />
             </ReactMap>
-           <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
+           <ExhibitionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} exhibition={currentExhibition} />
         </>
 
     );

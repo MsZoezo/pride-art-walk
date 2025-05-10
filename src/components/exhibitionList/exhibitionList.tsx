@@ -4,6 +4,8 @@ import ExhibitionCard from "../exhibitionCard/exhibitionCard";
 import { useEffect, useMemo, useState } from "react";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import { useListContext } from "@/context/ListContextProvider";
+import { useParams, useRouter, useSearchParams, } from "next/navigation";
+import { useLoadContext } from "@/context/LoadContextProvider";
 
 
 interface Props {
@@ -11,15 +13,47 @@ interface Props {
 }
 
 export default function ExhibitionList({ exhibitions }: Props) {
+    const params = useSearchParams();
+    const router = useRouter();
+    const { initialLoad } = useLoadContext()!;
     const { selectedTags, searchString } = useListContext()!;
 
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const showModal = (exhibition: Exhibition) => {
-        setCurrentExhibition(exhibition)
+        router.push(`/exhibitions?exhibition=${exhibition.id}`);
+        setCurrentExhibition(exhibition);
         setIsModalOpen(true);
     }
+
+    const closeModal = () => {
+        if(!initialLoad) router.back();
+        else router.replace('/exhibitions');
+        
+        setIsModalOpen(false);
+    }
+
+    useEffect(() => {
+        const id = params.get('exhibition');
+
+        if(!id) {
+            setIsModalOpen(false);
+            return;
+        }
+
+        const exhibition = exhibitions?.find(val => val.id === Number(id));
+
+        if(!exhibition) {
+            setIsModalOpen(false);
+            return;
+        }
+
+        if(currentExhibition === exhibition) return;
+
+        setCurrentExhibition(exhibition);
+        setIsModalOpen(true);
+    }, [params, exhibitions]);
 
     const shownExhibitions = useMemo(() => {
         if(!exhibitions) return;
@@ -51,7 +85,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
             { (searchString?.length != 0 && shownExhibitions?.length == 0) &&
                 <p className={styles.empty}>No exhibitions were found...</p>
             }
-            
+
             <section className={styles.exhibitions}>
                 {
                     shownExhibitions?.map((exhibition, i) => (
@@ -60,7 +94,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
                 }
             </section>
 
-            <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} />
+            <ExhibitionModal isOpen={isModalOpen} onClose={closeModal} exhibition={currentExhibition} />
 
         </>
     );

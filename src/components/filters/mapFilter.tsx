@@ -26,7 +26,7 @@ export default function MapFilter({ onSelect }: Props) {
                 <img src="/filter.svg" alt="" />
             </button>
 
-            <BaseModal isOpen={open} setOpen={setOpen}>
+            <BaseModal isOpen={open} onClose={() => setOpen(false)}>
                 <div className={styles.tags}>
                 {
                     tags?.map((tag, i) => (
