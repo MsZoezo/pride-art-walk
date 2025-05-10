@@ -11,6 +11,8 @@
     align-content: center;
 
     box-shadow: 0 4px 4px #00000040;
+
+    cursor: pointer;
 }
 
 .button img {
