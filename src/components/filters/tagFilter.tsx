@@ -11,17 +11,6 @@ export default function TagFilter() {
 
     const [ open, setOpen ] = useState<boolean>(false);
 
-    // useEffect(() => {
-    //     const tags = tagsRef.current!;
-
-    //     if(open) {
-    //         tags.style.maxHeight = `${tags.scrollHeight}px`;
-    //         // setTimeout(() => tags.style.maxHeight = '', 600);
-    //     } else {
-    //         tags.style.maxHeight = '';
-    //     }
-    // }, [open]);
-
     const onClick = (id: number) => {
         setSelectedTags(prev => prev.includes(id) ? prev.filter(selected => selected !== id) : [...prev, id]);
     }

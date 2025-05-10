@@ -1,6 +1,25 @@
 .content {
-  height: 100vh;
+    height: 100vh;
 
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+}
+
+.mapIcons {
+    position: absolute;
+
+    top: 1rem;
+    left: 1rem;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+    .mapIcons {
+        top: 8rem;
+    }
 }

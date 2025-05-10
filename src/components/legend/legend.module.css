@@ -1,8 +1,5 @@
 .legend {
-    position: absolute;
-
-    top: 1rem;
-    left: 1rem;
+    position: relative;
 
     z-index: 1000;
 
@@ -76,10 +73,3 @@
 
     gap: 1rem;
 }
-
-@media screen and (min-width: 500px) {
-    .legend {
-        top: 8rem;
-    }
-}
-

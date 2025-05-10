@@ -73,8 +73,11 @@ export default function Home() {
             { exhibitions && <Map exhibitions={shownExhibitions ?? []} setIsMapLoading={setIsMapLoading}></Map> }
             
             <Mascot />
-            <MapFilter onSelect={val => setSelectedTags(val)}/>
-            <Legend />
+
+            <div className={styles.mapIcons}>
+                <Legend />
+                <MapFilter onSelect={val => setSelectedTags(val)}/>
+            </div>
         </section>
     )
 }
