@@ -22,15 +22,15 @@ export default function ExhibitionList({ exhibitions }: Props) {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const showModal = (exhibition: Exhibition) => {
-        router.push(`/exhibitions?exhibition=${exhibition.id}`);
+        window.history.pushState(null, '', `/exhibitions?exhibition=${exhibition.id}`);
         setCurrentExhibition(exhibition);
         setIsModalOpen(true);
     }
 
     const closeModal = () => {
-        if(!initialLoad) router.back();
-        else router.replace('/exhibitions');
-        
+        if(!initialLoad) window.history.back();
+        else window.history.replaceState(null, '', '/exhibitions');
+
         setIsModalOpen(false);
     }
 
@@ -49,7 +49,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
             return;
         }
 
-        if(currentExhibition === exhibition) return;
+        if(currentExhibition === exhibition && isModalOpen) return;
 
         setCurrentExhibition(exhibition);
         setIsModalOpen(true);

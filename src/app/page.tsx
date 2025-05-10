@@ -19,18 +19,16 @@ import { Protocol } from "pmtiles";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import { Tag } from "@/types/Tag";
 import Legend from "@/components/legend/legend";
+import Map from "@/components/map";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
     const { exhibitions, isError, isLoading, retryTime } = useExhibitions();
     const [ isMapLoading, setIsMapLoading ] = useState<boolean>(true);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
-    
-    const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
     const shownExhibitions = useMemo(() => {
-        console.log(selectedTags)
-        if(!exhibitions) return;
+        if(!exhibitions) return [];
 
         let shownExhibitions = [...exhibitions];
 
@@ -70,7 +68,7 @@ export default function Home() {
                 <Link href="/news">News</Link>
             </MapNavigation>
 
-            { exhibitions && <Map exhibitions={shownExhibitions ?? []} setIsMapLoading={setIsMapLoading}></Map> }
+            <Map exhibitions={shownExhibitions} setIsMapLoading={setIsMapLoading}></Map>
             
             <Mascot />
 

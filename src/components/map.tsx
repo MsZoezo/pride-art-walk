@@ -11,14 +11,16 @@ import { useUserLocationContext } from '@/context/UserLocationContextProvider';
 import ExhibitionMarker from './exhibitionMarker/exhibitionMarker';
 import GpsMarker from './gpsMarker/gpsMarker';
 import { theme } from '../util/theme';
-import maplibregl, { LngLat } from 'maplibre-gl';
+import maplibregl, { LngLat, StyleSpecification } from 'maplibre-gl';
 import ExhibitionModal from './modals/exhibitionModal/exhibitionModal';
 import { env } from 'process';
 import LandmarkMarker from './landmarkMarker/landmarkMarker';
+import { useLoadContext } from '@/context/LoadContextProvider';
+import { useRouter, useSearchParams } from 'next/navigation';
+import MapExhibitions from './mapExhibitions/mapExhibitions';
 
 interface Props {
     exhibitions: Exhibition[];
-
     setIsMapLoading: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -30,30 +32,29 @@ const minMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MIN_ZOOM);
 const maxMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MAX_ZOOM);
 
 const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
-    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const mapStyle: StyleSpecification = useMemo(() => ({
+        version: 8,
+        glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
+        sprite: "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
+        sources: {
+            protomaps: {
+                type: "vector",
+                url: `pmtiles://maps/${process.env.NEXT_PUBLIC_MAP}.pmtiles`,
+            },
+        },
+        layers: layers("protomaps", theme, { lang: undefined }),
+    }), []);
 
-    /** Changes the modal to the exhibition identified by id.
-     * @param id the exhibition id.
-    */
-        const changeModal = (id: number) => {
-            if (!exhibitions) return;
-    
-            const exhibition = exhibitions.find(exhibition => exhibition.id === id);
-    
-            if (!exhibition) return;
-    
-            setCurrentExhibition(exhibition);
-            setIsModalOpen(true);
-        }
-    return (
+    const initialViewState = useMemo(() => ({
+        longitude: mapCenter[0],
+        latitude: mapCenter[1],
+        zoom: initialMapZoom
+    }), []);
+
+    return(
         <>
             <ReactMap
-                initialViewState={{
-                    longitude: mapCenter[0], 
-                    latitude: mapCenter[1],
-                    zoom: initialMapZoom
-                }}
+                initialViewState={initialViewState}
 
                 minZoom={minMapZoom}
                 maxZoom={maxMapZoom}
@@ -66,18 +67,7 @@ const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
 
                 reuseMaps={true}
 
-                mapStyle={{
-                    version: 8,
-                    glyphs:'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
-                    sprite: "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
-                    sources: {
-                    protomaps: {
-                        type: "vector",
-                        url: `pmtiles://maps/${process.env.NEXT_PUBLIC_MAP}.pmtiles`,
-                    },
-                    },
-                    layers: layers("protomaps", theme, {lang: undefined }),
-                }}
+                mapStyle={mapStyle}
 
                 onLoad={() => setIsMapLoading(false)}
             >
@@ -87,13 +77,10 @@ const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
                 <LandmarkMarker name='Homomonument' lng={4.884685} lat={52.374419} />
                 <LandmarkMarker name='Vondelpark' lng={4.866347} lat={52.357652} />
 
-                {exhibitions?.map((exhibition, index) => (
-                    <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} exhibition={exhibition} onClick={changeModal} />
-                ))}
+                <MapExhibitions exhibitions={exhibitions} />
 
                 <GpsMarker />
             </ReactMap>
-           <ExhibitionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} exhibition={currentExhibition} />
         </>
 
     );
