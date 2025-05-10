@@ -14,6 +14,7 @@ import { theme } from '../util/theme';
 import maplibregl, { LngLat } from 'maplibre-gl';
 import ExhibitionModal from './modals/exhibitionModal/exhibitionModal';
 import { env } from 'process';
+import LandmarkMarker from './landmarkMarker/landmarkMarker';
 
 interface Props {
     exhibitions: Exhibition[];
@@ -80,7 +81,12 @@ const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
 
                 onLoad={() => setIsMapLoading(false)}
             >
-                
+
+                <LandmarkMarker name='Central station' lng={4.900576} lat={52.378905} />
+                <LandmarkMarker name='Dam square' lng={4.892363} lat={52.373089} />
+                <LandmarkMarker name='Homomonument' lng={4.884685} lat={52.374419} />
+                <LandmarkMarker name='Vondelpark' lng={4.866347} lat={52.357652} />
+
                 {exhibitions?.map((exhibition, index) => (
                     <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} exhibition={exhibition} onClick={changeModal} />
                 ))}
