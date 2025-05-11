@@ -1,9 +1,11 @@
 import { Exhibition } from "@/types/Exhibition";
 import ExhibitionMarker from "../exhibitionMarker/exhibitionMarker";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLoadContext } from "@/context/LoadContextProvider";
 import { useSearchParams, useRouter } from "next/navigation";
+import { useMapContext } from "@/context/MapContextProvider";
+import { ZoomPercentageContextProvider } from "@/context/ZoomPercentageContext";
 
 interface Props {
     exhibitions: Exhibition[];
@@ -13,6 +15,7 @@ export default function MapExhibitions({ exhibitions }: Props) {
     const router = useRouter();
     const params = useSearchParams();
     const { initialLoad } = useLoadContext()!;
+    const { selectedTags } = useMapContext()!;
 
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -60,12 +63,35 @@ export default function MapExhibitions({ exhibitions }: Props) {
 
         setIsModalOpen(false);
     }
+    
+    const shownExhibitions: Number[] = useMemo(() => {
+        if(!exhibitions) return [];
+
+        let shownExhibitions = [...exhibitions];
+
+        if(selectedTags.length == 0) return shownExhibitions.map(ex => ex.id);
+
+        if(selectedTags.length != 0) {
+            shownExhibitions = shownExhibitions.filter(exhibition => {
+                for(let i = 0; i < selectedTags.length; i++) {
+                    if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+    
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        return shownExhibitions.map(ex => ex.id);
+    }, [exhibitions, selectedTags]);
 
     return (
         <>
-            {exhibitions?.map((exhibition, index) => (
-                <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} exhibition={exhibition} onClick={changeModal} />
-            ))}
+            <ZoomPercentageContextProvider>
+                {exhibitions?.map((exhibition, index) => (
+                    <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} transparent={!shownExhibitions.includes(exhibition.id)} exhibition={exhibition} onClick={changeModal} />
+                ))}
+            </ZoomPercentageContextProvider>
 
             <ExhibitionModal isOpen={isModalOpen} onClose={closeModal} exhibition={currentExhibition} />
         </>

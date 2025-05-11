@@ -20,33 +20,12 @@ import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import { Tag } from "@/types/Tag";
 import Legend from "@/components/legend/legend";
 import Map from "@/components/map";
+import { MapContextProvider } from "@/context/MapContextProvider";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
     const { exhibitions, isError, isLoading, retryTime } = useExhibitions();
     const [ isMapLoading, setIsMapLoading ] = useState<boolean>(true);
-    const [selectedTags, setSelectedTags] = useState<number[]>([]);
-
-    const shownExhibitions = useMemo(() => {
-        if(!exhibitions) return [];
-
-        let shownExhibitions = [...exhibitions];
-
-        if(selectedTags.length == 0) return shownExhibitions;
-
-        if(selectedTags.length != 0) {
-            shownExhibitions = shownExhibitions.filter(exhibition => {
-                for(let i = 0; i < selectedTags.length; i++) {
-                    if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
-    
-                    return true;
-                }
-                return false;
-            });
-        }
-
-        return shownExhibitions;
-    }, [exhibitions, selectedTags]);
 
     useEffect(() => {
         let protocol = new Protocol();
@@ -68,14 +47,16 @@ export default function Home() {
                 <Link href="/news">News</Link>
             </MapNavigation>
 
-            <Map exhibitions={shownExhibitions} setIsMapLoading={setIsMapLoading}></Map>
+            <MapContextProvider>
+                <Map exhibitions={exhibitions ?? []} setIsMapLoading={setIsMapLoading}></Map>
+
+                <div className={styles.mapIcons}>
+                    <Legend />
+                    <MapFilter />
+                </div>
+            </MapContextProvider>
             
             <Mascot />
-
-            <div className={styles.mapIcons}>
-                <Legend />
-                <MapFilter onSelect={val => setSelectedTags(val)}/>
-            </div>
         </section>
     )
 }
