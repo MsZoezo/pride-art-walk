@@ -29,16 +29,16 @@ export default function NewsList({ news }: Props) {
             return shownNews;
         }
 
-        // if(selectedTags.length != 0) {
-        //     shownExhibitions = shownExhibitions.filter(exhibition => {
-        //         for(let i = 0; i < selectedTags.length; i++) {
-        //             if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+         if(selectedTags.length != 0) {
+            shownNews = shownNews.filter(news => {
+                for(let i = 0; i < selectedTags.length; i++) {
+                    if(!news.tags.find(tag => tag.id === selectedTags[i])) continue;
     
-        //             return true;
-        //         }
-        //         return false;
-        //     });
-        // }
+                   return true;
+                }
+                return false;
+            });
+        }
 
         if(searchString) shownNews = shownNews.filter(news => news.title.toLowerCase().includes(searchString.toLowerCase()));
 
