@@ -1,5 +1,5 @@
 .marker {
-    transition: all 250ms ease-in-out;
+    transition: opacity 250ms ease-in-out;
 
     cursor: pointer;
 }

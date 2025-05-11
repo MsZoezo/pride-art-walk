@@ -30,7 +30,7 @@ export function ZoomPercentageContextProvider({ children }: Props) {
         setZoomPercentage(percentage);
       }
 
-      const listener = map.on('zoomend', onZoom);
+      const listener = map.on('zoom', onZoom);
       onZoom();
 
       return () => listener.unsubscribe();
