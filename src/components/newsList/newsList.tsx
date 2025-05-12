@@ -70,7 +70,7 @@ export default function NewsList({ news }: Props) {
                 }
             </section>
 
-            <NewsModal isOpen={isModalOpen} onClose={closeModal} setOpen={setIsModalOpen} news={currentNewsItem} />
+            <NewsModal isOpen={isModalOpen} onClose={closeModal} news={currentNewsItem} />
 
         </>
         );
