@@ -5,7 +5,7 @@ import useSWR from "swr";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function useNewsRibbon() {
-    const { data, error, isLoading } = useSWR(`${API_URL}/news-ribbon`, fetcher<Newsribbon>, { refreshInterval: 30000 });
+    const { data, error, isLoading } = useSWR(`${API_URL}/news-ribbon`, fetcher<Newsribbon>, { refreshInterval: 5 * 60 * 1000 });
 
     return {
         data,
