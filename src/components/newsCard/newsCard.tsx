@@ -1,7 +1,7 @@
 import { News } from "@/types/News";
 import styles from "./newsCard.module.css";
 import { CSSProperties } from "react";
-
+import Tag from "../tag/tag";
 interface Props {
     news: News,
     onClick?: any
@@ -23,9 +23,9 @@ export default function NewsCard({ news, onClick, index }: Props) {
             <div className={styles.content}>
                 <h3 className={styles.title}>{news.title}</h3>
 
-                {/* <ul className={styles.tags}>
-                    {exhibition.tags.map((tag, i) => <Tag key={`${exhibition.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
-                </ul> */}
+                <ul className={styles.tags}>
+                    {news.tags.map((tag, i) => <Tag key={`${news.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
+                </ul>
 
                 <p>{description}</p>
 

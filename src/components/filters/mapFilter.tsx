@@ -5,7 +5,7 @@ import BaseModal from "../modals/baseModal/baseModal";
 import { useMapContext } from "@/context/MapContextProvider";
 
 export default function MapFilter() {
-    const { tags, isLoading, isError } = useTags();
+    const { tags, isLoading, isError } = useTags('exhibitions');
     const { selectedTags, setSelectedTags } = useMapContext()!;
 
     const [open, setOpen] = useState(false);

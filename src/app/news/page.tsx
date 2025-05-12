@@ -28,7 +28,7 @@ export default function News() {
             <ListContextProvider>
                 <section className={styles.filters}>
                     <TextFilter />
-                    <TagFilter />
+                    <TagFilter contentType="news"/>
                 </section>
 
                 <NewsList news={news} />
