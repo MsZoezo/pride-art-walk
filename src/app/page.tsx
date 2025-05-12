@@ -39,7 +39,7 @@ export default function Home() {
 
     return (
         <section className={styles.content}>
-            <LoadingScreen render={isLoading || isMapLoading} error={isError} retryTime={retryTime} />
+            <LoadingScreen render={isLoading || isMapLoading || isError} error={isError} retryTime={retryTime} />
 
             <MapNavigation>
                 <Link href="/">Home</Link>
