@@ -21,6 +21,7 @@ import { Tag } from "@/types/Tag";
 import Legend from "@/components/legend/legend";
 import Map from "@/components/map";
 import { MapContextProvider } from "@/context/MapContextProvider";
+import NewsRibbon from "@/components/newsRibbon/newsRibbon";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
@@ -56,6 +57,7 @@ export default function Home() {
                 </div>
             </MapContextProvider>
             
+            <NewsRibbon />
             <Mascot />
         </section>
     )
