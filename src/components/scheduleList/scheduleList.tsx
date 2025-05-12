@@ -17,7 +17,10 @@ export default function ScheduleList({ schedules }: Props) {
     return(
         <div>
             <ul className={`${styles.list} ${open ? styles.open : ''}`}>
-                {schedules.map((schedule, i) => <ScheduleItem key={schedule.start_time} scheduleDate={schedule} />)}
+                {schedules.map((schedule, i) => {
+                    if(!open && i > 5) return null;
+                    return <ScheduleItem key={schedule.start_time} scheduleDate={schedule} />
+            })}
             </ul>
 
             { schedules.length > 5 &&

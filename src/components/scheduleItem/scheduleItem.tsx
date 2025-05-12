@@ -24,8 +24,14 @@ export default function ScheduleItem({ scheduleDate }: Props) {
 
     return(
         <li className={styles.item}>
-            <p className={styles.day}>{day}</p>
-            <p>{open} - {end}</p>
+            <div className={styles.time}>
+                <p className={styles.day}>{day}</p>
+                <p>{open} - {end}</p>
+            </div>
+
+            { scheduleDate.is_special_event && 
+                <p className={styles.special}>{scheduleDate.special_event_description}</p>
+            }
         </li>
     );
 }
