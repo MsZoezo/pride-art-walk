@@ -35,7 +35,7 @@ export default function Exhibitions() {
             <ListContextProvider>
                 <section className={styles.filters}>
                     <TextFilter />
-                    <TagFilter />
+                    <TagFilter contentType="exhibitions"/>
                 </section>
 
                 <ExhibitionList exhibitions={exhibitions} />
