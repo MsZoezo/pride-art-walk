@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { News } from "@/types/News";
 import useNews from "@/hooks/useNews";
 import NewsCard from "../newsCard/newsCard";
+import NewsModal from "../modals/newsModal/newsModal";
+import { useLoadContext } from "@/context/LoadContextProvider";
 
 interface Props {
     news?: News[];
@@ -11,13 +13,21 @@ interface Props {
 
 export default function NewsList({ news }: Props) {
     const { selectedTags, searchString } = useListContext()!;
+    const { initialLoad } = useLoadContext()!;
 
-    const [currentNewsItem, setCurrentNewsItem] = useState<News | undefined>(undefined);
+    const [currentNewsItem, setCurrentNewsItem] = useState<News | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const showModal = (news: News) => {
         setCurrentNewsItem(news)
         setIsModalOpen(true);
+    }
+    
+    const closeModal = () => {
+        /* if(!initialLoad) window.history.back();
+        else window.history.replaceState(null, '', '/news'); */
+
+        setIsModalOpen(false);
     }
 
     const shownNews = useMemo(() => {
@@ -29,16 +39,16 @@ export default function NewsList({ news }: Props) {
             return shownNews;
         }
 
-        // if(selectedTags.length != 0) {
-        //     shownExhibitions = shownExhibitions.filter(exhibition => {
-        //         for(let i = 0; i < selectedTags.length; i++) {
-        //             if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+         if(selectedTags.length != 0) {
+            shownNews = shownNews.filter(news => {
+                for(let i = 0; i < selectedTags.length; i++) {
+                    if(!news.tags.find(tag => tag.id === selectedTags[i])) continue;
     
-        //             return true;
-        //         }
-        //         return false;
-        //     });
-        // }
+                   return true;
+                }
+                return false;
+            });
+        }
 
         if(searchString) shownNews = shownNews.filter(news => news.title.toLowerCase().includes(searchString.toLowerCase()));
 
@@ -60,7 +70,7 @@ export default function NewsList({ news }: Props) {
                 }
             </section>
 
-            {/* <ExhibitionModal isOpen={isModalOpen} setOpen={setIsModalOpen} exhibition={currentExhibition} /> */}
+            <NewsModal isOpen={isModalOpen} onClose={closeModal} setOpen={setIsModalOpen} news={currentNewsItem} />
 
         </>
         );

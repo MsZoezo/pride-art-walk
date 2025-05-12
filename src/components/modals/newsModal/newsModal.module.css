@@ -1,0 +1,161 @@
+.spinner {
+    position: absolute;
+
+    inset: 0;
+
+    background-color: white;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10;
+
+}
+
+.spinner.visible {
+    display: flex;
+}
+
+.title {
+    text-align: center;
+}
+
+.venue {
+    text-align: center;
+}
+
+.content {
+    margin-top: 2.4rem;
+}
+
+.image {
+    margin-top: 1rem;
+
+    width: 100%;
+    max-width: 45rem;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image img {
+    width: 100%;
+
+    border-radius: 1.2rem;
+    border: 2px solid black;
+
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    list-style: none;
+
+    margin: 1rem 0;
+}
+
+.wwww {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 0.5rem;
+
+    margin: 0.5rem 0;
+}
+
+.type {
+    min-width: 6rem;
+
+    /* text-align: end; */
+
+    font-weight: 700;
+}
+
+.artists {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+
+    list-style: none;
+}
+
+.route {
+    text-decoration: underline;
+}
+
+.description {
+    margin-top: 1.2rem;
+}
+
+.cta {
+    position: sticky;
+
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.cta a {
+    margin: 1.2rem 1.2rem 1rem 1.2rem;
+
+    padding: 0.8rem 1.2rem;
+
+    background: #f18500;
+    color: #fff;
+
+    font-weight: 700;
+
+    border-radius: 1.2rem;
+}
+
+@media screen and (min-width: 600px) {
+    .content {
+        width: 90%;
+        margin: 0 auto;
+
+        margin: 1rem auto;
+
+        max-width: 75rem;
+    }
+
+    .image {
+        width: 100%;
+        max-width: 75rem;
+    }
+}
+
+.blob:has(~ .spinner.visible) {
+    z-index: 100;
+}
+
+.blobPink,
+.blobBlue {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.blobGreen {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.blobBrown {
+    position: absolute;
+    bottom: 0;
+    left: 75px;
+    z-index: -1;
+}
