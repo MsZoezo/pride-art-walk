@@ -55,12 +55,12 @@ export default function NewsModal({ isOpen, onClose, news }: Props) {
             </ul>
 
             <div className={styles.content}>
-                <ul>
+                {/* <ul>
                     <li className={styles.wwww}>
                         <h4 className={styles.type}>What</h4>
                         <p>{news.title}</p>
                     </li>
-                </ul>
+                </ul> */}
 
                 {news.image &&
                     <figure className={styles.image}>
