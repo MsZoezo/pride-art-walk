@@ -1,17 +1,11 @@
 "use client";
 
 import Navigation from "@/components/navigation/navigation";
-import ExhibitionModal from '@/components/modals/exhibitionModal/exhibitionModal'
 import TagFilter from "@/components/filters/tagFilter";
 import TextFilter from "@/components/filters/textFilter";
 import Link from "next/link";
 
-import { useContext, useEffect, useMemo, useState } from 'react'
-import { getTags, showExhibition } from "@/util/fetch/tags";
-import { Exhibition } from '@/types/Exhibition';
-import { Tag } from "@/types/Tag";
 import styles from "./page.module.css"
-import ExhibitionCard from "@/components/exhibitionCard/exhibitionCard";
 import useExhibitions from "@/hooks/useExhibitions";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import ExhibitionList from "@/components/exhibitionList/exhibitionList";
@@ -38,7 +32,7 @@ export default function Exhibitions() {
                     <TagFilter contentType="exhibitions"/>
                 </section>
 
-                <ExhibitionList exhibitions={exhibitions} />
+                <ExhibitionList exhibitions={exhibitions ?? []} />
             </ListContextProvider>
         </main>
     );

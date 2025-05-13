@@ -1,20 +1,21 @@
+"use client";
+
 import { Exhibition } from "@/types/Exhibition";
 import styles from "./exhibitionList.module.css";
 import ExhibitionCard from "../exhibitionCard/exhibitionCard";
 import { useEffect, useMemo, useState } from "react";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import { useListContext } from "@/context/ListContextProvider";
-import { useParams, useRouter, useSearchParams, } from "next/navigation";
+import { useSearchParams, } from "next/navigation";
 import { useLoadContext } from "@/context/LoadContextProvider";
 
 
 interface Props {
-    exhibitions?: Exhibition[];
+    exhibitions: Exhibition[];
 }
 
 export default function ExhibitionList({ exhibitions }: Props) {
     const params = useSearchParams();
-    const router = useRouter();
     const { initialLoad } = useLoadContext()!;
     const { selectedTags, searchString } = useListContext()!;
 

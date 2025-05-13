@@ -2,18 +2,15 @@ import { useListContext } from "@/context/ListContextProvider";
 import styles from "./newsList.module.css";
 import { useMemo, useState } from "react";
 import { News } from "@/types/News";
-import useNews from "@/hooks/useNews";
 import NewsCard from "../newsCard/newsCard";
 import NewsModal from "../modals/newsModal/newsModal";
-import { useLoadContext } from "@/context/LoadContextProvider";
 
 interface Props {
-    news?: News[];
+    news: News[];
 }
 
 export default function NewsList({ news }: Props) {
     const { selectedTags, searchString } = useListContext()!;
-    const { initialLoad } = useLoadContext()!;
 
     const [currentNewsItem, setCurrentNewsItem] = useState<News | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

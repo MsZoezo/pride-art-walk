@@ -31,7 +31,7 @@ export default function News() {
                     <TagFilter contentType="news"/>
                 </section>
 
-                <NewsList news={news} />
+                <NewsList news={news ?? []} />
             </ListContextProvider>
         </main>
     );

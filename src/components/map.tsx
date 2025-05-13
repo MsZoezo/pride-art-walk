@@ -1,3 +1,5 @@
+"use client";
+
 import { LngLatBounds, LngLatBoundsLike, MapRef, Map as ReactMap } from 'react-map-gl/maplibre';
 import { DARK, layers, namedFlavor } from '@protomaps/basemaps';
 import 'maplibre-gl/dist/maplibre-gl.css';

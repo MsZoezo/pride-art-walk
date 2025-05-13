@@ -1,3 +1,5 @@
+"use client";
+
 import { Exhibition } from "@/types/Exhibition";
 import ExhibitionMarker from "../exhibitionMarker/exhibitionMarker";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
