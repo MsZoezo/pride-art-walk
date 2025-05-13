@@ -16,5 +16,5 @@ export async function getUserLocation(): Promise<UserLocation | null> {
 }
 
 function getCurrentPosition(): Promise<GeolocationPosition> {
-    return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
+    return new Promise((resolve, reject) => navigator.geolocation.watchPosition(resolve, reject));
 }
