@@ -4,7 +4,6 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 import { Dispatch, memo, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getAvgPosition } from '@/util/map';
-import { getUserLocation } from '@/util/location/user.location';
 import { Exhibition } from '@/types/Exhibition';
 import { UserLocation } from '@/types/UserLocation';
 import { useUserLocationContext } from '@/context/UserLocationContextProvider';

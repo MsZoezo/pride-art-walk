@@ -1,5 +1,4 @@
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
-import { getUserLocation } from "../location/user.location"
 import { UserLocation } from "@/types/UserLocation";
 
 /**
