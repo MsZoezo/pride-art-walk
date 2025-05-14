@@ -22,7 +22,7 @@ export default function TagFilter({contentType}: Props) {
     return (
         <div className={styles.container}>
             <button className={styles.toggle} onClick={() => setOpen(prev => !prev)}>
-                <h3 className={styles.title}>Tags</h3>
+                <h3 className={styles.title}>Filter</h3>
                 <img src={open ? '/eye-open.svg' : '/eye-closed.svg'} className={styles.eye} />
             </button>
 
