@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./legend.module.css";
 import Color from "./color/color";
+import { colors } from "@/util/theme";
 
 const openDefault = process.env.NEXT_PUBLIC_LEGEND_OPEN.toLowerCase() === 'true';
 
@@ -16,9 +17,9 @@ export default function Legend() {
                 </button>
             </div>
             <ul className={styles.list}>
-                <Color color="#829fae" name="Closed exhibition" />
-                <Color color="#ffde00" name="Open exhibition" />
-                <Color color="#c3e1cc" name="Your location" />
+                <Color color={colors.exhibition_closed} name="Closed exhibition" />
+                <Color color={colors.exhibition_open} name="Open exhibition" />
+                <Color color={colors.user_location} name="Your location" />
             </ul>
         </section>
     );

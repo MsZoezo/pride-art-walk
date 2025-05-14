@@ -11,3 +11,9 @@ export const theme: Flavor = {
 
     other: '#231f20',
 }
+
+export enum colors {
+    exhibition_open = '#00973a',
+    exhibition_closed = '#e30513',
+    user_location = '#f7c2db'
+}

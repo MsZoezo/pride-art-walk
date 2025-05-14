@@ -6,7 +6,6 @@
 #circle {
     transform: scale(2);
     transform-origin: center;
-    fill: #829fae;
 
     animation: 2s ease-out infinite both circle;
 }
