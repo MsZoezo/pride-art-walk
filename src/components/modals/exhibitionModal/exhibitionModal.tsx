@@ -66,11 +66,6 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
             <div className={styles.content}>
                 <ul>
                     <li className={styles.wwww}>
-                        <h4 className={styles.type}>What</h4>
-                        <p>{exhibition.title}</p>
-                    </li>
-
-                    <li className={styles.wwww}>
                         <h4 className={styles.type}>Who</h4>
                         <ul className={styles.artists}>
                         {exhibition.artist_name.map((artist, i) => <li key={`${exhibition.title}-artists-${i}`}>{artist}{exhibition.artist_name.length - 1 != i ? ',' : ''}</li>)}
