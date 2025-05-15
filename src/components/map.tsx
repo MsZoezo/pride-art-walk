@@ -77,6 +77,9 @@ const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
                 <LandmarkMarker name='Dam square' lng={4.892363} lat={52.373089} />
                 <LandmarkMarker name='Homomonument' lng={4.884685} lat={52.374419} />
                 <LandmarkMarker name='Vondelpark' lng={4.866347} lat={52.357652} />
+                <LandmarkMarker name='NDSM' lng={4.895811} lat={52.400484} />
+                <LandmarkMarker name='Rembrandtplein' lng={4.896470} lat={52.366003} />
+                <LandmarkMarker name='Leidseplein' lng={4.882882} lat={52.364170} />
 
                 <MapExhibitions exhibitions={exhibitions} />
 
