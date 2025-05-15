@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from "react"
+import { CSSProperties, Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from "react"
 import styles from "./tagFilter.module.css"
 import useTags from "@/hooks/useTags";
 import { useListContext } from "@/context/ListContextProvider";
@@ -31,7 +31,7 @@ export default function TagFilter({contentType}: Props) {
             <div className={`${styles.tags} ${open? styles.open : ''}`} ref={tagsRef}>
                 {
                     tags?.map((tag, i) => (
-                        <button key={`filter-${i}`} onClick={() => onClick(tag.id)} className={`${styles.button} ${selectedTags.includes(tag.id) ? styles.selected:''}`}>
+                        <button key={`filter-${i}`} onClick={() => onClick(tag.id)} className={`${styles.button} ${selectedTags.includes(tag.id) ? styles.selected:''}`} style={{'--stagger': `${i * 100}ms`} as CSSProperties}>
                             { tag.name }
                         </button>
                     ))
