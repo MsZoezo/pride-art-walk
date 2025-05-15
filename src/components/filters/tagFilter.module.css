@@ -21,8 +21,24 @@
     font-size: 2rem;
 }
 
-.eye {
+.eyeclosed, .eyeopen {
     width: 2.5rem;
+}
+
+.eyeclosed {
+    fill: black;
+}
+
+.filtering .eyeclosed {
+    fill: #e30513;
+}
+
+.eyeopen {
+    stroke: black;
+}
+
+.filtering .eyeopen {
+    stroke: #e30513;
 }
 
 .tags {
