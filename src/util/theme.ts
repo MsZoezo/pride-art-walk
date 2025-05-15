@@ -11,7 +11,9 @@ export const theme: Flavor = {
 
     other: '#231f20',
 
-    highway: 'white'
+    highway: 'white',
+    tunnel_highway: 'white',
+    bridges_highway: 'white',
 }
 
 export enum colors {
