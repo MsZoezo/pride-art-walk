@@ -158,3 +158,26 @@
     left: 75px;
     z-index: -1;
 }
+
+@media screen and (min-width: 900px) {
+    .blobPink {
+        width: 306px;
+        height: 303px;
+    }
+
+    .blobBlue {
+        width: 331px;
+        height: 402px;
+    }
+
+    .blobGreen {
+        width: 289px;
+        height: 321px;
+    }
+
+    .blobBrown {
+        width: 324px;
+        height: 266px;
+        bottom: -20px;
+    }
+}
