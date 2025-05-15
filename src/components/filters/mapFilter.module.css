@@ -1,4 +1,6 @@
 .button {
+    position: relative;
+
     width: 5rem;
     height: 5rem;
 
@@ -20,6 +22,28 @@
 
     width: 75%;
     height: 75%;
+}
+
+.counter {
+    position: absolute;
+
+    align-content: center;
+    justify-items: center;
+
+    right: 0;
+    bottom: 0;
+
+    transform: translate(25%, 25%);
+
+    background: #c2e0cb;
+    color: black;
+
+    font-weight: 500;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    border-radius: 50%;
 }
 
 .tags {

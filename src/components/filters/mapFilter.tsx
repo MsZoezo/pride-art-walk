@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import styles from "./mapFilter.module.css"
 import useTags from "@/hooks/useTags";
 import BaseModal from "../modals/baseModal/baseModal";
@@ -14,10 +14,16 @@ export default function MapFilter() {
         setSelectedTags(prev => prev.includes(id) ? prev.filter(selected => selected !== id) : [...prev, id]);
     }
 
+    const amount = useMemo(() => selectedTags.length, [selectedTags]);
+
     return(
         <>
             <button className={styles.button} onClick={() => setOpen(prev => !prev)}>
                 <img src="/filter.svg" alt="" />
+
+                { amount != 0 && 
+                    <figure className={styles.counter}>{amount}</figure>
+                }
             </button>
 
             <BaseModal isOpen={open} onClose={() => setOpen(false)}>
