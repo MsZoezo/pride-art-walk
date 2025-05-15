@@ -10,6 +10,8 @@ export const theme: Flavor = {
     park_b: '#231f20',
 
     other: '#231f20',
+
+    highway: 'white'
 }
 
 export enum colors {
