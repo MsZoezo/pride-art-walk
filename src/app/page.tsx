@@ -46,6 +46,7 @@ export default function Home() {
                 <Link href="/">Home</Link>
                 <Link href="/exhibitions">Exhibitions</Link>
                 <Link href="/news">News</Link>
+                <Link href="/about">About</Link>
             </MapNavigation>
 
             <MapContextProvider>
