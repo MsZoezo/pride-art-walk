@@ -12,7 +12,6 @@ import { useContext, useEffect, useState, useMemo } from 'react'
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { Exhibition } from '@/types/Exhibition';
 import Mascot from "@/components/mascot/mascot";
-import MapFilter from "@/components/filters/mapFilter"
 import useExhibitions from "@/hooks/useExhibitions";
 import maplibregl from "maplibre-gl";
 import { Protocol } from "pmtiles";
@@ -22,6 +21,7 @@ import Legend from "@/components/legend/legend";
 import Map from "@/components/map";
 import { MapContextProvider } from "@/context/MapContextProvider";
 import NewsRibbon from "@/components/newsRibbon/newsRibbon";
+import MapFilters from "@/components/mapFilters/mapFilters";
 
 export default function Home() {
     // const exhibitions = useExhibitionsContext();
@@ -38,9 +38,11 @@ export default function Home() {
         };
     }, []);
 
+    const loading = isLoading || isMapLoading || isError;
+
     return (
         <section className={styles.content}>
-            <LoadingScreen render={isLoading || isMapLoading || isError} error={isError} retryTime={retryTime} />
+            <LoadingScreen render={loading} error={isError} retryTime={retryTime} />
 
             <MapNavigation>
                 <Link href="/">Home</Link>
@@ -53,8 +55,8 @@ export default function Home() {
                 <Map exhibitions={exhibitions ?? []} setIsMapLoading={setIsMapLoading}></Map>
 
                 <div className={styles.mapIcons}>
-                    <Legend />
-                    <MapFilter />
+                    <Legend loaded={!loading} />
+                    <MapFilters />
                 </div>
             </MapContextProvider>
             

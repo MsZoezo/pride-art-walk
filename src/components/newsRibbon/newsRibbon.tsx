@@ -16,15 +16,15 @@ export default function NewsRibbon() {
     const items = useMemo(() => {
         if(!text) return null;
 
-        const length = Math.ceil(500 / text.length);
+        const length = Math.ceil(window.innerWidth / text.length);
 
         return [...Array(length)].map((_, i) => <NewsRibbonItem key={i} text={text} />);
     }, [text]);
 
     return(
         <div className={`${styles.ribbon} ${(!data || !data.active) ? '' : styles.open}`}>
-            <ul className={styles.text}>{items}</ul>
-            <ul className={`${styles.text} ${styles.textAlt}`}>{items}</ul>
+            <ul className={styles.item}>{items}</ul>
+            <ul className={styles.item}>{items}</ul>
         </div>
     );
 }
@@ -36,7 +36,7 @@ interface Props {
 function NewsRibbonItem({ text }: Props) {
     return(
         <>
-            <li>{text}</li>
+            <li className={styles.text} dangerouslySetInnerHTML={{__html: text}}></li>
             <li>●</li>
         </>
     );

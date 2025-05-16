@@ -22,11 +22,11 @@
     animation: open 250ms ease-out forwards;
 }
 
-.ribbon:not(.open) .text {
+.ribbon:not(.open) .item {
     animation-play-state: paused    ;
 }
 
-.text {
+.item {
     display: flex;
     gap: 1rem;
 
@@ -35,6 +35,15 @@
     min-width: 100%;
 
     list-style: none;
+}
+
+.text strong {
+    font-weight: 700;
+}
+
+.text em {
+    font-style: italic;
+    font-weight: 300;
 }
 
 @keyframes scroll {

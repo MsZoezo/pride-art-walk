@@ -21,8 +21,24 @@
     font-size: 2rem;
 }
 
-.eye {
+.eyeclosed, .eyeopen {
     width: 2.5rem;
+}
+
+.eyeclosed {
+    fill: black;
+}
+
+.filtering .eyeclosed {
+    fill: #e30513;
+}
+
+.eyeopen {
+    stroke: black;
+}
+
+.filtering .eyeopen {
+    stroke: #e30513;
 }
 
 .tags {
@@ -58,6 +74,13 @@
 
     margin-bottom: 0.5rem;
 }
+
+.tags.open .button {
+    opacity: 0;
+    animation: slideUp 200ms ease-out forwards;
+    animation-delay: var(--stagger);
+}
+
 .selected {
     background: #839faf;
     color: white;
@@ -73,5 +96,21 @@
         justify-content: center;
 
         flex-wrap: wrap;
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
