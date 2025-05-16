@@ -38,9 +38,11 @@ export default function Home() {
         };
     }, []);
 
+    const loading = isLoading || isMapLoading || isError;
+
     return (
         <section className={styles.content}>
-            <LoadingScreen render={isLoading || isMapLoading || isError} error={isError} retryTime={retryTime} />
+            <LoadingScreen render={loading} error={isError} retryTime={retryTime} />
 
             <MapNavigation>
                 <Link href="/">Home</Link>
@@ -52,7 +54,7 @@ export default function Home() {
                 <Map exhibitions={exhibitions ?? []} setIsMapLoading={setIsMapLoading}></Map>
 
                 <div className={styles.mapIcons}>
-                    <Legend />
+                    <Legend loaded={!loading} />
                     <MapFilters />
                 </div>
             </MapContextProvider>

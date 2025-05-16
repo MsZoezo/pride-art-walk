@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./legend.module.css";
 import Color from "./color/color";
 import { colors } from "@/util/theme";
 
 const openDefault = process.env.NEXT_PUBLIC_LEGEND_OPEN.toLowerCase() === 'true';
 
-export default function Legend() {
+interface Props {
+    loaded: boolean;
+}
+
+export default function Legend({ loaded }: Props) {
     const [isOpen, setIsOpen] = useState<boolean>(openDefault);
+
+    useEffect(() => {
+        if(!openDefault || !loaded) return;
+
+        const timeout = setTimeout(() => setIsOpen(false), 3000);
+
+        return () => clearTimeout(timeout);
+    }, [loaded]);
 
     return(
         <section className={`${styles.legend} ${isOpen ? styles.open : ''}`}>
