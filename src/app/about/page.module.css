@@ -1,14 +1,22 @@
 .main {
     min-height: 100vh;
-}
-
-.title {
     margin: 0 1rem;
 }
 
+.title {
+    /* margin: 0 1rem; */
+}
+
+.aboutSection {
+    display: block;
+    gap: 1rem;
+}
 
 @media screen and (min-width: 600px) {
     .title {
         text-align: center;
+    }
+    .aboutSection {
+        display: flex;
     }
 }

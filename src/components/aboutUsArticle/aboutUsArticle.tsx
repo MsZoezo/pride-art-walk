@@ -1,4 +1,4 @@
-import AboutPlaceholder from "./aboutPlaceholder";
+import AboutPlaceholder from "../aboutPlaceholder/aboutPlaceholder";
 import styles from './aboutUsArticle.module.css';
 interface Props {
     text?: string
@@ -6,10 +6,10 @@ interface Props {
 
 export default function AboutUsArticle({ text }: Props) {
     return (
-        <article className={styles.aboutArticle}>
-            <h1 className={styles.aboutTitle}>
-                About us
-            </h1>
+        <article className={styles.card}>
+            <h2 className={styles.title}>
+                Our history
+            </h2>
 
             {
                 text ? (

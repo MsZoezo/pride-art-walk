@@ -1,0 +1,20 @@
+.link {
+    display: flex;
+    align-items: center;
+
+    color: var(--color);
+
+    text-decoration: none;
+
+    margin-bottom: 0.5rem;
+}
+
+.link svg {
+    margin-right: 0.75rem;
+
+    outline: var(--color-icon);
+    color: var(--color-icon);
+
+    height: 2rem;
+    width: 2rem;
+}

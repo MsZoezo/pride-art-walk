@@ -1,7 +1,8 @@
 "use client"
 
 import Navigation from "@/components/navigation/navigation";
-import AboutUsArticle from "@/components/about/aboutUsArticle";
+import AboutUsArticle from "@/components/aboutUsArticle/aboutUsArticle";
+import AboutContactArticle from "@/components/aboutContactArticle/aboutContactArticle";
 import useAbout from "@/hooks/useAbout";
 import Link from "next/link";
 
@@ -19,7 +20,11 @@ export default function About() {
             </Navigation>
 
             <h1 className={styles.title}>About us</h1>
-            <AboutUsArticle text={description}/>
+
+            <section className={styles.aboutSection}>
+                <AboutUsArticle text={description}/>
+                <AboutContactArticle email={email}/>
+            </section>
         </main>
     )
 }
