@@ -3,13 +3,14 @@
 import Navigation from "@/components/navigation/navigation";
 import AboutUsArticle from "@/components/aboutUsArticle/aboutUsArticle";
 import AboutContactArticle from "@/components/aboutContactArticle/aboutContactArticle";
+import PartnerList from "@/components/partnerList/partnerList";
 import useAbout from "@/hooks/useAbout";
 import Link from "next/link";
 
 import styles from "./page.module.css"
 
 export default function About() {
-    const { description, email } = useAbout();
+    const { description, email, partners, teams } = useAbout();
     return (
         <main className={styles.main}>
             <Navigation>
@@ -25,6 +26,8 @@ export default function About() {
                 <AboutUsArticle text={description}/>
                 <AboutContactArticle email={email}/>
             </section>
+
+            <PartnerList partners={partners}/>
         </main>
     )
 }

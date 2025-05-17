@@ -20,6 +20,8 @@ export default function useAbout() {
         data: data,
         description: data?.description,
         email: data?.email,
+        partners: data?.partners,
+        teams: data?.teams,
         isError: error,
         isLoading,
         retryTime,
