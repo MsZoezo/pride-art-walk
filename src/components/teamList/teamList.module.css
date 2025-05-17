@@ -1,0 +1,23 @@
+.section {
+    margin: auto;
+}
+
+.title {
+}
+
+.teams {
+    width: 100%;
+    max-width: 140rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (min-width: 600px) {
+    .title {
+        text-align: center;
+    }
+    .teams {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

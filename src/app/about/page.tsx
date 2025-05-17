@@ -8,6 +8,7 @@ import useAbout from "@/hooks/useAbout";
 import Link from "next/link";
 
 import styles from "./page.module.css"
+import TeamList from "@/components/teamList/teamList";
 
 export default function About() {
     const { description, email, partners, teams } = useAbout();
@@ -28,6 +29,7 @@ export default function About() {
             </section>
 
             <PartnerList partners={partners}/>
+            <TeamList teams={teams}/>
         </main>
     )
 }
