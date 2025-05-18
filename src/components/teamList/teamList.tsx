@@ -2,7 +2,7 @@ import { Team } from "@/types/Team";
 import styles from "./teamList.module.css"
 import Avatar from "../avatar/avatar";
 interface Props {
-    teams: Team[]
+    teams?: Team[]
 }
 
 export default function TeamList({ teams }: Props) {
@@ -10,13 +10,19 @@ export default function TeamList({ teams }: Props) {
         <section className={styles.section}>
             <h2 className={styles.title}>Our teams</h2>
             
-            <ul className={styles.teams}>
-                {
-                    teams?.map((team) => (
-                        <Avatar person={team}/>
-                    ))
-                }
-            </ul>
+            {teams && teams.length > 0 ? (
+                <ul className={styles.teams}>
+                    {
+                        teams.map((team) => (
+                            <Avatar person={team}/>
+                        ))
+                    }
+                </ul>
+                )
+                :
+                (
+                    <div className={styles.placeholder}>No teams yet.</div>
+                )}
         </section>
     )
 }

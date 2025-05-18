@@ -14,6 +14,15 @@
     gap: 1rem;
 }
 
+.placeholder {
+    text-align: center;
+    margin: 2rem 0;
+
+    font-weight: 500;
+
+    color: hsl(0, 0%, 40%);
+}
+
 @media screen and (min-width: 600px) {
     .title {
         text-align: center;

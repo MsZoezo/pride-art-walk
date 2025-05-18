@@ -21,7 +21,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
 
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
+    
     const showModal = (exhibition: Exhibition) => {
         window.history.pushState(null, '', `/exhibitions?exhibition=${exhibition.id}`);
         setCurrentExhibition(exhibition);

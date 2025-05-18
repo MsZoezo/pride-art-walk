@@ -16,6 +16,13 @@
     display: flex;
 }
 
+.placeholder {
+
+    font-weight: 500;
+    margin: 1rem 0;
+    color: hsl(0, 0%, 40%);
+}
+
 @media screen and (min-width: 600px) {
     .teams {
         /* grid-template-columns: repeat(3, 1fr); */

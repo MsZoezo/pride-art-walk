@@ -10,13 +10,19 @@ export default function PartnerList({ partners }: Props) {
         <section className={styles.section}>
             <h2 className={styles.title}>Partners</h2>
             
-            <ul className={styles.partners}>
-                {
-                    partners?.map((partner) => (
-                        <PartnerCard partner={partner}/>
-                    ))
-                }
-            </ul>
+            {partners && partners.length > 0 ? (
+                <ul className={styles.partners}>
+                    {
+                        partners?.map((partner) => (
+                            <PartnerCard partner={partner}/>
+                        ))
+                    }
+                </ul>
+            ):(
+                <div className={styles.placeholder}>
+                    No partners yet
+                </div>
+            )}
         </section>
     )
 }
