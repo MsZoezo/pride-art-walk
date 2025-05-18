@@ -15,8 +15,3 @@
 .title {
     font-weight: 500;
 }
-@media screen and (min-width: 800px) {
-    .card {
-        width: 50%;
-    }
-}

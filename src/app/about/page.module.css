@@ -13,11 +13,20 @@
     margin: 1rem auto;
 }
 
+.sectionRight {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 @media screen and (min-width: 600px) {
     .title {
         text-align: center;
     }
     .aboutSection {
         display: flex;
+    }
+    .sectionRight {
+        width: 50%;
     }
 }

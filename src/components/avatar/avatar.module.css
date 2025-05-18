@@ -1,8 +1,7 @@
 .pfp {
     width: 100%;
-    max-width: 15rem;
+    max-width: 5rem;
 
-    margin-bottom: 1rem;
 }
 
 .pfp img {
@@ -27,8 +26,8 @@
     height: 100%;
 
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 1rem;
 }
 
 .card h3, .card h4 {

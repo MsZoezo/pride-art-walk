@@ -25,11 +25,13 @@ export default function About() {
 
             <section className={styles.aboutSection}>
                 <AboutUsArticle text={description}/>
-                <AboutContactArticle email={email}/>
+                <div className={styles.sectionRight}>
+                    <AboutContactArticle email={email}/>
+                    <TeamList teams={teams}/>
+                </div>
             </section>
 
             <PartnerList partners={partners}/>
-            <TeamList teams={teams}/>
         </main>
     )
 }
