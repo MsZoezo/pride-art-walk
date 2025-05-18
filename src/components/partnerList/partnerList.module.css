@@ -1,5 +1,7 @@
 .section {
     margin: auto;
+    /* remove if we decide to add copyright */
+    padding-bottom: 2.5rem;
 }
 
 .title {
