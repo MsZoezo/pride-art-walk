@@ -19,6 +19,7 @@ export default function News() {
                 <Link href="/">Home</Link>
                 <Link href="/exhibitions">Exhibitions</Link>
                 <Link href="/news">News</Link>
+                <Link href="/about">About</Link>
             </Navigation>
 
             <LoadingScreen render={isLoading || isError} error={isError} retryTime={retryTime} />

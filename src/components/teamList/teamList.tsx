@@ -8,7 +8,7 @@ interface Props {
 export default function TeamList({ teams }: Props) {
     return (
         <section className={styles.section}>
-            <h2 className={styles.title}>Our teams</h2>
+            <h2 className={styles.title}>Our team-members</h2>
             
             {teams && teams.length > 0 ? (
                 <ul className={styles.teams}>
