@@ -4,7 +4,7 @@
     left: 0;
 
     width: 100%;
-    height: 100vh;
+        height: 100dvh;
 
     display: none;
     align-items: center;
@@ -16,6 +16,8 @@
 
     pointer-events: all;
     touch-action: auto;
+
+    font-size: 1.6rem;
 }
 
 .wrapper.open {
@@ -30,7 +32,7 @@
 
 .modal {
     width: calc(100% - 3rem);
-    height: calc(100vh - 3rem);
+    height: calc(100dvh - 3rem);
 
     border-radius: 1.5rem;
 
