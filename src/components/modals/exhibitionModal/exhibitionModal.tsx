@@ -10,6 +10,7 @@ import Spinner from "@/components/spinner/spinner";
 import ScheduleItem from "@/components/scheduleItem/scheduleItem";
 import ScheduleList from "@/components/scheduleList/scheduleList";
 import Image from "../atoms/image/image";
+import Description from "../atoms/description/description";
 
 interface Props {
     isOpen: boolean;
@@ -76,8 +77,7 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
 
                 { exhibition.image && <Image src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt={exhibition.image_alt} caption={exhibition.image_caption} />}
 
-
-                <div className={styles.description} dangerouslySetInnerHTML={{ __html: exhibition.description }} />
+                <Description content={exhibition.description} />
             </div>
 
             <div className={styles.cta}>
