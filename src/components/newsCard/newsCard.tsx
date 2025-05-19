@@ -11,6 +11,8 @@ interface Props {
 export default function NewsCard({ news, onClick, index }: Props) {
     const description = news.description.replaceAll(/<\/?[^>]+(>|$)/g, "").split(/\s+/).slice(0, 25).join(' ') + '...';
 
+    const date = new Date(news.date).toLocaleDateString("en-US", { day: '2-digit', month: '2-digit', year: 'numeric', });
+
     return(
         <article onClick={onClick} className={styles.card} style={{'--stagger': `${index * 100}ms`} as CSSProperties}>
 
@@ -22,6 +24,7 @@ export default function NewsCard({ news, onClick, index }: Props) {
 
             <div className={styles.content}>
                 <h3 className={styles.title}>{news.title}</h3>
+                <h4 className={styles.date}>{date}</h4>
 
                 <ul className={styles.tags}>
                     {news.tags.map((tag, i) => <Tag key={`${news.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
