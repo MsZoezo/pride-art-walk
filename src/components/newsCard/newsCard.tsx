@@ -2,6 +2,7 @@ import { News } from "@/types/News";
 import styles from "./newsCard.module.css";
 import { CSSProperties } from "react";
 import Tag from "../tag/tag";
+import { useMemo } from "react";
 interface Props {
     news: News,
     onClick?: any

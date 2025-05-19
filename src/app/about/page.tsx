@@ -27,10 +27,9 @@ export default function About() {
             <h1 className={styles.title}>About us</h1>
 
             <section className={styles.aboutSection}>
-                <AboutUsArticle text={description}/>
+                <AboutUsArticle text={description} email={email}/>
+                <TeamList teams={teams}/>
                 <div className={styles.sectionRight}>
-                    <AboutContactArticle email={email}/>
-                    <TeamList teams={teams}/>
                 </div>
             </section>
 

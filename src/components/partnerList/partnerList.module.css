@@ -8,7 +8,7 @@
     width: 100%;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
 }
 
@@ -20,11 +20,17 @@
 
     color: hsl(0, 0%, 40%);
 }
+.title {
+    text-align: center;
+}
 
 @media screen and (min-width: 600px) {
-    .title {
-        text-align: center;
+    .partners {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
+
+@media screen and (min-width: 800px) {
     .partners {
         grid-template-columns: repeat(3, 1fr);
     }
