@@ -1,10 +1,10 @@
 import { Team } from "@/types/Team"
-import styles from "./avatar.module.css"
+import styles from "./teamAvatar.module.css"
 interface Props {
     person: Team
 }
 
-export default function Avatar({ person }: Props) {
+export default function TeamAvatar({ person }: Props) {
     return (
         <article className={styles.card}>
             <figure className={styles.pfp}>
