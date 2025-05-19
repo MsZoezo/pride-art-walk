@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
-    const description = exhibition.description.replaceAll(/<\/?[^>]+(>|$)/g, "").split(/\s+/).slice(0, 25).join(' ') + '...';
+    const description = exhibition.description.replaceAll(/<\/?[^>]+(>|$)/g, "").replaceAll(/\s|&nbsp;/g, ' ').split(/\s+/).slice(0, 25).join(' ') + '...';
 
     return (
         <article onClick={onClick} className={styles.card} style={{'--stagger': `${index * 100}ms`} as CSSProperties}>

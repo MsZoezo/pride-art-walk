@@ -21,6 +21,11 @@
     text-align: center;
 }
 
+.date {
+    font-weight: 500;
+    text-align: center;
+}
+
 .venue {
     text-align: center;
 }
@@ -138,24 +143,28 @@
     z-index: 100;
 }
 
-.blobPink,
-.blobBlue {
+.blobGreen {
     position: absolute;
     top: 0;
     right: 0;
     z-index: -1;
 }
 
-.blobGreen {
+.blobPink {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 0;
+    right: 0;
     z-index: -1;
 }
 
-.blobBrown {
-    position: absolute;
-    bottom: 0;
-    left: 75px;
-    z-index: -1;
+@media screen and (min-width: 900px) {
+    .blobGreen {
+        width: 244px;
+        height: 434px;
+    }
+
+    .blobPink {
+        width: 424px;
+        height: 222px;
+    }
 }

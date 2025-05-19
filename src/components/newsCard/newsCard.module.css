@@ -60,6 +60,10 @@
     font-size: 2.4rem;
 }
 
+.date {
+    font-weight: 500;
+}
+
 .tags {
     display: flex;
     flex-wrap: wrap;
