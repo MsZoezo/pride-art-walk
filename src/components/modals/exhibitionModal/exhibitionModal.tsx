@@ -9,6 +9,7 @@ import Tag from "@/components/tag/tag";
 import Spinner from "@/components/spinner/spinner";
 import ScheduleItem from "@/components/scheduleItem/scheduleItem";
 import ScheduleList from "@/components/scheduleList/scheduleList";
+import Image from "../atoms/image/image";
 
 interface Props {
     isOpen: boolean;
@@ -73,11 +74,7 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
                     </li>
                 </ul>
 
-                {exhibition.image &&
-                    <figure className={styles.image}>
-                        <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt={exhibition.image_alt ?? ""} />
-                    </figure>
-                }
+                { exhibition.image && <Image src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt={exhibition.image_alt} caption={exhibition.image_caption} />}
 
 
                 <div className={styles.description} dangerouslySetInnerHTML={{ __html: exhibition.description }} />

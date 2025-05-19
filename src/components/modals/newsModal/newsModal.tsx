@@ -9,6 +9,7 @@ import Spinner from "@/components/spinner/spinner";
 import ScheduleItem from "@/components/scheduleItem/scheduleItem";
 import ScheduleList from "@/components/scheduleList/scheduleList";
 import { News } from "@/types/News";
+import Image from "../atoms/image/image";
 
 interface Props {
     isOpen: boolean;
@@ -47,6 +48,7 @@ export default function NewsModal({ isOpen, onClose, news }: Props) {
                     </figure>
                 }
 
+                { news.image &&  <Image src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${news.image}`} alt={news.image_alt} caption={news.image_caption} /> }
 
                 <div className={styles.description} dangerouslySetInnerHTML={{ __html: news.description }} />
             </div>
