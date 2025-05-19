@@ -7,11 +7,7 @@ interface Props {
 
 export default function AboutContactArticle({ email }: Props) {
     return (
-        <article className={styles.card}>
-            <h2 className={styles.title}>
-                Contact us
-            </h2>
-
+        <div className={styles.card}>
             <p>You can contact us via:</p>
             {
                 email ? (
@@ -23,6 +19,6 @@ export default function AboutContactArticle({ email }: Props) {
                     </div>
                 ):<AboutPlaceholder/>
             }
-        </article>
+        </div>
     )
 }

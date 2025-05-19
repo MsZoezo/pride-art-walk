@@ -2,6 +2,7 @@ import { News } from "@/types/News";
 import styles from "./newsCard.module.css";
 import { CSSProperties } from "react";
 import Tag from "../tag/tag";
+import { useMemo } from "react";
 interface Props {
     news: News,
     onClick?: any
@@ -9,7 +10,10 @@ interface Props {
 }
 
 export default function NewsCard({ news, onClick, index }: Props) {
-    const description = news.description.replaceAll(/<\/?[^>]+(>|$)/g, "").split(/\s+/).slice(0, 25).join(' ') + '...';
+    const description = useMemo(() => {
+        let desc = news.description.replaceAll(/<\/?[^>]+(>|$)/g, "").split(/\s+/).slice(0, 25).join(' ') + '...';
+        return desc.replaceAll('&nbsp;', ' ')
+    }, [news])
 
     return(
         <article onClick={onClick} className={styles.card} style={{'--stagger': `${index * 100}ms`} as CSSProperties}>
