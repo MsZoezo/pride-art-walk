@@ -64,20 +64,20 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
             </ul>
 
             <div className={styles.content}>
-                <ul>
-                    <li className={styles.wwww}>
+                <ul className={styles.www}>
+                    <li className={styles.item}>
                         <h4 className={styles.type}>Who</h4>
                         <ul className={styles.artists}>
                         {exhibition.artist_name.map((artist, i) => <li key={`${exhibition.title}-artists-${i}`}>{artist}{exhibition.artist_name.length - 1 != i ? ',' : ''}</li>)}
                         </ul>
                     </li>
 
-                    <li className={styles.wwww}>
+                    <li className={styles.item}>
                         <h4 className={styles.type}>Where</h4>
                         <Link href={mapLink ? mapLink : ''} className={styles.route}>{exhibition.address ?? 'Adress'}</Link>
                     </li>
 
-                    <li className={styles.wwww}>
+                    <li className={styles.item}>
                         <h4 className={styles.type}>When</h4>
                         <ScheduleList schedules={exhibition.schedules} />
                     </li>

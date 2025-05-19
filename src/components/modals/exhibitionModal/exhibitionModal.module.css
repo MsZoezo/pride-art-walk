@@ -59,7 +59,12 @@
     margin: 1rem 0;
 }
 
-.wwww {
+.www {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.item {
     display: flex;
     align-items: flex-start;
 
@@ -90,6 +95,8 @@
 }
 
 .description {
+    width: fit-content;
+    margin: 0 auto;
     margin-top: 1.2rem;
 }
 
@@ -129,7 +136,7 @@
 
     .image {
         width: 100%;
-        max-width: 75rem;
+        max-width: 50rem;
     }
 }
 

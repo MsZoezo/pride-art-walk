@@ -96,6 +96,8 @@
 }
 
 .description {
+    width: fit-content;
+    margin: 0 auto;
     margin-top: 1.2rem;
 }
 
@@ -135,7 +137,7 @@
 
     .image {
         width: 100%;
-        max-width: 75rem;
+        max-width: 50rem;
     }
 }
 
