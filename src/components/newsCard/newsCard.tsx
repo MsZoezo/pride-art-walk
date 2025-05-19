@@ -19,7 +19,7 @@ export default function NewsCard({ news, onClick, index }: Props) {
 
             {news.image &&
                 <figure className={styles.image}>
-                    <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${news.image}`} alt="" />
+                    <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${news.image}`} alt={news.image_alt} />
                 </figure>
             }
 

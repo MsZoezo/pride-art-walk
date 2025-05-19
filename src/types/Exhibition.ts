@@ -32,6 +32,8 @@ export interface Exhibition {
     /** The alt text of the exhibition image. */
     image_alt?: string,
 
+    image_caption?: string,
+
     /** Exhibition's address. */
     address?: string,
 

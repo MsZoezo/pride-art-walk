@@ -18,7 +18,7 @@ export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
 
             {exhibition.image &&
                 <figure className={styles.image}>
-                    <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt="" />
+                    <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt={exhibition.image_alt} />
                 </figure>
             }
 
