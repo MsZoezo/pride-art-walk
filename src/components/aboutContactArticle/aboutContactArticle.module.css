@@ -2,8 +2,6 @@
     width: 100%;
     height: fit-content;
     overflow: hidden;
-    background-color: white;
-    margin-bottom: 1rem;
     display: flex;
 }
 
@@ -12,7 +10,7 @@
 }
 
 @media screen and (min-width: 600px) {
-    .card {
+    /* .card {
         justify-content: center;
-    }   
+    }    */
 }

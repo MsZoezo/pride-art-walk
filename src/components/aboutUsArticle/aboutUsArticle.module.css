@@ -1,3 +1,10 @@
+.wrapper {
+    display: grid;
+    padding-bottom: 2rem;
+    gap: 0.5rem;
+    align-items: start;
+}
+
 .card {
     width: 100%;
     /* min-height: 40rem; */
@@ -8,16 +15,39 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2.4rem;
 }
 
 .title {
-    padding-left: 1rem;
-    font-weight: 500;
-}
-
-.card {
+    font-size: 3rem;
     text-align: center;
 }
+
+.image {
+    border: 1px solid black;
+    display: block;
+}
+
+.image img {
+    width: 100%;
+    max-height: 25rem;
+    object-fit: cover;
+    height: 100%;
+}
+
 @media screen and (min-width: 800px) {
+    .wrapper {
+        grid-template-columns: 1fr 1fr;
+        padding: 5rem 10%;
+    }
+    .title {
+        text-align: start;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 800px) {
+    .wrapper {
+        display: grid;
+        padding: 5rem 5%;
+        gap: 1rem;
+        align-items: start;
+    }    
 }
