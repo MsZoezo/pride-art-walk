@@ -18,12 +18,6 @@ interface Props {
 }
 
 export default function NewsModal({ isOpen, onClose, news }: Props) {
-    const [ loaded, setLoaded ] = useState<boolean>(news?.image ? false : true);
-
-    useEffect(() => {
-        setLoaded(news?.image ? false : true);
-    }, [news]);
-
     if (!news) return;
 
     const date = new Date(news.date).toLocaleDateString("en-US", { day: '2-digit', month: '2-digit', year: 'numeric', });
@@ -38,12 +32,6 @@ export default function NewsModal({ isOpen, onClose, news }: Props) {
                 <path d="M72.0384 88.6914C57.3498 78.9753 41.9447 69.7989 26.3605 53.0655C10.9553 36.3321 -4.62891 12.4016 1.28236 -4.15186C7.37276 -20.7053 34.9587 -29.7018 57.1707 -34.9197C79.5619 -39.9577 96.5791 -41.2172 117.358 -46.4351C138.137 -51.833 162.857 -61.0094 182.74 -55.0717C202.445 -48.9541 217.491 -27.9025 221.791 -5.59129C225.91 16.8998 219.104 40.4705 207.46 58.2835C195.638 76.0964 179.158 87.9717 162.678 96.9682C146.198 106.145 129.897 112.622 115.029 110.643C99.9826 108.664 86.5479 98.5875 72.0384 88.6914Z" fill="#F7C3DC" fill-opacity="0.4"/>
             </svg>
 
-
-            
-            <div className={`${styles.spinner} ${loaded ? '' : styles.visible}`}>
-                <Spinner color="#eae9f5" />
-            </div>
-
             <h2 className={styles.title}>{news.title}</h2>
             <h3 className={styles.date}>{date}</h3>
             {/* <h3 className={styles.venue}>{news.venue_name}</h3> */}
@@ -55,7 +43,7 @@ export default function NewsModal({ isOpen, onClose, news }: Props) {
             <div className={styles.content}>
                 {news.image &&
                     <figure className={styles.image}>
-                        <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${news.image}`} alt="" onLoad={() => setLoaded(true)} />
+                        <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${news.image}`} alt={news.image_alt} />
                     </figure>
                 }
 

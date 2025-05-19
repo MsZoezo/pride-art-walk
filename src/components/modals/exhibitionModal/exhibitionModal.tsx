@@ -18,12 +18,6 @@ interface Props {
 }
 
 export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) {
-    const [ loaded, setLoaded ] = useState<boolean>(exhibition?.image ? false : true);
-
-    useEffect(() => {
-        setLoaded(exhibition?.image ? false : true);
-    }, [exhibition]);
-
     const position = useUserLocationContext();
 
     const mapLink = useMemo(()=> {
@@ -51,10 +45,6 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
             <svg className={`${styles.blobBrown} ${styles.blob}`} width="224" height="166" viewBox="0 0 224 166" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M176.379 4.65639C198.145 11.8097 219.77 27.5189 223.421 47.1554C227.072 66.7919 212.749 90.3558 200.392 110.273C188.034 130.19 177.784 146.6 163.32 154.174C148.716 161.749 130.04 160.486 107.151 166.097C84.2623 171.707 57.4416 184.05 42.1356 176.756C26.8295 169.463 23.0381 142.393 14.8936 117.005C6.74915 91.4779 -5.74845 67.4932 2.95774 53.4672C11.6639 39.3008 41.4335 35.093 63.0585 27.9397C84.6836 20.7864 97.8833 10.8279 115.436 5.07718C132.989 -0.813779 154.754 -2.35665 176.379 4.65639Z" fill="#B17F4A" fillOpacity="0.4" />
             </svg>
-
-            <div className={`${styles.spinner} ${loaded ? '' : styles.visible}`}>
-                <Spinner color="#eae9f5" />
-            </div>
 
             <h2 className={styles.title}>{exhibition.title}</h2>
             <h3 className={styles.venue}>{exhibition.venue_name}</h3>
@@ -85,7 +75,7 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
 
                 {exhibition.image &&
                     <figure className={styles.image}>
-                        <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt="" onLoad={() => setLoaded(true)} />
+                        <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt={exhibition.image_alt ?? ""} />
                     </figure>
                 }
 
