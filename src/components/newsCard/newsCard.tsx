@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function NewsCard({ news, onClick, index }: Props) {
-    const description = news.description.replaceAll(/<\/?[^>]+(>|$)/g, "").split(/\s+/).slice(0, 25).join(' ') + '...';
+    const description = news.description.replaceAll(/<\/?[^>]+(>|$)/g, "").replaceAll(/\s|&nbsp;/g, ' ').split(/\s+/).slice(0, 25).join(' ') + '...';
 
     const date = new Date(news.date).toLocaleDateString("en-US", { day: '2-digit', month: '2-digit', year: 'numeric', });
 
