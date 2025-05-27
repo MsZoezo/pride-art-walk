@@ -72,7 +72,22 @@
 
     padding: 0.8rem 1.2rem;
 
-    background: #f18500;
+    /* background: #f18500; */
+    /* Zoe, Taco zei dat hij de navigatie link een regenboog wilde maken. Is dit goed? */
+    background: linear-gradient(
+        to right,
+        hsl(0, 100%, 50%),
+        hsl(30, 100%, 50%),
+        hsl(60, 100%, 50%),
+        hsl(90, 100%, 50%),
+        hsl(120, 100%, 50%),
+        hsl(150, 100%, 50%),
+        hsl(180, 100%, 50%),
+        hsl(210, 100%, 50%),
+        hsl(240, 100%, 50%),
+        hsl(270, 100%, 50%),
+        hsl(280, 100%, 50%)
+    );
     color: #fff;
 
     font-weight: 700;

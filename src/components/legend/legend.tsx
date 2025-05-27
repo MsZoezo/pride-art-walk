@@ -15,7 +15,7 @@ export default function Legend({ loaded }: Props) {
     useEffect(() => {
         if(!openDefault || !loaded) return;
 
-        const timeout = setTimeout(() => setIsOpen(false), 3000);
+        const timeout = setTimeout(() => setIsOpen(false), 5000);
 
         return () => clearTimeout(timeout);
     }, [loaded]);
