@@ -21,7 +21,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
 
     const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-    
+
     const showModal = (exhibition: Exhibition) => {
         window.history.pushState(null, '', `/exhibitions?exhibition=${exhibition.id}`);
         setCurrentExhibition(exhibition);
@@ -29,7 +29,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
     }
 
     const closeModal = () => {
-        if(!initialLoad) window.history.back();
+        if (!initialLoad) window.history.back();
         else window.history.replaceState(null, '', '/exhibitions');
 
         setIsModalOpen(false);
@@ -38,59 +38,68 @@ export default function ExhibitionList({ exhibitions }: Props) {
     useEffect(() => {
         const id = params.get('exhibition');
 
-        if(!id) {
+        if (!id) {
             setIsModalOpen(false);
             return;
         }
 
         const exhibition = exhibitions?.find(val => val.id === Number(id));
 
-        if(!exhibition) {
+        if (!exhibition) {
             setIsModalOpen(false);
             return;
         }
 
-        if(currentExhibition === exhibition && isModalOpen) return;
+        if (currentExhibition === exhibition && isModalOpen) return;
 
         setCurrentExhibition(exhibition);
         setIsModalOpen(true);
     }, [params, exhibitions]);
 
     const shownExhibitions = useMemo(() => {
-        if(!exhibitions) return;
+        if (!exhibitions) return;
 
         let shownExhibitions = [...exhibitions];
 
-        if(selectedTags.length == 0 && (!searchString || searchString.length == 0)) {
+        if (selectedTags.length == 0 && (!searchString || searchString.length == 0)) {
             return shownExhibitions;
         }
 
-        if(selectedTags.length != 0) {
+        if (selectedTags.length != 0) {
             shownExhibitions = shownExhibitions.filter(exhibition => {
-                for(let i = 0; i < selectedTags.length; i++) {
-                    if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
-    
+                for (let i = 0; i < selectedTags.length; i++) {
+                    if (!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+
                     return true;
                 }
                 return false;
             });
         }
 
-        if(searchString) shownExhibitions = shownExhibitions.filter(exhibitions => exhibitions.title.toLowerCase().includes(searchString.toLowerCase()));
+        if (searchString) {
+            const lowerSearch = searchString.toLowerCase();
+
+            shownExhibitions = shownExhibitions.filter(exhibition =>
+                exhibition.title.toLowerCase().includes(lowerSearch) ||
+                exhibition.address?.toLowerCase().includes(lowerSearch) ||
+                exhibition.venue_name?.toLowerCase().includes(lowerSearch) ||
+                exhibition.artist_name?.some(artist => artist.toLowerCase().includes(lowerSearch))
+            );
+        }
 
         return shownExhibitions;
     }, [exhibitions, selectedTags, searchString]);
 
-    return(
+    return (
         <>
-            { (searchString?.length != 0 && shownExhibitions?.length == 0) &&
+            {(searchString?.length != 0 && shownExhibitions?.length == 0) &&
                 <p className={styles.empty}>No exhibitions were found...</p>
             }
 
             <section className={styles.exhibitions}>
                 {
                     shownExhibitions?.map((exhibition, i) => (
-                        <ExhibitionCard key={`${i}-${exhibition.id}`} index={i} exhibition={exhibition} onClick={() => showModal(exhibition)}/>
+                        <ExhibitionCard key={`${i}-${exhibition.id}`} index={i} exhibition={exhibition} onClick={() => showModal(exhibition)} />
                     ))
                 }
             </section>
