@@ -81,12 +81,14 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
             </div>
 
             <div className={styles.cta}>
-                {
-                    mapLink ? (
-                        <Link href={mapLink}>How to get there</Link>
-                    ):
-                    null
-                }
+                <div>
+                    {
+                        mapLink ? (
+                            <Link href={mapLink}>How to get there</Link>
+                        ):
+                        null
+                    }
+                </div>
             </div>
         </BaseModal>
     );
