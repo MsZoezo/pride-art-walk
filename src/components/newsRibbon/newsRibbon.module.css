@@ -16,6 +16,8 @@
     background: white;
 
     animation: close 250ms ease-out forwards;
+
+    z-index: 10;
 }
 
 .ribbon.open {
