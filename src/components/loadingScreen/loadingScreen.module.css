@@ -96,3 +96,38 @@
         transform: translateY(0);
     }
 }
+
+.blobRed, .blobGreen {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.blobBlue, .blobPink {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+}
+
+@media screen and (min-width: 1000px) {
+    .blobRed {
+        width: 268px;
+        height: 292px;
+    }
+
+    .blobGreen {
+        width: 372px;
+        height: 428px;
+    }
+
+    .blobBlue {
+        width: 408px;
+        height: 356px;
+    }
+
+    .blobPink {
+        width: 286px;
+        height: 186px;
+    }
+}
