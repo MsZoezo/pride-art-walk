@@ -3,46 +3,23 @@
 import { IExhibition } from "@/types/IExhibition";
 import ExhibitionMarker from "../exhibitionMarker/exhibitionMarker";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
-import { useEffect, useMemo, useState } from "react";
-import { useLoadContext } from "@/context/LoadContextProvider";
-import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import { useMapContext } from "@/context/MapContextProvider";
 import { ZoomPercentageContextProvider } from "@/context/ZoomPercentageContext";
-import { ModalWindowState } from "@/util/modals";
+import useModalParams from "@/hooks/useModalParams";
 
 interface Props {
 	exhibitions: IExhibition[];
 }
 
 export default function MapExhibitions({ exhibitions }: Props) {
-	const params = useSearchParams();
 	const { selectedTags } = useMapContext()!;
 
-	const { showModal, closeModal } = ModalWindowState("exhibition", "/exhibitions");
-
-	const [currentExhibition, setCurrentExhibition] = useState<IExhibition | null>(null);
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-	useEffect(() => {
-		const id = params.get("exhibition");
-
-		if (!id) {
-			setIsModalOpen(false);
-			return;
-		}
-
-		const exhibition = exhibitions.find(exhibition => exhibition.id === Number(id));
-
-		if (!exhibition) {
-			setIsModalOpen(false);
-			return;
-		}
-
-		if (exhibition === currentExhibition && isModalOpen) return;
-
-		setCurrentExhibition(exhibition);
-		setIsModalOpen(true);
-	}, [params, exhibitions]);
+	const { showModal, closeModal, isOpen, currentItem } = useModalParams<IExhibition>(
+		"exhibition",
+		"/exhibitions",
+		exhibitions,
+	);
 
 	const shownExhibitions: number[] = useMemo(() => {
 		if (!exhibitions) return [];
@@ -79,9 +56,9 @@ export default function MapExhibitions({ exhibitions }: Props) {
 			</ZoomPercentageContextProvider>
 
 			<ExhibitionModal
-				isOpen={isModalOpen}
+				isOpen={isOpen}
 				onClose={closeModal}
-				exhibition={currentExhibition}
+				exhibition={currentItem}
 			/>
 		</>
 	);

@@ -3,46 +3,23 @@
 import { IExhibition } from "@/types/IExhibition";
 import styles from "./exhibitionList.module.css";
 import ExhibitionCard from "../exhibitionCard/exhibitionCard";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import { useListContext } from "@/context/ListContextProvider";
-import { useSearchParams } from "next/navigation";
-import { useLoadContext } from "@/context/LoadContextProvider";
-import { ModalWindowState } from "@/util/modals";
+import useModalParams from "@/hooks/useModalParams";
 
 interface Props {
 	exhibitions: IExhibition[];
 }
 
 export default function ExhibitionList({ exhibitions }: Props) {
-	const params = useSearchParams();
 	const { selectedTags, searchString } = useListContext()!;
 
-	const { showModal, closeModal } = ModalWindowState("exhibition", "/exhibitions");
-
-	const [currentExhibition, setCurrentExhibition] = useState<IExhibition | null>(null);
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-	useEffect(() => {
-		const id = params.get("exhibition");
-
-		if (!id) {
-			setIsModalOpen(false);
-			return;
-		}
-
-		const exhibition = exhibitions?.find(val => val.id === Number(id));
-
-		if (exhibition === currentExhibition && isModalOpen) return;
-
-		if (!exhibition) {
-			setIsModalOpen(false);
-			return;
-		}
-
-		setCurrentExhibition(exhibition);
-		setIsModalOpen(true);
-	}, [params, exhibitions]);
+	const { showModal, closeModal, isOpen, currentItem } = useModalParams<IExhibition>(
+		"exhibition",
+		"/exhibitions",
+		exhibitions,
+	);
 
 	const shownExhibitions = useMemo(() => {
 		if (!exhibitions) return;
@@ -99,9 +76,9 @@ export default function ExhibitionList({ exhibitions }: Props) {
 			</section>
 
 			<ExhibitionModal
-				isOpen={isModalOpen}
+				isOpen={isOpen}
 				onClose={closeModal}
-				exhibition={currentExhibition}
+				exhibition={currentItem}
 			/>
 		</>
 	);
