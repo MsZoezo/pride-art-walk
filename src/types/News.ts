@@ -4,7 +4,7 @@ export interface News {
     id: number,
     title: string,
     date: string,
-    description: string,
+    description?: string,
     image: string,
     image_alt?: string,
     image_caption?: string,

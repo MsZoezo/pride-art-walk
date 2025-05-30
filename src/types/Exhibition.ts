@@ -24,7 +24,7 @@ export interface Exhibition {
     artist_name: string[],
 
     /** Description of the exhibition, raw html. */
-    description: string,
+    description?: string,
 
     /** The image url of the exhibition. */
     image?: string,

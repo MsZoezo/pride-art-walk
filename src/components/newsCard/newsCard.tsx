@@ -3,6 +3,7 @@ import styles from "./newsCard.module.css";
 import { CSSProperties } from "react";
 import Tag from "../tag/tag";
 import { useMemo } from "react";
+import { toPreview } from "@/util/description";
 interface Props {
     news: News,
     onClick?: any
@@ -10,7 +11,7 @@ interface Props {
 }
 
 export default function NewsCard({ news, onClick, index }: Props) {
-    const description = news.description.replaceAll(/<\/?[^>]+(>|$)/g, "").replaceAll(/\s|&nbsp;/g, ' ').split(/\s+/).slice(0, 25).join(' ') + '...';
+    const description = toPreview(news.description);
 
     const date = new Date(news.date).toLocaleDateString("en-US", { day: '2-digit', month: '2-digit', year: 'numeric', });
 
@@ -31,7 +32,7 @@ export default function NewsCard({ news, onClick, index }: Props) {
                     {news.tags.map((tag, i) => <Tag key={`${news.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
                 </ul>
 
-                <p>{description}</p>
+                { description && <p>{description}</p> }
 
                 <button className={styles.button}>Read more <img src="/arrow-right.svg" alt="" /></button>
             </div>

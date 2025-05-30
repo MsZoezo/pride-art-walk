@@ -2,6 +2,7 @@ import { Exhibition } from "@/types/Exhibition";
 import styles from "./exhibitionCard.module.css";
 import Tag from "../tag/tag";
 import { CSSProperties } from "react";
+import { toPreview } from "@/util/description";
 
 interface Props {
     exhibition: Exhibition,
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
-    const description = exhibition.description.replaceAll(/<\/?[^>]+(>|$)/g, "").replaceAll(/\s|&nbsp;/g, ' ').split(/\s+/).slice(0, 25).join(' ') + '...';
+    const description = toPreview(exhibition.description);
 
     return (
         <article onClick={onClick} className={styles.card} style={{'--stagger': `${index * 100}ms`} as CSSProperties}>
@@ -29,7 +30,7 @@ export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
                     {exhibition.tags.map((tag, i) => <Tag key={`${exhibition.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
                 </ul>
 
-                <p>{description}</p>
+                {description && <p>{description}</p> }
 
                 <button className={styles.button}>Read more <img src="/arrow-right.svg" alt="" /></button>
             </div>
