@@ -1,4 +1,3 @@
-import { Exhibition } from "@/types/Exhibition";
 import fetcher from "@/util/fetch/fetcher";
 import RetryWithCountdown from "@/util/fetch/retry";
 import { useRef, useState } from "react";

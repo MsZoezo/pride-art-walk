@@ -1,4 +1,4 @@
-import { News } from "@/types/News";
+import { News } from "@/types/INews";
 import styles from "./newsCard.module.css";
 import { CSSProperties } from "react";
 import Tag from "../tag/tag";

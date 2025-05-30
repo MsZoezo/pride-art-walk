@@ -1,4 +1,4 @@
-import { Team } from "@/types/Team";
+import { Team } from "@/types/ITeam";
 import styles from "./teamAvatar.module.css";
 interface Props {
 	person: Team;

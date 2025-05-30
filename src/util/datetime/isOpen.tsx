@@ -1,4 +1,4 @@
-import { ScheduleDate } from "@/types/ScheduleDate";
+import { ScheduleDate } from "@/types/IScheduleDate";
 
 export default function isOpen(schedules: ScheduleDate[]): boolean {
 	const timestamp = Math.round(Date.now() / 1000);

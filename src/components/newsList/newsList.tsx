@@ -1,7 +1,7 @@
 import { useListContext } from "@/context/ListContextProvider";
 import styles from "./newsList.module.css";
 import { useMemo, useState } from "react";
-import { News } from "@/types/News";
+import { News } from "@/types/INews";
 import NewsCard from "../newsCard/newsCard";
 import NewsModal from "../modals/newsModal/newsModal";
 

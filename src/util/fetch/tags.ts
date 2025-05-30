@@ -1,4 +1,4 @@
-import { Tag } from "@/types/Tag";
+import { Tag } from "@/types/ITag";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

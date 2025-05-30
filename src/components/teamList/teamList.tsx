@@ -1,4 +1,4 @@
-import { Team } from "@/types/Team";
+import { Team } from "@/types/ITeam";
 import styles from "./teamList.module.css";
 import TeamAvatar from "../teamAvatar/teamAvatar";
 interface Props {

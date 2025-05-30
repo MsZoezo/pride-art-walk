@@ -1,6 +1,6 @@
 "use client";
 
-import { Exhibition } from "@/types/Exhibition";
+import { IExhibition } from "@/types/IExhibition";
 import styles from "./exhibitionList.module.css";
 import ExhibitionCard from "../exhibitionCard/exhibitionCard";
 import { useEffect, useMemo, useState } from "react";
@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useLoadContext } from "@/context/LoadContextProvider";
 
 interface Props {
-	exhibitions: Exhibition[];
+	exhibitions: IExhibition[];
 }
 
 export default function ExhibitionList({ exhibitions }: Props) {
@@ -18,10 +18,10 @@ export default function ExhibitionList({ exhibitions }: Props) {
 	const { initialLoad } = useLoadContext()!;
 	const { selectedTags, searchString } = useListContext()!;
 
-	const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
+	const [currentExhibition, setCurrentExhibition] = useState<IExhibition | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-	const showModal = (exhibition: Exhibition) => {
+	const showModal = (exhibition: IExhibition) => {
 		window.history.pushState(null, "", `/exhibitions?exhibition=${exhibition.id}`);
 		setCurrentExhibition(exhibition);
 		setIsModalOpen(true);

@@ -1,6 +1,6 @@
 "use client";
 
-import { Exhibition } from "@/types/Exhibition";
+import { Exhibition } from "@/types/IExhibition";
 import ExhibitionMarker from "../exhibitionMarker/exhibitionMarker";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import { useEffect, useMemo, useState } from "react";

@@ -1,4 +1,4 @@
-import { News } from "@/types/News";
+import { News } from "@/types/INews";
 import fetcher from "@/util/fetch/fetcher";
 import RetryWithCountdown from "@/util/fetch/retry";
 import { useRef, useState } from "react";

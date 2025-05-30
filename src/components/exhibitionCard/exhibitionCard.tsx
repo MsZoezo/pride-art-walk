@@ -1,11 +1,11 @@
-import { Exhibition } from "@/types/Exhibition";
+import { IExhibition } from "@/types/IExhibition";
 import styles from "./exhibitionCard.module.css";
 import Tag from "../tag/tag";
 import { CSSProperties } from "react";
 import { toPreview } from "@/util/description";
 
 interface Props {
-	exhibition: Exhibition;
+	exhibition: IExhibition;
 	onClick?: any;
 	selectedTags?: number[];
 	index: number;

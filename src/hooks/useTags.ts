@@ -1,4 +1,4 @@
-import { Tag } from "@/types/Tag";
+import { Tag } from "@/types/ITag";
 import fetcher from "@/util/fetch/fetcher";
 import useSWR from "swr";
 

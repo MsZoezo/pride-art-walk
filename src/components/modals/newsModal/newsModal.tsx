@@ -8,7 +8,7 @@ import Tag from "@/components/tag/tag";
 import Spinner from "@/components/spinner/spinner";
 import ScheduleItem from "@/components/scheduleItem/scheduleItem";
 import ScheduleList from "@/components/scheduleList/scheduleList";
-import { News } from "@/types/News";
+import { News } from "@/types/INews";
 import Image from "../atoms/image/image";
 import Description from "../atoms/description/description";
 

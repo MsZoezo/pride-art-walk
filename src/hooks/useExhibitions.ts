@@ -1,4 +1,4 @@
-import { Exhibition } from "@/types/Exhibition";
+import { IExhibition } from "@/types/IExhibition";
 import fetcher from "@/util/fetch/fetcher";
 import RetryWithCountdown from "@/util/fetch/retry";
 import { useRef, useState } from "react";
@@ -12,7 +12,7 @@ export default function useExhibitions() {
 
 	const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
 
-	const { data, error, isLoading } = useSWR(`${API_URL}/exhibitions`, fetcher<Exhibition[]>, {
+	const { data, error, isLoading } = useSWR(`${API_URL}/exhibitions`, fetcher<IExhibition[]>, {
 		use: [retryMiddleware],
 	});
 

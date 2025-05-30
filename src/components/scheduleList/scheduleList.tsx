@@ -1,4 +1,4 @@
-import { ScheduleDate } from "@/types/ScheduleDate";
+import { ScheduleDate } from "@/types/IScheduleDate";
 import styles from "./scheduleList.module.css";
 import ScheduleItem from "../scheduleItem/scheduleItem";
 import { useEffect, useState } from "react";

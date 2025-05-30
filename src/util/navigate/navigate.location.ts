@@ -1,5 +1,5 @@
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
-import { UserLocation } from "@/types/UserLocation";
+import { UserLocation } from "@/types/IUserLocation";
 
 /**
  * This helper function generates a google maps url for direction to the POI.

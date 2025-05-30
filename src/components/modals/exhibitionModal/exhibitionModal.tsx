@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction, useEffect, useMemo, useState } from "react";
 import BaseModal from "../baseModal/baseModal";
 import styles from "./exhibitionModal.module.css";
-import { Exhibition } from "@/types/Exhibition";
+import { Exhibition } from "@/types/IExhibition";
 import Link from "next/link";
 import { generateMapsLink } from "@/util/navigate/navigate.location";
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";

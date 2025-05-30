@@ -1,4 +1,4 @@
-import { Exhibition } from "@/types/Exhibition";
+import { IExhibition } from "@/types/IExhibition";
 import styles from "./exhibitionMarker.module.css";
 import isOpen from "@/util/datetime/isOpen";
 import { Marker, useMap } from "react-map-gl/maplibre";
@@ -7,7 +7,7 @@ import { useZoomPercentageContext } from "@/context/ZoomPercentageContext";
 import { colors } from "@/util/theme";
 
 interface Props {
-	exhibition: Exhibition;
+	exhibition: IExhibition;
 
 	onClick: (id: number) => void;
 

@@ -1,4 +1,4 @@
-import { ScheduleDate } from "@/types/ScheduleDate";
+import { ScheduleDate } from "@/types/IScheduleDate";
 import styles from "./scheduleItem.module.css";
 
 interface Props {

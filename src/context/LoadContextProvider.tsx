@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useUserLocation } from "@/hooks/location/useUserLocation";
-import { UserLocation } from "@/types/UserLocation";
+import { UserLocation } from "@/types/IUserLocation";
 import { usePathname, useSearchParams } from "next/navigation";
 
 interface LoadContextType {

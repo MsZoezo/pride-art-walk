@@ -1,4 +1,4 @@
-import { Partner } from "@/types/Partner";
+import { Partner } from "@/types/IPartner";
 import styles from "./partnerCard.module.css";
 
 interface Props {

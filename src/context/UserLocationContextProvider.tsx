@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext } from "react";
 import { useUserLocation } from "@/hooks/location/useUserLocation";
-import { UserLocation } from "@/types/UserLocation";
+import { UserLocation } from "@/types/IUserLocation";
 
 interface UserLocationContextType {
 	position: UserLocation | null;

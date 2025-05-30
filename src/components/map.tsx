@@ -15,8 +15,8 @@ import {
 	useState,
 } from "react";
 import { getAvgPosition } from "@/util/map";
-import { Exhibition } from "@/types/Exhibition";
-import { UserLocation } from "@/types/UserLocation";
+import { Exhibition } from "@/types/IExhibition";
+import { UserLocation } from "@/types/IUserLocation";
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import ExhibitionMarker from "./exhibitionMarker/exhibitionMarker";
 import GpsMarker from "./gpsMarker/gpsMarker";

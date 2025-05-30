@@ -1,4 +1,4 @@
-import { UserLocation } from "@/types/UserLocation";
+import { UserLocation } from "@/types/IUserLocation";
 import { useState, useEffect } from "react";
 
 export function useUserLocation(options?: PositionOptions) {
