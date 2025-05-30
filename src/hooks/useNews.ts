@@ -1,4 +1,4 @@
-import { News } from "@/types/INews";
+import { INews } from "@/types/INews";
 import fetcher from "@/util/fetch/fetcher";
 import RetryWithCountdown from "@/util/fetch/retry";
 import { useRef, useState } from "react";
@@ -12,7 +12,7 @@ export default function useNews() {
 
 	const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
 
-	const { data, error, isLoading } = useSWR(`${API_URL}/news`, fetcher<News[]>, {
+	const { data, error, isLoading } = useSWR(`${API_URL}/news`, fetcher<INews[]>, {
 		use: [retryMiddleware],
 	});
 
