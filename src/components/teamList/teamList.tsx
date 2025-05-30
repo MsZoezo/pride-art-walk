@@ -1,8 +1,8 @@
-import { Team } from "@/types/ITeam";
+import { ITeam } from "@/types/ITeam";
 import styles from "./teamList.module.css";
 import TeamAvatar from "../teamAvatar/teamAvatar";
 interface Props {
-	teams?: Team[];
+	teams?: ITeam[];
 }
 
 export default function TeamList({ teams }: Props) {
@@ -13,7 +13,10 @@ export default function TeamList({ teams }: Props) {
 			{teams && teams.length > 0 ? (
 				<ul className={styles.teams}>
 					{teams.map(team => (
-						<TeamAvatar person={team} />
+						<TeamAvatar
+							key={team.id}
+							person={team}
+						/>
 					))}
 				</ul>
 			) : (

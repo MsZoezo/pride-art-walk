@@ -1,9 +1,9 @@
 import useNewsRibbon from "@/hooks/useNewsRibbon";
 import styles from "./newsRibbon.module.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function NewsRibbon() {
-	const { data, isError, isLoading } = useNewsRibbon();
+	const { data } = useNewsRibbon();
 
 	const [text, setText] = useState<string | null>(null);
 

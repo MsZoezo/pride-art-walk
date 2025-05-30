@@ -1,15 +1,6 @@
-import {
-	useState,
-	useRef,
-	useEffect,
-	useMemo,
-	SetStateAction,
-	Dispatch,
-	CSSProperties,
-} from "react";
+import { SetStateAction, Dispatch, CSSProperties } from "react";
 import styles from "./mapTagFilter.module.css";
 import useTags from "@/hooks/useTags";
-import BaseModal from "../modals/baseModal/baseModal";
 import { useMapContext } from "@/context/MapContextProvider";
 
 interface Props {
@@ -18,7 +9,7 @@ interface Props {
 }
 
 export default function MapTagFilter({ isOpen, setOpen }: Props) {
-	const { tags, isLoading, isError } = useTags("exhibitions");
+	const { tags } = useTags("exhibitions");
 	const { selectedTags, setSelectedTags } = useMapContext()!;
 
 	const onClick = (id: number) => {

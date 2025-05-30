@@ -1,8 +1,8 @@
-import { Partner } from "@/types/IPartner";
+import { IPartner } from "@/types/IPartner";
 import styles from "./partnerList.module.css";
 import PartnerCard from "../partnerCard/partnerCard";
 interface Props {
-	partners?: Partner[];
+	partners?: IPartner[];
 }
 
 export default function PartnerList({ partners }: Props) {
@@ -12,7 +12,12 @@ export default function PartnerList({ partners }: Props) {
 
 			{partners && partners.length > 0 ? (
 				<ul className={styles.partners}>
-					{partners?.map(partner => <PartnerCard partner={partner} />)}
+					{partners?.map(partner => (
+						<PartnerCard
+							key={partner.id}
+							partner={partner}
+						/>
+					))}
 				</ul>
 			) : (
 				<div className={styles.placeholder}>No partners yet</div>

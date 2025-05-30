@@ -2,7 +2,7 @@ export default async function fetcher<Type>(url: string): Promise<Type | null> {
 	let response;
 	try {
 		response = await fetch(url);
-	} catch (err: unknown) {
+	} catch {
 		throw new Error(`Failed to connect to API!`);
 	}
 

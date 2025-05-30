@@ -25,7 +25,7 @@ export default function Home() {
 
 	// Here we add support for the pmtiles protocol to the map library, with which we serve the map.
 	useEffect(() => {
-		let protocol = new Protocol();
+		const protocol = new Protocol();
 
 		maplibregl.addProtocol("pmtiles", protocol.tile);
 

@@ -1,12 +1,12 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 interface ListContextType {
-	selectedTags: Number[];
-	setSelectedTags: Dispatch<SetStateAction<Number[]>>;
-	searchString: String | null;
-	setSearchString: Dispatch<SetStateAction<String | null>>;
+	selectedTags: number[];
+	setSelectedTags: Dispatch<SetStateAction<number[]>>;
+	searchString: string | null;
+	setSearchString: Dispatch<SetStateAction<string | null>>;
 }
 
 interface Props {
@@ -16,8 +16,8 @@ interface Props {
 const listContext = createContext<ListContextType | null>(null);
 
 export function ListContextProvider({ children }: Props) {
-	const [selectedTags, setSelectedTags] = useState<Number[]>([]);
-	const [searchString, setSearchString] = useState<String | null>(null);
+	const [selectedTags, setSelectedTags] = useState<number[]>([]);
+	const [searchString, setSearchString] = useState<string | null>(null);
 
 	return (
 		<listContext.Provider

@@ -6,7 +6,7 @@ export function toPreview(text?: string, maxLength: number = 25): string | null 
 			.replaceAll(/<\/?[^>]+(>|$)/g, "")
 			.replaceAll(/\s|&nbsp;/g, " ")
 			.split(/\s+/)
-			.slice(0, 25)
+			.slice(0, maxLength)
 			.join(" ") + "..."
 	);
 }

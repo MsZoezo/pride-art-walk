@@ -1,49 +1,34 @@
 "use client";
 
-import { LngLatBounds, LngLatBoundsLike, MapRef, Map as ReactMap } from "react-map-gl/maplibre";
-import { DARK, layers, namedFlavor } from "@protomaps/basemaps";
+import { Map as ReactMap } from "react-map-gl/maplibre";
+import { layers } from "@protomaps/basemaps";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import {
-	Dispatch,
-	memo,
-	SetStateAction,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
-import { getAvgPosition } from "@/util/map";
-import { Exhibition } from "@/types/IExhibition";
-import { UserLocation } from "@/types/IUserLocation";
-import { useUserLocationContext } from "@/context/UserLocationContextProvider";
-import ExhibitionMarker from "./exhibitionMarker/exhibitionMarker";
+import { Dispatch, SetStateAction, useMemo } from "react";
+
+import { IExhibition } from "@/types/IExhibition";
 import GpsMarker from "./gpsMarker/gpsMarker";
 import { theme } from "../util/theme";
-import maplibregl, { LngLat, StyleSpecification } from "maplibre-gl";
-import ExhibitionModal from "./modals/exhibitionModal/exhibitionModal";
-import { env } from "process";
+import { StyleSpecification } from "maplibre-gl";
 import LandmarkMarker from "./landmarkMarker/landmarkMarker";
-import { useLoadContext } from "@/context/LoadContextProvider";
-import { useRouter, useSearchParams } from "next/navigation";
 import MapExhibitions from "./mapExhibitions/mapExhibitions";
 
 interface Props {
-	exhibitions: Exhibition[];
+	exhibitions: IExhibition[];
 	setIsMapLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const mapBounds: [[number, number], [number, number]] = JSON.parse(
 	process.env.NEXT_PUBLIC_MAP_BOUNDS,
 );
+
 const mapCenter: [number, number] = JSON.parse(process.env.NEXT_PUBLIC_MAP_CENTER);
 
 const initialMapZoom = Number(process.env.NEXT_PUBLIC_MAP_INITIAL_ZOOM);
 const minMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MIN_ZOOM);
 const maxMapZoom = Number(process.env.NEXT_PUBLIC_MAP_MAX_ZOOM);
 
-const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
+export default function Map({ exhibitions, setIsMapLoading }: Props) {
 	const mapStyle: StyleSpecification = useMemo(
 		() => ({
 			version: 8,
@@ -124,6 +109,4 @@ const Map = memo(({ exhibitions, setIsMapLoading }: Props) => {
 			</ReactMap>
 		</>
 	);
-});
-
-export default Map;
+}

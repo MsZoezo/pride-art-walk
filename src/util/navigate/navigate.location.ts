@@ -1,5 +1,4 @@
-import { useUserLocationContext } from "@/context/UserLocationContextProvider";
-import { UserLocation } from "@/types/IUserLocation";
+import { IUserLocation } from "@/types/IUserLocation";
 
 /**
  * This helper function generates a google maps url for direction to the POI.
@@ -13,7 +12,7 @@ import { UserLocation } from "@/types/IUserLocation";
 export function generateMapsLink(
 	lat: string | number,
 	long: string | number,
-	userPosition?: UserLocation | null,
+	userPosition?: IUserLocation | null,
 	travelMode = "bicycling",
 ): string {
 	const baseUrl = "https://www.google.com/maps/dir/?api=1";

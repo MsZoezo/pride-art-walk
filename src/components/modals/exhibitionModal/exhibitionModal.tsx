@@ -1,13 +1,11 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import BaseModal from "../baseModal/baseModal";
 import styles from "./exhibitionModal.module.css";
-import { Exhibition } from "@/types/IExhibition";
+import { IExhibition } from "@/types/IExhibition";
 import Link from "next/link";
 import { generateMapsLink } from "@/util/navigate/navigate.location";
 import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import Tag from "@/components/tag/tag";
-import Spinner from "@/components/spinner/spinner";
-import ScheduleItem from "@/components/scheduleItem/scheduleItem";
 import ScheduleList from "@/components/scheduleList/scheduleList";
 import Image from "../atoms/image/image";
 import Description from "../atoms/description/description";
@@ -16,7 +14,7 @@ interface Props {
 	isOpen: boolean;
 	onClose: () => void;
 
-	exhibition: Exhibition | null;
+	exhibition: IExhibition | null;
 }
 
 export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) {

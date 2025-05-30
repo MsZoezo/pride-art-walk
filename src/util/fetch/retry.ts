@@ -1,12 +1,14 @@
-import { Dispatch, RefObject, SetStateAction, use } from "react";
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
+import { Dispatch, RefObject, SetStateAction } from "react";
 import { Middleware } from "swr";
 
 export default function RetryWithCountdown(
 	setRetryTime: Dispatch<SetStateAction<number>>,
 	intervalRef: RefObject<NodeJS.Timeout | null>,
 ): Middleware {
-	return useSWRNext => (key, fetcher, config) => {
-		return useSWRNext(key, fetcher, {
+	return SWRNext => (key, fetcher, config) => {
+		return SWRNext(key, fetcher, {
 			...config,
 			onErrorRetry: (
 				err: any,

@@ -6,7 +6,7 @@ import { toPreview } from "@/util/description";
 
 interface Props {
 	exhibition: IExhibition;
-	onClick?: any;
+	onClick?: () => void;
 	selectedTags?: number[];
 	index: number;
 }

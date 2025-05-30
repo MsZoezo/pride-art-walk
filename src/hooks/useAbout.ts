@@ -11,7 +11,7 @@ export default function useAbout() {
 
 	const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
 
-	const { data, error, isLoading } = useSWR(`${API_URL}/about-us`, fetcher<any>, {
+	const { data, error, isLoading } = useSWR(`${API_URL}/about-us`, fetcher<unknown>, {
 		use: [retryMiddleware],
 	});
 

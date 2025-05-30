@@ -1,7 +1,7 @@
 import styles from "./loadingScreen.module.css";
 import Mascot from "../mascot/mascot";
 import Spinner from "../spinner/spinner";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
 	render: boolean;

@@ -1,14 +1,7 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useMemo, useState } from "react";
 import BaseModal from "../baseModal/baseModal";
 import styles from "./newsModal.module.css";
-import Link from "next/link";
-import { generateMapsLink } from "@/util/navigate/navigate.location";
-import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import Tag from "@/components/tag/tag";
-import Spinner from "@/components/spinner/spinner";
-import ScheduleItem from "@/components/scheduleItem/scheduleItem";
-import ScheduleList from "@/components/scheduleList/scheduleList";
-import { News } from "@/types/INews";
+import { INews } from "@/types/INews";
 import Image from "../atoms/image/image";
 import Description from "../atoms/description/description";
 
@@ -16,7 +9,7 @@ interface Props {
 	isOpen: boolean;
 	onClose: () => void;
 
-	news: News | null;
+	news: INews | null;
 }
 
 export default function NewsModal({ isOpen, onClose, news }: Props) {

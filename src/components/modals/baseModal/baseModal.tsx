@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import styles from "./baseModal.module.css";
 
 interface Props {

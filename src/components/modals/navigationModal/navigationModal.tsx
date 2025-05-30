@@ -1,7 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import BaseModal from "../baseModal/baseModal";
 import styles from "./navigationModal.module.css";
-import Link from "next/link";
 
 interface Props {
 	isOpen: boolean;

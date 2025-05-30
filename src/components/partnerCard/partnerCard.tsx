@@ -1,8 +1,8 @@
-import { Partner } from "@/types/IPartner";
+import { IPartner } from "@/types/IPartner";
 import styles from "./partnerCard.module.css";
 
 interface Props {
-	partner: Partner;
+	partner: IPartner;
 }
 
 export default function PartnerCard({ partner }: Props) {

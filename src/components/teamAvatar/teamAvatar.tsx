@@ -1,7 +1,7 @@
-import { Team } from "@/types/ITeam";
+import { ITeam } from "@/types/ITeam";
 import styles from "./teamAvatar.module.css";
 interface Props {
-	person: Team;
+	person: ITeam;
 }
 
 export default function TeamAvatar({ person }: Props) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useMap } from "react-map-gl/maplibre";
 
 interface Props {

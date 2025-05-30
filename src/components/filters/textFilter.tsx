@@ -1,7 +1,6 @@
 import styles from "./textFilter.module.css";
 
 import { useListContext } from "@/context/ListContextProvider";
-import { useState } from "react";
 
 export default function TextFilter() {
 	const { setSearchString } = useListContext()!;

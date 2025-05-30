@@ -1,8 +1,8 @@
 import { IExhibition } from "@/types/IExhibition";
 import styles from "./exhibitionMarker.module.css";
 import isOpen from "@/util/datetime/isOpen";
-import { Marker, useMap } from "react-map-gl/maplibre";
-import { useEffect, useMemo, useState } from "react";
+import { Marker } from "react-map-gl/maplibre";
+import { useMemo } from "react";
 import { useZoomPercentageContext } from "@/context/ZoomPercentageContext";
 import { colors } from "@/util/theme";
 

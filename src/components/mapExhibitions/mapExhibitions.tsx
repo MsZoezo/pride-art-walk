@@ -1,25 +1,24 @@
 "use client";
 
-import { Exhibition } from "@/types/IExhibition";
+import { IExhibition } from "@/types/IExhibition";
 import ExhibitionMarker from "../exhibitionMarker/exhibitionMarker";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import { useEffect, useMemo, useState } from "react";
 import { useLoadContext } from "@/context/LoadContextProvider";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useMapContext } from "@/context/MapContextProvider";
 import { ZoomPercentageContextProvider } from "@/context/ZoomPercentageContext";
 
 interface Props {
-	exhibitions: Exhibition[];
+	exhibitions: IExhibition[];
 }
 
 export default function MapExhibitions({ exhibitions }: Props) {
-	const router = useRouter();
 	const params = useSearchParams();
 	const { initialLoad } = useLoadContext()!;
 	const { selectedTags } = useMapContext()!;
 
-	const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
+	const [currentExhibition, setCurrentExhibition] = useState<IExhibition | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
 	/** Changes the modal to the exhibition identified by id.
@@ -66,7 +65,7 @@ export default function MapExhibitions({ exhibitions }: Props) {
 		setIsModalOpen(false);
 	};
 
-	const shownExhibitions: Number[] = useMemo(() => {
+	const shownExhibitions: number[] = useMemo(() => {
 		if (!exhibitions) return [];
 
 		let shownExhibitions = [...exhibitions];
@@ -90,7 +89,7 @@ export default function MapExhibitions({ exhibitions }: Props) {
 	return (
 		<>
 			<ZoomPercentageContextProvider>
-				{exhibitions?.map((exhibition, index) => (
+				{exhibitions?.map(exhibition => (
 					<ExhibitionMarker
 						key={`exhibition-marker-${exhibition.id}`}
 						transparent={!shownExhibitions.includes(exhibition.id)}

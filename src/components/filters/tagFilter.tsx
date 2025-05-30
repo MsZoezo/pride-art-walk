@@ -1,12 +1,4 @@
-import {
-	CSSProperties,
-	Dispatch,
-	SetStateAction,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
+import { CSSProperties, useMemo, useRef, useState } from "react";
 import styles from "./tagFilter.module.css";
 import useTags from "@/hooks/useTags";
 import { useListContext } from "@/context/ListContextProvider";
@@ -16,7 +8,7 @@ interface Props {
 }
 
 export default function TagFilter({ contentType }: Props) {
-	const { tags, isLoading, isError } = useTags(contentType);
+	const { tags } = useTags(contentType);
 	const { selectedTags, setSelectedTags } = useListContext()!;
 
 	const tagsRef = useRef<HTMLDivElement>(null);
