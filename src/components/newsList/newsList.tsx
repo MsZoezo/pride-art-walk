@@ -1,31 +1,46 @@
 import { useListContext } from "@/context/ListContextProvider";
 import styles from "./newsList.module.css";
-import { useMemo, useState } from "react";
-import { News } from "@/types/INews";
+import { useEffect, useMemo, useState } from "react";
+import { INews } from "@/types/INews";
 import NewsCard from "../newsCard/newsCard";
 import NewsModal from "../modals/newsModal/newsModal";
+import { useLoadContext } from "@/context/LoadContextProvider";
+import { useSearchParams } from "next/navigation";
+import { ModalWindowState } from "@/util/modals";
 
 interface Props {
-	news: News[];
+	news: INews[];
 }
 
 export default function NewsList({ news }: Props) {
+	const params = useSearchParams();
+
+	const { showModal, closeModal } = ModalWindowState("news", "/news");
 	const { selectedTags, searchString } = useListContext()!;
 
-	const [currentNewsItem, setCurrentNewsItem] = useState<News | null>(null);
+	const [currentNewsItem, setCurrentNewsItem] = useState<INews | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-	const showModal = (news: News) => {
-		setCurrentNewsItem(news);
+	useEffect(() => {
+		const id = params.get("news");
+
+		if (!id) {
+			setIsModalOpen(false);
+			return;
+		}
+
+		const newsItem = news?.find(val => val.id === Number(id));
+
+		if (newsItem === currentNewsItem && isModalOpen) return;
+
+		if (!newsItem) {
+			setIsModalOpen(false);
+			return;
+		}
+
+		setCurrentNewsItem(newsItem);
 		setIsModalOpen(true);
-	};
-
-	const closeModal = () => {
-		/* if(!initialLoad) window.history.back();
-        else window.history.replaceState(null, '', '/news'); */
-
-		setIsModalOpen(false);
-	};
+	}, [params, news]);
 
 	const shownNews = useMemo(() => {
 		if (!news) return;
@@ -67,7 +82,7 @@ export default function NewsList({ news }: Props) {
 						key={`${i}-${news.id}`}
 						index={i}
 						news={news}
-						onClick={() => showModal(news)}
+						onClick={() => showModal(news.id)}
 					/>
 				))}
 			</section>

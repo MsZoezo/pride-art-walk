@@ -8,6 +8,7 @@ import { useLoadContext } from "@/context/LoadContextProvider";
 import { useSearchParams } from "next/navigation";
 import { useMapContext } from "@/context/MapContextProvider";
 import { ZoomPercentageContextProvider } from "@/context/ZoomPercentageContext";
+import { ModalWindowState } from "@/util/modals";
 
 interface Props {
 	exhibitions: IExhibition[];
@@ -15,27 +16,12 @@ interface Props {
 
 export default function MapExhibitions({ exhibitions }: Props) {
 	const params = useSearchParams();
-	const { initialLoad } = useLoadContext()!;
 	const { selectedTags } = useMapContext()!;
+
+	const { showModal, closeModal } = ModalWindowState("exhibition", "/exhibitions");
 
 	const [currentExhibition, setCurrentExhibition] = useState<IExhibition | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-	/** Changes the modal to the exhibition identified by id.
-	 * @param id the exhibition id.
-	 */
-	const changeModal = (id: number) => {
-		if (!exhibitions) return;
-
-		const exhibition = exhibitions.find(exhibition => exhibition.id === id);
-
-		window.history.pushState(null, "", `?exhibition=${id}`);
-
-		if (!exhibition) return;
-
-		setCurrentExhibition(exhibition);
-		setIsModalOpen(true);
-	};
 
 	useEffect(() => {
 		const id = params.get("exhibition");
@@ -57,13 +43,6 @@ export default function MapExhibitions({ exhibitions }: Props) {
 		setCurrentExhibition(exhibition);
 		setIsModalOpen(true);
 	}, [params, exhibitions]);
-
-	const closeModal = () => {
-		if (!initialLoad && params.get("exhibition")) window.history.back();
-		else window.history.replaceState(null, "", "/");
-
-		setIsModalOpen(false);
-	};
 
 	const shownExhibitions: number[] = useMemo(() => {
 		if (!exhibitions) return [];
@@ -94,7 +73,7 @@ export default function MapExhibitions({ exhibitions }: Props) {
 						key={`exhibition-marker-${exhibition.id}`}
 						transparent={!shownExhibitions.includes(exhibition.id)}
 						exhibition={exhibition}
-						onClick={changeModal}
+						onClick={showModal}
 					/>
 				))}
 			</ZoomPercentageContextProvider>

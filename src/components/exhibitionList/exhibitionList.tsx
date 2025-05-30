@@ -8,6 +8,7 @@ import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import { useListContext } from "@/context/ListContextProvider";
 import { useSearchParams } from "next/navigation";
 import { useLoadContext } from "@/context/LoadContextProvider";
+import { ModalWindowState } from "@/util/modals";
 
 interface Props {
 	exhibitions: IExhibition[];
@@ -15,24 +16,12 @@ interface Props {
 
 export default function ExhibitionList({ exhibitions }: Props) {
 	const params = useSearchParams();
-	const { initialLoad } = useLoadContext()!;
 	const { selectedTags, searchString } = useListContext()!;
+
+	const { showModal, closeModal } = ModalWindowState("exhibition", "/exhibitions");
 
 	const [currentExhibition, setCurrentExhibition] = useState<IExhibition | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-	const showModal = (exhibition: IExhibition) => {
-		window.history.pushState(null, "", `/exhibitions?exhibition=${exhibition.id}`);
-		setCurrentExhibition(exhibition);
-		setIsModalOpen(true);
-	};
-
-	const closeModal = () => {
-		if (!initialLoad) window.history.back();
-		else window.history.replaceState(null, "", "/exhibitions");
-
-		setIsModalOpen(false);
-	};
 
 	useEffect(() => {
 		const id = params.get("exhibition");
@@ -44,12 +33,12 @@ export default function ExhibitionList({ exhibitions }: Props) {
 
 		const exhibition = exhibitions?.find(val => val.id === Number(id));
 
+		if (exhibition === currentExhibition && isModalOpen) return;
+
 		if (!exhibition) {
 			setIsModalOpen(false);
 			return;
 		}
-
-		if (currentExhibition === exhibition && isModalOpen) return;
 
 		setCurrentExhibition(exhibition);
 		setIsModalOpen(true);
@@ -104,7 +93,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
 						key={`${i}-${exhibition.id}`}
 						index={i}
 						exhibition={exhibition}
-						onClick={() => showModal(exhibition)}
+						onClick={() => showModal(exhibition.id)}
 					/>
 				))}
 			</section>
