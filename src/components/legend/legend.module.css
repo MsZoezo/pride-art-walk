@@ -1,77 +1,79 @@
 .legend {
-    position: relative;
+	position: relative;
 
-    z-index: 1000;
+	z-index: 1000;
 
-    min-width: 5rem;
-    min-height: 5rem;
+	min-width: 5rem;
+	min-height: 5rem;
 
-    max-width: 5rem;
-    max-height: 5rem;
+	max-width: 5rem;
+	max-height: 5rem;
 
-    padding: 1rem;
+	padding: 1rem;
 
-    background-color: white;
+	background-color: white;
 
-    border-radius: 1rem;
+	border-radius: 1rem;
 
-    overflow: hidden;
+	overflow: hidden;
 
-    transition: max-height .25s ease-out, max-width .25s ease-out;
-    interpolate-size: allow-keywords;
+	transition:
+		max-height 0.25s ease-out,
+		max-width 0.25s ease-out;
+	interpolate-size: allow-keywords;
 
-    box-shadow: 0 4px 4px #00000040;
+	box-shadow: 0 4px 4px #00000040;
 }
 
 .legend.open {
-    max-width: max-content;
-    max-height: max-content;
+	max-width: max-content;
+	max-height: max-content;
 }
 
 .header {
-    width: 20rem;
+	width: 20rem;
 
-    padding: 0 5rem;
+	padding: 0 5rem;
 
-    margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
 
-    justify-items: center;
+	justify-items: center;
 }
 
 .button {
-    position: absolute;
+	position: absolute;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    left: 0;
-    top: 0;
+	left: 0;
+	top: 0;
 
-    width: 5rem;
-    height: 5rem;
+	width: 5rem;
+	height: 5rem;
 
-    background: white;
+	background: white;
 
-    border: none;
-    outline: none;
+	border: none;
+	outline: none;
 
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .button img {
-    width: 75%;
-    height: 75%;
+	width: 75%;
+	height: 75%;
 }
 
 .list {
-    width: 20rem;
+	width: 20rem;
 
-    /* min-height: 10rem; */
-    height: fit-content;
+	/* min-height: 10rem; */
+	height: fit-content;
 
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    gap: 1rem;
+	gap: 1rem;
 }

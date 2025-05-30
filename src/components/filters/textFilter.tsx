@@ -1,20 +1,29 @@
 import styles from "./textFilter.module.css";
 
-import { useListContext } from "@/context/ListContextProvider"
-import { useState } from "react"
+import { useListContext } from "@/context/ListContextProvider";
+import { useState } from "react";
 
 export default function TextFilter() {
-    const { setSearchString } = useListContext()!;
-    const handleEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        const string = event.currentTarget.value;
+	const { setSearchString } = useListContext()!;
+	const handleEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const string = event.currentTarget.value;
 
-        setSearchString(string);
-    }
+		setSearchString(string);
+	};
 
-    return (
-        <div className={styles.textFilter}>
-            <input type="text" onKeyUp={handleEvent} className={styles.input} placeholder="Search..."></input>
-            <img src="/search.svg" className={styles.icon} alt="" />
-        </div>
-    )
+	return (
+		<div className={styles.textFilter}>
+			<input
+				type="text"
+				onKeyUp={handleEvent}
+				className={styles.input}
+				placeholder="Search..."
+			></input>
+			<img
+				src="/search.svg"
+				className={styles.icon}
+				alt=""
+			/>
+		</div>
+	);
 }

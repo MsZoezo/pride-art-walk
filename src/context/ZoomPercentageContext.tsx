@@ -4,46 +4,45 @@ import { createContext, Dispatch, SetStateAction, useContext, useEffect, useStat
 import { useMap } from "react-map-gl/maplibre";
 
 interface Props {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 const zoomPercentageContext = createContext<number>(0);
 
 export function ZoomPercentageContextProvider({ children }: Props) {
-    const mapCollection = useMap();
+	const mapCollection = useMap();
 
-    const [ zoomPercentage, setZoomPercentage ] = useState<number>(0);
+	const [zoomPercentage, setZoomPercentage] = useState<number>(0);
 
-    useEffect(() => {
-      const map = mapCollection.current;
-      if(!map) return;
+	useEffect(() => {
+		const map = mapCollection.current;
+		if (!map) return;
 
-      const minZoom = map.getMinZoom();
-      const maxZoom = map.getMaxZoom();
+		const minZoom = map.getMinZoom();
+		const maxZoom = map.getMaxZoom();
 
-      const onZoom = () => {
-        const zoom = map.getZoom() - minZoom;
-        const max = maxZoom - minZoom;
+		const onZoom = () => {
+			const zoom = map.getZoom() - minZoom;
+			const max = maxZoom - minZoom;
 
-        const percentage = zoom / max;
+			const percentage = zoom / max;
 
-        setZoomPercentage(percentage);
-      }
+			setZoomPercentage(percentage);
+		};
 
-      const listener = map.on('zoom', onZoom);
-      onZoom();
+		const listener = map.on("zoom", onZoom);
+		onZoom();
 
-      return () => listener.unsubscribe();
-    }, [mapCollection]);
+		return () => listener.unsubscribe();
+	}, [mapCollection]);
 
-
-    return(
-        <zoomPercentageContext.Provider value={zoomPercentage}>
-            { children }
-        </zoomPercentageContext.Provider>
-    );
+	return (
+		<zoomPercentageContext.Provider value={zoomPercentage}>
+			{children}
+		</zoomPercentageContext.Provider>
+	);
 }
 
 export function useZoomPercentageContext(): number {
-    return useContext(zoomPercentageContext);
+	return useContext(zoomPercentageContext);
 }

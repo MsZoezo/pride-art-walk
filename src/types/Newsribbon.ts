@@ -1,10 +1,10 @@
 export interface Newsribbon {
-    id: number,
-    
-    text: string,
+	id: number;
 
-    active: boolean,
+	text: string;
 
-    created_at: string,
-    updated_at: string,
+	active: boolean;
+
+	created_at: string;
+	updated_at: string;
 }

@@ -10,92 +10,101 @@ import { useMapContext } from "@/context/MapContextProvider";
 import { ZoomPercentageContextProvider } from "@/context/ZoomPercentageContext";
 
 interface Props {
-    exhibitions: Exhibition[];
+	exhibitions: Exhibition[];
 }
 
 export default function MapExhibitions({ exhibitions }: Props) {
-    const router = useRouter();
-    const params = useSearchParams();
-    const { initialLoad } = useLoadContext()!;
-    const { selectedTags } = useMapContext()!;
+	const router = useRouter();
+	const params = useSearchParams();
+	const { initialLoad } = useLoadContext()!;
+	const { selectedTags } = useMapContext()!;
 
-    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    /** Changes the modal to the exhibition identified by id.
-     * @param id the exhibition id.
-    */
-    const changeModal = (id: number) => {
-        if (!exhibitions) return;
+	/** Changes the modal to the exhibition identified by id.
+	 * @param id the exhibition id.
+	 */
+	const changeModal = (id: number) => {
+		if (!exhibitions) return;
 
-        const exhibition = exhibitions.find(exhibition => exhibition.id === id);
+		const exhibition = exhibitions.find(exhibition => exhibition.id === id);
 
-        window.history.pushState(null, '', `?exhibition=${id}`);
+		window.history.pushState(null, "", `?exhibition=${id}`);
 
-        if (!exhibition) return;
+		if (!exhibition) return;
 
-        setCurrentExhibition(exhibition);
-        setIsModalOpen(true);
-    }
+		setCurrentExhibition(exhibition);
+		setIsModalOpen(true);
+	};
 
-    useEffect(() => {
-        const id = params.get('exhibition');
+	useEffect(() => {
+		const id = params.get("exhibition");
 
-        if(!id) {
-            setIsModalOpen(false);
-            return;
-        }
+		if (!id) {
+			setIsModalOpen(false);
+			return;
+		}
 
-        const exhibition = exhibitions.find(exhibition => exhibition.id === Number(id));
+		const exhibition = exhibitions.find(exhibition => exhibition.id === Number(id));
 
-        if(!exhibition) {
-            setIsModalOpen(false);
-            return;
-        }
+		if (!exhibition) {
+			setIsModalOpen(false);
+			return;
+		}
 
-        if(exhibition === currentExhibition && isModalOpen) return;
+		if (exhibition === currentExhibition && isModalOpen) return;
 
-        setCurrentExhibition(exhibition);
-        setIsModalOpen(true);
-    }, [params, exhibitions]);
+		setCurrentExhibition(exhibition);
+		setIsModalOpen(true);
+	}, [params, exhibitions]);
 
-    const closeModal = () => {
-        if(!initialLoad && params.get('exhibition')) window.history.back();
-        else window.history.replaceState(null, '', '/');
+	const closeModal = () => {
+		if (!initialLoad && params.get("exhibition")) window.history.back();
+		else window.history.replaceState(null, "", "/");
 
-        setIsModalOpen(false);
-    }
-    
-    const shownExhibitions: Number[] = useMemo(() => {
-        if(!exhibitions) return [];
+		setIsModalOpen(false);
+	};
 
-        let shownExhibitions = [...exhibitions];
+	const shownExhibitions: Number[] = useMemo(() => {
+		if (!exhibitions) return [];
 
-        if(selectedTags.length == 0) return shownExhibitions.map(ex => ex.id);
+		let shownExhibitions = [...exhibitions];
 
-        if(selectedTags.length != 0) {
-            shownExhibitions = shownExhibitions.filter(exhibition => {
-                for(let i = 0; i < selectedTags.length; i++) {
-                    if(!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
-    
-                    return true;
-                }
-                return false;
-            });
-        }
+		if (selectedTags.length == 0) return shownExhibitions.map(ex => ex.id);
 
-        return shownExhibitions.map(ex => ex.id);
-    }, [exhibitions, selectedTags]);
+		if (selectedTags.length != 0) {
+			shownExhibitions = shownExhibitions.filter(exhibition => {
+				for (let i = 0; i < selectedTags.length; i++) {
+					if (!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
 
-    return (
-        <>
-            <ZoomPercentageContextProvider>
-                {exhibitions?.map((exhibition, index) => (
-                    <ExhibitionMarker key={`exhibition-marker-${exhibition.id}`} transparent={!shownExhibitions.includes(exhibition.id)} exhibition={exhibition} onClick={changeModal} />
-                ))}
-            </ZoomPercentageContextProvider>
+					return true;
+				}
+				return false;
+			});
+		}
 
-            <ExhibitionModal isOpen={isModalOpen} onClose={closeModal} exhibition={currentExhibition} />
-        </>
-    );
+		return shownExhibitions.map(ex => ex.id);
+	}, [exhibitions, selectedTags]);
+
+	return (
+		<>
+			<ZoomPercentageContextProvider>
+				{exhibitions?.map((exhibition, index) => (
+					<ExhibitionMarker
+						key={`exhibition-marker-${exhibition.id}`}
+						transparent={!shownExhibitions.includes(exhibition.id)}
+						exhibition={exhibition}
+						onClick={changeModal}
+					/>
+				))}
+			</ZoomPercentageContextProvider>
+
+			<ExhibitionModal
+				isOpen={isModalOpen}
+				onClose={closeModal}
+				exhibition={currentExhibition}
+			/>
+		</>
+	);
 }

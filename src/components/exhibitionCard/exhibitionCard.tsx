@@ -5,35 +5,54 @@ import { CSSProperties } from "react";
 import { toPreview } from "@/util/description";
 
 interface Props {
-    exhibition: Exhibition,
-    onClick?: any
-    selectedTags?: number[];
-    index: number;
+	exhibition: Exhibition;
+	onClick?: any;
+	selectedTags?: number[];
+	index: number;
 }
 
 export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
-    const description = toPreview(exhibition.description);
+	const description = toPreview(exhibition.description);
 
-    return (
-        <article onClick={onClick} className={styles.card} style={{'--stagger': `${index * 100}ms`} as CSSProperties}>
+	return (
+		<article
+			onClick={onClick}
+			className={styles.card}
+			style={{ "--stagger": `${index * 100}ms` } as CSSProperties}
+		>
+			{exhibition.image && (
+				<figure className={styles.image}>
+					<img
+						src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`}
+						alt={exhibition.image_alt}
+					/>
+				</figure>
+			)}
 
-            {exhibition.image &&
-                <figure className={styles.image}>
-                    <img src={`${process.env.NEXT_PUBLIC_API_CONTENT_URL}/${exhibition.image}`} alt={exhibition.image_alt} />
-                </figure>
-            }
+			<div className={styles.content}>
+				<h3 className={styles.title}>{exhibition.title}</h3>
 
-            <div className={styles.content}>
-                <h3 className={styles.title}>{exhibition.title}</h3>
+				<ul className={styles.tags}>
+					{exhibition.tags.map((tag, i) => (
+						<Tag
+							key={`${exhibition.title}-tags-${i}`}
+							text={tag.name}
+							id={tag.id}
+							index={i}
+						/>
+					))}
+				</ul>
 
-                <ul className={styles.tags}>
-                    {exhibition.tags.map((tag, i) => <Tag key={`${exhibition.title}-tags-${i}`} text={tag.name} id={tag.id} index={i} />)}
-                </ul>
+				{description && <p>{description}</p>}
 
-                {description && <p>{description}</p> }
-
-                <button className={styles.button}>Read more <img src="/arrow-right.svg" alt="" /></button>
-            </div>
-        </article>
-    )
+				<button className={styles.button}>
+					Read more{" "}
+					<img
+						src="/arrow-right.svg"
+						alt=""
+					/>
+				</button>
+			</div>
+		</article>
+	);
 }

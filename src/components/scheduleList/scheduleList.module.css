@@ -1,29 +1,29 @@
 .list {
-    overflow: hidden;
+	overflow: hidden;
 
-    height: auto;
+	height: auto;
 
-    transition: height .25s ease-out;
-    interpolate-size: allow-keywords;
+	transition: height 0.25s ease-out;
+	interpolate-size: allow-keywords;
 }
 
 .list.open {
-    /* height: auto; */
+	/* height: auto; */
 }
 
 .button {
-    display: block;
+	display: block;
 
-    margin: 0 auto;
-    margin-top: 1rem;
+	margin: 0 auto;
+	margin-top: 1rem;
 
-    border: none;
-    background: none;
+	border: none;
+	background: none;
 
-    font-size: 1.6rem;
-    font-weight: 500;
+	font-size: 1.6rem;
+	font-weight: 500;
 
-    cursor: pointer;
+	cursor: pointer;
 
-    color: hsl(202, 22%, 30%);
+	color: hsl(202, 22%, 30%);
 }

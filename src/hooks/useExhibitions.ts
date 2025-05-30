@@ -7,19 +7,19 @@ import useSWR from "swr";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function useExhibitions() {
-    const [retryTime, setRetryTime] = useState<number>(0);
-    const intervalRef = useRef<NodeJS.Timeout>(null);
+	const [retryTime, setRetryTime] = useState<number>(0);
+	const intervalRef = useRef<NodeJS.Timeout>(null);
 
-    const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
+	const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
 
-    const { data, error, isLoading } = useSWR(`${API_URL}/exhibitions`, fetcher<Exhibition[]>, {
-        use: [retryMiddleware]
-    });
+	const { data, error, isLoading } = useSWR(`${API_URL}/exhibitions`, fetcher<Exhibition[]>, {
+		use: [retryMiddleware],
+	});
 
-    return {
-        exhibitions: data,
-        isError: error,
-        isLoading,
-        retryTime,
-    }
+	return {
+		exhibitions: data,
+		isError: error,
+		isLoading,
+		retryTime,
+	};
 }

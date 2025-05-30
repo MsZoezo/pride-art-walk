@@ -11,29 +11,33 @@ import useNews from "@/hooks/useNews";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 
 export default function News() {
-    const { news, isLoading, isError, retryTime } = useNews();
-    
-    return(
-        <main className={styles.main}>
-            <Navigation>
-                <Link href="/">Home</Link>
-                <Link href="/exhibitions">Exhibitions</Link>
-                <Link href="/news">News</Link>
-                <Link href="/about">About</Link>
-            </Navigation>
+	const { news, isLoading, isError, retryTime } = useNews();
 
-            <LoadingScreen render={isLoading || isError} error={isError} retryTime={retryTime} />
+	return (
+		<main className={styles.main}>
+			<Navigation>
+				<Link href="/">Home</Link>
+				<Link href="/exhibitions">Exhibitions</Link>
+				<Link href="/news">News</Link>
+				<Link href="/about">About</Link>
+			</Navigation>
 
-            <h1 className={styles.title}>News</h1>
+			<LoadingScreen
+				render={isLoading || isError}
+				error={isError}
+				retryTime={retryTime}
+			/>
 
-            <ListContextProvider>
-                <section className={styles.filters}>
-                    <TextFilter />
-                    <TagFilter contentType="news"/>
-                </section>
+			<h1 className={styles.title}>News</h1>
 
-                <NewsList news={news ?? []} />
-            </ListContextProvider>
-        </main>
-    );
+			<ListContextProvider>
+				<section className={styles.filters}>
+					<TextFilter />
+					<TagFilter contentType="news" />
+				</section>
+
+				<NewsList news={news ?? []} />
+			</ListContextProvider>
+		</main>
+	);
 }

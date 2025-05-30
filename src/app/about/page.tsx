@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Navigation from "@/components/navigation/navigation";
 import AboutUsArticle from "@/components/aboutUsArticle/aboutUsArticle";
@@ -7,28 +7,37 @@ import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import useAbout from "@/hooks/useAbout";
 import Link from "next/link";
 
-import styles from "./page.module.css"
+import styles from "./page.module.css";
 import TeamList from "@/components/teamList/teamList";
 
 export default function About() {
-    const { description, email, image, partners, teams, isLoading, isError, retryTime } = useAbout();
-    return (
-        <main className={styles.main}>
-            <Navigation>
-                <Link href="/">Home</Link>
-                <Link href="/exhibitions">Exhibitions</Link>
-                <Link href="/news">News</Link>
-                <Link href="/about">About</Link>
-            </Navigation>
+	const { description, email, image, partners, teams, isLoading, isError, retryTime } =
+		useAbout();
+	return (
+		<main className={styles.main}>
+			<Navigation>
+				<Link href="/">Home</Link>
+				<Link href="/exhibitions">Exhibitions</Link>
+				<Link href="/news">News</Link>
+				<Link href="/about">About</Link>
+			</Navigation>
 
-            <LoadingScreen render={isLoading || isError} error={isError} retryTime={retryTime} />
+			<LoadingScreen
+				render={isLoading || isError}
+				error={isError}
+				retryTime={retryTime}
+			/>
 
-            <section className={styles.aboutSection}>
-                <AboutUsArticle text={description} email={email} image={image}/>
-                <TeamList teams={teams}/>
-            </section>
+			<section className={styles.aboutSection}>
+				<AboutUsArticle
+					text={description}
+					email={email}
+					image={image}
+				/>
+				<TeamList teams={teams} />
+			</section>
 
-            <PartnerList partners={partners}/>
-        </main>
-    )
+			<PartnerList partners={partners} />
+		</main>
+	);
 }

@@ -5,19 +5,36 @@ import { useUserLocationContext } from "@/context/UserLocationContextProvider";
 import { colors } from "@/util/theme";
 
 export default function GpsMarker() {
-    const position = useUserLocationContext();
+	const position = useUserLocationContext();
 
-    if(!position?.position) return;
+	if (!position?.position) return;
 
-    return (
-        <Marker
-            latitude={position.position.lat}
-            longitude={position.position.long}
-        >
-            <svg fill={colors.user_location} width="50px" height="50px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <circle id={styles.circle} cx="100" cy="100" r="100" fill="inherit" />
-                <circle cx="100" cy="100" r="35" fill="inherit" />
-            </svg>
-        </Marker>
-    );
+	return (
+		<Marker
+			latitude={position.position.lat}
+			longitude={position.position.long}
+		>
+			<svg
+				fill={colors.user_location}
+				width="50px"
+				height="50px"
+				viewBox="0 0 200 200"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<circle
+					id={styles.circle}
+					cx="100"
+					cy="100"
+					r="100"
+					fill="inherit"
+				/>
+				<circle
+					cx="100"
+					cy="100"
+					r="35"
+					fill="inherit"
+				/>
+			</svg>
+		</Marker>
+	);
 }

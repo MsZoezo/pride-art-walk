@@ -1,156 +1,156 @@
 .title {
-    text-align: center;
+	text-align: center;
 }
 
 .venue {
-    text-align: center;
+	text-align: center;
 }
 
 .content {
-    margin-top: 2.4rem;
+	margin-top: 2.4rem;
 }
 
 .tags {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
 
-    list-style: none;
+	list-style: none;
 
-    margin: 1rem 0;
+	margin: 1rem 0;
 }
 
 .www {
-    width: fit-content;
-    margin: 0 auto;
+	width: fit-content;
+	margin: 0 auto;
 }
 
 .item {
-    display: flex;
-    align-items: flex-start;
+	display: flex;
+	align-items: flex-start;
 
-    gap: 0.5rem;
+	gap: 0.5rem;
 
-    margin: 0.5rem 0;
+	margin: 0.5rem 0;
 }
 
 .type {
-    min-width: 6rem;
+	min-width: 6rem;
 
-    /* text-align: end; */
+	/* text-align: end; */
 
-    font-weight: 700;
+	font-weight: 700;
 }
 
 .artists {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 
-    gap: 0.5rem;
+	gap: 0.5rem;
 
-    list-style: none;
+	list-style: none;
 }
 
 .route {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .cta {
-    position: sticky;
+	position: sticky;
 
-    left: 0;
-    bottom: 0;
-    width: 100%;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .cta div {
-    background: white;
-    display: flex;
-    margin: 1.2rem 1.2rem 1rem 1.2rem;
-    border-radius: 1.2rem;
+	background: white;
+	display: flex;
+	margin: 1.2rem 1.2rem 1rem 1.2rem;
+	border-radius: 1.2rem;
 }
 
 .cta div a {
-    padding: 0.8rem 1.2rem;
+	padding: 0.8rem 1.2rem;
 
-    background: linear-gradient(
-        to right,
-        hsl(0, 100%, 50%, 0.85),
-        hsl(36, 100%, 50%, 0.85),
-        hsl(65, 75%, 51%, 0.85),
-        hsl(123, 70%, 58%, 0.85),
-        hsl(178, 70%, 56%, 0.85),
-        hsl(189, 80%, 53%, 0.85),
-        hsl(220, 86%, 54%, 0.85),
-        hsl(261, 89%, 52%, 0.85),
-        hsl(288, 91%, 52%, 0.85),
-        hsl(316, 95%, 53%, 0.85),
-        hsl(0, 100%, 50%, 0.85)
-    );
+	background: linear-gradient(
+		to right,
+		hsl(0, 100%, 50%, 0.85),
+		hsl(36, 100%, 50%, 0.85),
+		hsl(65, 75%, 51%, 0.85),
+		hsl(123, 70%, 58%, 0.85),
+		hsl(178, 70%, 56%, 0.85),
+		hsl(189, 80%, 53%, 0.85),
+		hsl(220, 86%, 54%, 0.85),
+		hsl(261, 89%, 52%, 0.85),
+		hsl(288, 91%, 52%, 0.85),
+		hsl(316, 95%, 53%, 0.85),
+		hsl(0, 100%, 50%, 0.85)
+	);
 
-    color: #080800;
+	color: #080800;
 
-    font-weight: 700;
+	font-weight: 700;
 
-    border-radius: 1.2rem;
+	border-radius: 1.2rem;
 }
 
 @media screen and (min-width: 600px) {
-    .content {
-        width: 90%;
-        margin: 0 auto;
+	.content {
+		width: 90%;
+		margin: 0 auto;
 
-        margin: 1rem auto;
+		margin: 1rem auto;
 
-        max-width: 75rem;
-    }
+		max-width: 75rem;
+	}
 }
 
 .blobPink,
 .blobBlue {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: -1;
 }
 
 .blobGreen {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
 }
 
 .blobBrown {
-    position: absolute;
-    bottom: 0;
-    left: 75px;
-    z-index: -1;
+	position: absolute;
+	bottom: 0;
+	left: 75px;
+	z-index: -1;
 }
 
 @media screen and (min-width: 900px) {
-    .blobPink {
-        width: 306px;
-        height: 303px;
-    }
+	.blobPink {
+		width: 306px;
+		height: 303px;
+	}
 
-    .blobBlue {
-        width: 331px;
-        height: 402px;
-    }
+	.blobBlue {
+		width: 331px;
+		height: 402px;
+	}
 
-    .blobGreen {
-        width: 289px;
-        height: 321px;
-    }
+	.blobGreen {
+		width: 289px;
+		height: 321px;
+	}
 
-    .blobBrown {
-        width: 324px;
-        height: 266px;
-        bottom: -20px;
-    }
+	.blobBrown {
+		width: 324px;
+		height: 266px;
+		bottom: -20px;
+	}
 }

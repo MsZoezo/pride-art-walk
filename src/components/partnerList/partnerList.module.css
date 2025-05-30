@@ -1,31 +1,31 @@
 .section {
-    margin: auto;
-    /* remove if we decide to add copyright */
-    padding-bottom: 2.5rem;
+	margin: auto;
+	/* remove if we decide to add copyright */
+	padding-bottom: 2.5rem;
 }
 
 .partners {
-    width: 100%;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+	width: 100%;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
 }
 
 .placeholder {
-    text-align: center;
-    margin: 2rem 0;
+	text-align: center;
+	margin: 2rem 0;
 
-    font-weight: 500;
+	font-weight: 500;
 
-    color: hsl(0, 0%, 40%);
+	color: hsl(0, 0%, 40%);
 }
 .title {
-    text-align: center;
+	text-align: center;
 }
 
 @media screen and (min-width: 800px) {
-    .partners {
-        grid-template-columns: repeat(3, 1fr);
-    }
+	.partners {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }

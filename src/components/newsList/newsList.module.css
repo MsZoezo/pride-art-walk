@@ -1,32 +1,32 @@
 .empty {
-    text-align: center;
-    margin: 2rem 0;
+	text-align: center;
+	margin: 2rem 0;
 
-    font-weight: 500;
+	font-weight: 500;
 
-    color: hsl(0, 0%, 40%);
+	color: hsl(0, 0%, 40%);
 }
 
 .news {
-    margin: 2.4rem 0.5rem;
+	margin: 2.4rem 0.5rem;
 
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    gap: 1rem;
+	gap: 1rem;
 
-    overflow: hidden;
+	overflow: hidden;
 }
 
 @media screen and (min-width: 800px) {
-    .news {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
+	.news {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media screen and (min-width: 1300px) {
-    .news {
-        grid-template-columns: repeat(3, 1fr);
-    }
+	.news {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }

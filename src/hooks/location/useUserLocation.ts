@@ -1,38 +1,37 @@
-import { UserLocation } from '@/types/UserLocation'; 
-import { useState, useEffect } from 'react';
+import { UserLocation } from "@/types/UserLocation";
+import { useState, useEffect } from "react";
 
 export function useUserLocation(options?: PositionOptions) {
-    const [position, setPosition] = useState<UserLocation | null>(null);
-    const [error, setError] = useState<string | null>(null);
+	const [position, setPosition] = useState<UserLocation | null>(null);
+	const [error, setError] = useState<string | null>(null);
 
-    function updatePosition(pos: GeolocationPosition) {
-        if(pos.coords.latitude === position?.lat && pos.coords.longitude === position?.long) return;
-        setPosition(
-            {
-                lat: pos.coords.latitude,
-                long: pos.coords.longitude,
-                accuracy: pos.coords.accuracy,
-                timestamp: pos.timestamp,
-            }
-        );
-    }
+	function updatePosition(pos: GeolocationPosition) {
+		if (pos.coords.latitude === position?.lat && pos.coords.longitude === position?.long)
+			return;
+		setPosition({
+			lat: pos.coords.latitude,
+			long: pos.coords.longitude,
+			accuracy: pos.coords.accuracy,
+			timestamp: pos.timestamp,
+		});
+	}
 
-    function throwError(err: GeolocationPositionError) {
-        setError(err.message);
-    }
+	function throwError(err: GeolocationPositionError) {
+		setError(err.message);
+	}
 
-    useEffect(() => {
-        if (!navigator.geolocation) {
-            setError('Geolocation is not supported by your browser.');
-            return;
-        }
-    
-        const watchId = navigator.geolocation.watchPosition(updatePosition, throwError, options);
+	useEffect(() => {
+		if (!navigator.geolocation) {
+			setError("Geolocation is not supported by your browser.");
+			return;
+		}
 
-        return () => {
-            navigator.geolocation.clearWatch(watchId);
-        };
-    }, [options]);
+		const watchId = navigator.geolocation.watchPosition(updatePosition, throwError, options);
 
-    return { position, error };
+		return () => {
+			navigator.geolocation.clearWatch(watchId);
+		};
+	}, [options]);
+
+	return { position, error };
 }

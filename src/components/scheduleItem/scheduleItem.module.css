@@ -1,23 +1,23 @@
 .item {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    padding-right: 1rem;
+	padding-right: 1rem;
 }
 
 .item:has(.special) {
-    margin-bottom: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .time {
-    display: flex;
-    gap: 1rem;
+	display: flex;
+	gap: 1rem;
 }
 
 .day {
-    min-width: 9rem;
+	min-width: 9rem;
 }
 
 .special {
-    color: #e30613;
+	color: #e30613;
 }

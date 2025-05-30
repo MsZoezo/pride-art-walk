@@ -1,28 +1,27 @@
 .icon {
-    cursor: grab;
+	cursor: grab;
 }
 
-
 #circle {
-    transform: scale(2);
-    transform-origin: center;
+	transform: scale(2);
+	transform-origin: center;
 
-    animation: 2s ease-out infinite both circle;
+	animation: 2s ease-out infinite both circle;
 }
 
 @keyframes circle {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
+	0% {
+		transform: scale(0);
+		opacity: 1;
+	}
 
-    80% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
+	80% {
+		transform: scale(1);
+		opacity: 0.5;
+	}
 
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
+	100% {
+		transform: scale(1);
+		opacity: 0;
+	}
 }

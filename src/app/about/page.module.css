@@ -1,23 +1,23 @@
 .main {
-    min-height: 100vh;
+	min-height: 100vh;
 }
 
 .aboutSection {
-    display: block;
-    gap: 1rem;
-    margin: 0 1rem;
-    margin-bottom: 2rem;
+	display: block;
+	gap: 1rem;
+	margin: 0 1rem;
+	margin-bottom: 2rem;
 }
 
 .sectionRight {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 1rem;
 }
 
 @media screen and (min-width: 600px) {
-    /* .aboutSection {
+	/* .aboutSection {
         display: flex;
     }
     .sectionRight {

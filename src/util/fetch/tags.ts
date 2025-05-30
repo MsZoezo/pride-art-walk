@@ -7,17 +7,17 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
  * @returns All tags
  */
 export async function getTags(): Promise<Tag[]> {
-    try {
-        const response = await fetch(`${API_URL}/tags`);
+	try {
+		const response = await fetch(`${API_URL}/tags`);
 
-        const tags = await response.json();
-        return tags;
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
+		const tags = await response.json();
+		return tags;
+	} catch (error) {
+		console.error(error);
+		return [];
+	}
 }
 
 export async function showExhibition() {
-    // TODO
+	// TODO
 }

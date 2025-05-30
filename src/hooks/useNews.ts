@@ -7,19 +7,19 @@ import useSWR from "swr";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function useNews() {
-    const [retryTime, setRetryTime] = useState<number>(0);
-    const intervalRef = useRef<NodeJS.Timeout>(null);
+	const [retryTime, setRetryTime] = useState<number>(0);
+	const intervalRef = useRef<NodeJS.Timeout>(null);
 
-    const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
+	const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
 
-    const { data, error, isLoading } = useSWR(`${API_URL}/news`, fetcher<News[]>, {
-        use: [retryMiddleware]
-    });
+	const { data, error, isLoading } = useSWR(`${API_URL}/news`, fetcher<News[]>, {
+		use: [retryMiddleware],
+	});
 
-    return {
-        news: data,
-        isError: error,
-        isLoading,
-        retryTime,
-    }
+	return {
+		news: data,
+		isError: error,
+		isLoading,
+		retryTime,
+	};
 }

@@ -1,119 +1,120 @@
 .section {
-    margin: 1rem 0;
+	margin: 1rem 0;
 }
 
 .toggle {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    gap: 0.5rem;
+	gap: 0.5rem;
 
-    border: none;
-    background: none;
+	border: none;
+	background: none;
 
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .title {
-    font-weight: 700;
-    padding-bottom: 4px;
+	font-weight: 700;
+	padding-bottom: 4px;
 
-    font-size: 2rem;
+	font-size: 2rem;
 
-    color: black;
+	color: black;
 }
 
-.eyeclosed, .eyeopen {
-    width: 2.5rem;
+.eyeclosed,
+.eyeopen {
+	width: 2.5rem;
 }
 
 .eyeclosed {
-    fill: black;
+	fill: black;
 }
 
 .filtering .eyeclosed {
-    fill: #e30513;
+	fill: #e30513;
 }
 
 .eyeopen {
-    stroke: black;
+	stroke: black;
 }
 
 .filtering .eyeopen {
-    stroke: #e30513;
+	stroke: #e30513;
 }
 
 .tags {
-    display: grid;
+	display: grid;
 
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem 1rem;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.5rem 1rem;
 
-    margin-top: 0.5rem;
+	margin-top: 0.5rem;
 
-    max-height: 0px;
-    overflow: hidden;
+	max-height: 0px;
+	overflow: hidden;
 
-    transition: max-height 250ms ease-out;
-    interpolate-size: allow-keywords;
+	transition: max-height 250ms ease-out;
+	interpolate-size: allow-keywords;
 }
 
 .tags.open {
-    max-height: max-content;
+	max-height: max-content;
 }
 
 .button {
-    border: 2px solid black;
-    border-radius: 12px;
+	border: 2px solid black;
+	border-radius: 12px;
 
-    background: white;
-    color: black;
+	background: white;
+	color: black;
 
-    padding: 0.5rem 1rem;
+	padding: 0.5rem 1rem;
 
-    cursor: pointer;
+	cursor: pointer;
 
-    box-shadow: 0 4px 4px #00000030;
+	box-shadow: 0 4px 4px #00000030;
 
-    margin-bottom: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .tags.open .button {
-    opacity: 0;
-    animation: slideUp 200ms ease-out forwards;
-    animation-delay: var(--stagger);
+	opacity: 0;
+	animation: slideUp 200ms ease-out forwards;
+	animation-delay: var(--stagger);
 }
 
 .selected {
-    background: #839faf;
-    color: white;
+	background: #839faf;
+	color: white;
 }
 
 @media screen and (min-width: 600px) {
-    .toggle {
-        margin: 0 auto;
-    }
+	.toggle {
+		margin: 0 auto;
+	}
 
-    .tags {
-        display: flex;
-        justify-content: center;
+	.tags {
+		display: flex;
+		justify-content: center;
 
-        flex-wrap: wrap;
-    }
+		flex-wrap: wrap;
+	}
 }
 
 @keyframes slideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(50%);
-    }
+	0% {
+		opacity: 0;
+		transform: translateY(50%);
+	}
 
-    50% {
-        opacity: 1;
-    }
+	50% {
+		opacity: 1;
+	}
 
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

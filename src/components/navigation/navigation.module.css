@@ -1,79 +1,79 @@
 .navigation {
-    height: 7rem;
-    width: 100%;
+	height: 7rem;
+	width: 100%;
 
-    padding: 1rem 1rem 1rem 2rem;
+	padding: 1rem 1rem 1rem 2rem;
 
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .logo {
-    height: 100%;
+	height: 100%;
 }
 
 .logo img {
-    height: 100%;
+	height: 100%;
 }
 
 .links {
-    display: none;
+	display: none;
 
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
+	justify-content: center;
+	align-items: center;
+	gap: 2.5rem;
 }
 
 .links a {
-    transition: transform 100ms ease-in-out;
+	transition: transform 100ms ease-in-out;
 }
 
 .links a:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .hamburger {
-    position: relative;
+	position: relative;
 
-    height: 5rem;
-    width: 5rem;
+	height: 5rem;
+	width: 5rem;
 
-    background: none;
-    border: none;
+	background: none;
+	border: none;
 
-    display: flex;
+	display: flex;
 
-    justify-content: center;
-    align-items: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .hamburger .icon {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 
-    stroke: black;
+	stroke: black;
 }
 
 @media screen and (min-width: 500px) {
-    .hamburger {
-        display: none;
-    }
+	.hamburger {
+		display: none;
+	}
 
-    .links {
-        display: flex;
-    }
+	.links {
+		display: flex;
+	}
 }
 
 .blobRight {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: -1;
 }
 
 .blobLeft {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
 }

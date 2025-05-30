@@ -6,106 +6,114 @@ import ExhibitionCard from "../exhibitionCard/exhibitionCard";
 import { useEffect, useMemo, useState } from "react";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import { useListContext } from "@/context/ListContextProvider";
-import { useSearchParams, } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useLoadContext } from "@/context/LoadContextProvider";
 
-
 interface Props {
-    exhibitions: Exhibition[];
+	exhibitions: Exhibition[];
 }
 
 export default function ExhibitionList({ exhibitions }: Props) {
-    const params = useSearchParams();
-    const { initialLoad } = useLoadContext()!;
-    const { selectedTags, searchString } = useListContext()!;
+	const params = useSearchParams();
+	const { initialLoad } = useLoadContext()!;
+	const { selectedTags, searchString } = useListContext()!;
 
-    const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+	const [currentExhibition, setCurrentExhibition] = useState<Exhibition | null>(null);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const showModal = (exhibition: Exhibition) => {
-        window.history.pushState(null, '', `/exhibitions?exhibition=${exhibition.id}`);
-        setCurrentExhibition(exhibition);
-        setIsModalOpen(true);
-    }
+	const showModal = (exhibition: Exhibition) => {
+		window.history.pushState(null, "", `/exhibitions?exhibition=${exhibition.id}`);
+		setCurrentExhibition(exhibition);
+		setIsModalOpen(true);
+	};
 
-    const closeModal = () => {
-        if (!initialLoad) window.history.back();
-        else window.history.replaceState(null, '', '/exhibitions');
+	const closeModal = () => {
+		if (!initialLoad) window.history.back();
+		else window.history.replaceState(null, "", "/exhibitions");
 
-        setIsModalOpen(false);
-    }
+		setIsModalOpen(false);
+	};
 
-    useEffect(() => {
-        const id = params.get('exhibition');
+	useEffect(() => {
+		const id = params.get("exhibition");
 
-        if (!id) {
-            setIsModalOpen(false);
-            return;
-        }
+		if (!id) {
+			setIsModalOpen(false);
+			return;
+		}
 
-        const exhibition = exhibitions?.find(val => val.id === Number(id));
+		const exhibition = exhibitions?.find(val => val.id === Number(id));
 
-        if (!exhibition) {
-            setIsModalOpen(false);
-            return;
-        }
+		if (!exhibition) {
+			setIsModalOpen(false);
+			return;
+		}
 
-        if (currentExhibition === exhibition && isModalOpen) return;
+		if (currentExhibition === exhibition && isModalOpen) return;
 
-        setCurrentExhibition(exhibition);
-        setIsModalOpen(true);
-    }, [params, exhibitions]);
+		setCurrentExhibition(exhibition);
+		setIsModalOpen(true);
+	}, [params, exhibitions]);
 
-    const shownExhibitions = useMemo(() => {
-        if (!exhibitions) return;
+	const shownExhibitions = useMemo(() => {
+		if (!exhibitions) return;
 
-        let shownExhibitions = [...exhibitions];
+		let shownExhibitions = [...exhibitions];
 
-        if (selectedTags.length == 0 && (!searchString || searchString.length == 0)) {
-            return shownExhibitions;
-        }
+		if (selectedTags.length == 0 && (!searchString || searchString.length == 0)) {
+			return shownExhibitions;
+		}
 
-        if (selectedTags.length != 0) {
-            shownExhibitions = shownExhibitions.filter(exhibition => {
-                for (let i = 0; i < selectedTags.length; i++) {
-                    if (!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
+		if (selectedTags.length != 0) {
+			shownExhibitions = shownExhibitions.filter(exhibition => {
+				for (let i = 0; i < selectedTags.length; i++) {
+					if (!exhibition.tags.find(tag => tag.id === selectedTags[i])) continue;
 
-                    return true;
-                }
-                return false;
-            });
-        }
+					return true;
+				}
+				return false;
+			});
+		}
 
-        if (searchString) {
-            const lowerSearch = searchString.toLowerCase();
+		if (searchString) {
+			const lowerSearch = searchString.toLowerCase();
 
-            shownExhibitions = shownExhibitions.filter(exhibition =>
-                exhibition.title.toLowerCase().includes(lowerSearch) ||
-                exhibition.address?.toLowerCase().includes(lowerSearch) ||
-                exhibition.venue_name?.toLowerCase().includes(lowerSearch) ||
-                exhibition.artist_name?.some(artist => artist.toLowerCase().includes(lowerSearch))
-            );
-        }
+			shownExhibitions = shownExhibitions.filter(
+				exhibition =>
+					exhibition.title.toLowerCase().includes(lowerSearch) ||
+					exhibition.address?.toLowerCase().includes(lowerSearch) ||
+					exhibition.venue_name?.toLowerCase().includes(lowerSearch) ||
+					exhibition.artist_name?.some(artist =>
+						artist.toLowerCase().includes(lowerSearch),
+					),
+			);
+		}
 
-        return shownExhibitions;
-    }, [exhibitions, selectedTags, searchString]);
+		return shownExhibitions;
+	}, [exhibitions, selectedTags, searchString]);
 
-    return (
-        <>
-            {(searchString?.length != 0 && shownExhibitions?.length == 0) &&
-                <p className={styles.empty}>No exhibitions were found...</p>
-            }
+	return (
+		<>
+			{searchString?.length != 0 && shownExhibitions?.length == 0 && (
+				<p className={styles.empty}>No exhibitions were found...</p>
+			)}
 
-            <section className={styles.exhibitions}>
-                {
-                    shownExhibitions?.map((exhibition, i) => (
-                        <ExhibitionCard key={`${i}-${exhibition.id}`} index={i} exhibition={exhibition} onClick={() => showModal(exhibition)} />
-                    ))
-                }
-            </section>
+			<section className={styles.exhibitions}>
+				{shownExhibitions?.map((exhibition, i) => (
+					<ExhibitionCard
+						key={`${i}-${exhibition.id}`}
+						index={i}
+						exhibition={exhibition}
+						onClick={() => showModal(exhibition)}
+					/>
+				))}
+			</section>
 
-            <ExhibitionModal isOpen={isModalOpen} onClose={closeModal} exhibition={currentExhibition} />
-
-        </>
-    );
+			<ExhibitionModal
+				isOpen={isModalOpen}
+				onClose={closeModal}
+				exhibition={currentExhibition}
+			/>
+		</>
+	);
 }

@@ -1,19 +1,17 @@
 "use client";
 
-import { LoadContextProvider } from "@/context/LoadContextProvider";
 import { UserLocationProvider } from "@/context/UserLocationContextProvider";
+import { LoadContextProvider } from "@/context/LoadContextProvider";
 import { ReactNode } from "react";
 
 interface Props {
-    children: ReactNode;
+	children: ReactNode;
 }
 
 export default function Providers({ children }: Props) {
-    return(
-        <LoadContextProvider>
-            <UserLocationProvider>
-                {children}
-            </UserLocationProvider>
-        </LoadContextProvider>  
-    );
+	return (
+		<LoadContextProvider>
+			<UserLocationProvider>{children}</UserLocationProvider>
+		</LoadContextProvider>
+	);
 }
