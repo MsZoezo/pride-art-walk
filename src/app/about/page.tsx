@@ -10,9 +10,14 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import TeamList from "@/components/teamList/teamList";
 
+/**
+ * The about us page.
+ */
 export default function About() {
-	const { description, email, image, partners, teams, isLoading, isError, retryTime } =
-		useAbout();
+	const { data, isLoading, isError, retryTime } = useAbout();
+
+	const { description, email, image, partners, teams } = data;
+
 	return (
 		<main className={styles.main}>
 			<Navigation>

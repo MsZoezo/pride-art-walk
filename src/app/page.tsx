@@ -16,10 +16,14 @@ import { Protocol } from "pmtiles";
 import Map from "@/components/map";
 import Link from "next/link";
 
+/**
+ * The homepage with map.
+ */
 export default function Home() {
 	const { exhibitions, isError, isLoading, retryTime } = useExhibitions();
 	const [isMapLoading, setIsMapLoading] = useState<boolean>(true);
 
+	// Here we add support for the pmtiles protocol to the map library, with which we serve the map.
 	useEffect(() => {
 		let protocol = new Protocol();
 

@@ -11,6 +11,9 @@ import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import ExhibitionList from "@/components/exhibitionList/exhibitionList";
 import { ListContextProvider } from "@/context/ListContextProvider";
 
+/**
+ * The exhibitions list page.
+ */
 export default function Exhibitions() {
 	const { exhibitions, isError, isLoading, retryTime } = useExhibitions();
 

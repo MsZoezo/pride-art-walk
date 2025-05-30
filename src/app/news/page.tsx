@@ -10,6 +10,9 @@ import NewsList from "@/components/newsList/newsList";
 import useNews from "@/hooks/useNews";
 import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 
+/**
+ * The news list page.
+ */
 export default function News() {
 	const { news, isLoading, isError, retryTime } = useNews();
 
