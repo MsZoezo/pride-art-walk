@@ -4,9 +4,16 @@ import { useEffect, useState } from "react";
 
 interface Unique {
 	id: number;
+	title: string;
 }
 
-export default function useModalParams<T extends Unique>(key: string, baseUrl: string, items: T[]) {
+export default function useModalParams<T extends Unique>(
+	key: string,
+	baseUrl: string,
+	items: T[],
+	onOpen?: (item: T) => void,
+	onClose?: () => void,
+) {
 	const [currentItem, setCurrentItem] = useState<T | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -22,11 +29,26 @@ export default function useModalParams<T extends Unique>(key: string, baseUrl: s
 		else window.history.replaceState(null, "", baseUrl);
 	};
 
+	const close = () => {
+		setIsOpen(false);
+		onClose && onClose();
+
+		document.title = "Pride Art Walk";
+	};
+
+	const open = (item: T) => {
+		setCurrentItem(item);
+		setIsOpen(true);
+		onOpen && onOpen(item);
+
+		document.title = `Pride Art Walk | ${item.title}`;
+	};
+
 	useEffect(() => {
 		const id = params.get(key);
 
 		if (!id) {
-			setIsOpen(false);
+			close();
 			return;
 		}
 
@@ -35,12 +57,11 @@ export default function useModalParams<T extends Unique>(key: string, baseUrl: s
 		if (item === currentItem && isOpen) return;
 
 		if (!item) {
-			setIsOpen(false);
+			close();
 			return;
 		}
 
-		setCurrentItem(currentItem);
-		setIsOpen(true);
+		open(item);
 	}, [params, items]);
 
 	return {
