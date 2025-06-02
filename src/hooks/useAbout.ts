@@ -1,3 +1,4 @@
+import { IAboutArticle } from "@/types/IAboutArticle";
 import fetcher from "@/util/fetch/fetcher";
 import RetryWithCountdown from "@/util/fetch/retry";
 import { useRef, useState } from "react";
@@ -16,7 +17,7 @@ export default function useAbout() {
 
 	const retryMiddleware = RetryWithCountdown(setRetryTime, intervalRef);
 
-	const { data, error, isLoading } = useSWR(`${API_URL}/about-us`, fetcher<unknown>, {
+	const { data, error, isLoading } = useSWR(`${API_URL}/about-us`, fetcher<IAboutArticle>, {
 		use: [retryMiddleware],
 	});
 

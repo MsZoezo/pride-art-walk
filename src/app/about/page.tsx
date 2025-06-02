@@ -16,8 +16,6 @@ import TeamList from "@/components/teamList/teamList";
 export default function About() {
 	const { data, isLoading, isError, retryTime } = useAbout();
 
-	const { description, email, image, partners, teams } = data;
-
 	return (
 		<main className={styles.main}>
 			<Navigation>
@@ -35,14 +33,14 @@ export default function About() {
 
 			<section className={styles.aboutSection}>
 				<AboutUsArticle
-					text={description}
-					email={email}
-					image={image}
+					text={data?.description}
+					email={data?.email}
+					image={data?.image}
 				/>
-				<TeamList teams={teams} />
+				<TeamList teams={data?.teams} />
 			</section>
 
-			<PartnerList partners={partners} />
+			<PartnerList partners={data?.partners} />
 		</main>
 	);
 }
