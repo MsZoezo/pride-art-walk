@@ -1,6 +1,6 @@
 import { IDocument } from "./atoms/IDocument";
 import { IImage } from "./atoms/IImage";
-import { Tag } from "./ITag";
+import { ITag } from "./ITag";
 
 /**
  * This interface describes the properties available in a news item.
@@ -16,7 +16,7 @@ export interface INews extends IDocument, IImage {
 	description?: string;
 
 	/** List of descriptive tags relevant to the news item. */
-	tags: Tag[];
+	tags: ITag[];
 
 	/** If the news item is active & should be displayed. */
 	is_active: boolean;

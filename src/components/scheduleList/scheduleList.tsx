@@ -1,10 +1,10 @@
-import { ScheduleDate } from "@/types/IScheduleDate";
+import { IScheduleDate } from "@/types/IScheduleDate";
 import styles from "./scheduleList.module.css";
 import ScheduleItem from "../scheduleItem/scheduleItem";
 import { useEffect, useState } from "react";
 
 interface Props {
-	schedules: ScheduleDate[];
+	schedules: IScheduleDate[];
 }
 
 export default function ScheduleList({ schedules }: Props) {

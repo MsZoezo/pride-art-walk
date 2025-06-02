@@ -1,8 +1,8 @@
-import { UserLocation } from "@/types/IUserLocation";
+import { IUserLocation } from "@/types/IUserLocation";
 import { useState, useEffect } from "react";
 
 export function useUserLocation(options?: PositionOptions) {
-	const [position, setPosition] = useState<UserLocation | null>(null);
+	const [position, setPosition] = useState<IUserLocation | null>(null);
 	const [error, setError] = useState<string | null>(null);
 
 	function updatePosition(pos: GeolocationPosition) {

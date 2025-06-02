@@ -31,7 +31,7 @@ export default function useModalParams<T extends Unique>(
 
 	const close = () => {
 		setIsOpen(false);
-		onClose && onClose();
+		if (onClose) onClose();
 
 		document.title = "Pride Art Walk";
 	};
@@ -39,7 +39,7 @@ export default function useModalParams<T extends Unique>(
 	const open = (item: T) => {
 		setCurrentItem(item);
 		setIsOpen(true);
-		onOpen && onOpen(item);
+		if (onOpen) onOpen(item);
 
 		document.title = `Pride Art Walk | ${item.title}`;
 	};

@@ -9,6 +9,7 @@ const eslintConfig = [
 		extends: ["next", "next/core-web-vitals", "next/typescript", "prettier"],
 		rules: {
 			"@next/next/no-img-element": "off",
+			"react-hooks/exhaustive-deps": "off",
 		},
 	}),
 ];

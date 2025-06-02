@@ -1,7 +1,7 @@
 import { IDocument } from "./atoms/IDocument";
 import { IImage } from "./atoms/IImage";
-import { ScheduleDate } from "./IScheduleDate";
-import { Tag } from "./ITag";
+import { IScheduleDate } from "./IScheduleDate";
+import { ITag } from "./ITag";
 
 /**
  * This interface describes the properties available in an exhibition.
@@ -11,7 +11,7 @@ export interface IExhibition extends IDocument, IImage {
 	title: string;
 
 	/** List of descriptive tags relevant to the exhibition. */
-	tags: Tag[];
+	tags: ITag[];
 
 	/** Indicates if this exhibition is a special event. */
 	special_event: boolean;
@@ -32,7 +32,7 @@ export interface IExhibition extends IDocument, IImage {
 	location: [number, number];
 
 	/** The schedule items for the exhibition. */
-	schedules: ScheduleDate[];
+	schedules: IScheduleDate[];
 
 	/** If the exhibition is active & should be displayed. */
 	is_active: boolean;

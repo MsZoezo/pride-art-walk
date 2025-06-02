@@ -1,10 +1,10 @@
 "use client";
 import { createContext, useContext } from "react";
 import { useUserLocation } from "@/hooks/location/useUserLocation";
-import { UserLocation } from "@/types/IUserLocation";
+import { IUserLocation } from "@/types/IUserLocation";
 
 interface UserLocationContextType {
-	position: UserLocation | null;
+	position: IUserLocation | null;
 	error: string | null;
 }
 interface Props {

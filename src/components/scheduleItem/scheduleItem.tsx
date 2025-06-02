@@ -1,8 +1,8 @@
-import { ScheduleDate } from "@/types/IScheduleDate";
+import { IScheduleDate } from "@/types/IScheduleDate";
 import styles from "./scheduleItem.module.css";
 
 interface Props {
-	scheduleDate: ScheduleDate;
+	scheduleDate: IScheduleDate;
 }
 
 const dateOptions: Intl.DateTimeFormatOptions = {
