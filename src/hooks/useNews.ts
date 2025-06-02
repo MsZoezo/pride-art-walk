@@ -6,6 +6,10 @@ import useSWR from "swr";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+/**
+ * Hook to retrieve all news items from server or cache.
+ * @returns News Items, and SWR specific variables
+ */
 export default function useNews() {
 	const [retryTime, setRetryTime] = useState<number>(0);
 	const intervalRef = useRef<NodeJS.Timeout>(null);

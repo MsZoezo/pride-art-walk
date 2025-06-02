@@ -7,6 +7,16 @@ interface Unique {
 	title: string;
 }
 
+/**
+ * Hook to use url params for modal state management.
+ *
+ * @param key The url key
+ * @param baseUrl The base url
+ * @param items Array of all items of Type
+ * @param onOpen Callback when modal opens
+ * @param onClose Callback when modal closes
+ * @returns callbacks & state
+ */
 export default function useModalParams<T extends Unique>(
 	key: string,
 	baseUrl: string,

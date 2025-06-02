@@ -1,5 +1,8 @@
 import { Flavor, DARK } from "@protomaps/basemaps";
 
+/**
+ * This is the coloring for the map, extending from the base DARK theme.
+ */
 export const theme: Flavor = {
 	...DARK,
 
@@ -15,6 +18,9 @@ export const theme: Flavor = {
 	bridges_highway: "white",
 };
 
+/**
+ * Color definitions for the exhibitions on the map.
+ */
 export enum colors {
 	exhibition_open = "#00973a",
 	exhibition_closed = "#e30513",

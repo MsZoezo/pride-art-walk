@@ -5,6 +5,11 @@ import useSWR from "swr";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+/**
+ * Hook to retrieve about data from server or cache.
+ *
+ * @returns Data, and SWR specific variables
+ */
 export default function useAbout() {
 	const [retryTime, setRetryTime] = useState<number>(0);
 	const intervalRef = useRef<NodeJS.Timeout>(null);

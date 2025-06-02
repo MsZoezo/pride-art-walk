@@ -1,5 +1,11 @@
 import { IScheduleDate } from "@/types/IScheduleDate";
 
+/**
+ * Check if an exhibition is open by checking the schedules array.
+ *
+ * @param schedules The array with all schedules
+ * @returns If the exhibition is open or not
+ */
 export default function isOpen(schedules: IScheduleDate[]): boolean {
 	const timestamp = Math.round(Date.now() / 1000);
 

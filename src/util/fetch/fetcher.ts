@@ -1,3 +1,9 @@
+/**
+ * Fetch data of Type from url.
+ *
+ * @param url The url to fetch from
+ * @returns Data of Type or null
+ */
 export default async function fetcher<Type>(url: string): Promise<Type | null> {
 	let response;
 	try {

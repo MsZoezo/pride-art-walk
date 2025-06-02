@@ -17,7 +17,3 @@ export async function getTags(): Promise<ITag[]> {
 		return [];
 	}
 }
-
-export async function showExhibition() {
-	// TODO
-}
