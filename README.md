@@ -31,8 +31,39 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment (static)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To deploy this application follow these steps
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Check your node version (at least 18.*)
+
+2. Make sure that next.config.ts has output: 'export',
+
+3. npm i
+
+4. npm run build
+
+5. compress the generated .next folder.
+
+6. open cPanel
+
+7. navigate to root of your website (usually public_html)
+
+8. place the contents of the compressed folder in the root
+    a. Its important that you place the content and not the folder itself in root.
+
+9. enjoy!
+
+## Changing the map
+
+To change the map in this application, follow these steps
+
+1. go to https://github.com/protomaps/go-pmtiles/releases and download the latest version (in the form of a zip)
+
+2. place the zip in a trusted folder
+
+3. Run ./pmtiles extract https://build.protomaps.com/20250513.pmtiles holland.pmtiles --bbox=4.642120,52.205923,5.136437,52.721322
+
+You can change the --bbox to mach preferred boundaries
+The folder name "20250513.pmtiles" at the end of https://build.protomaps.com/20250513.pmtiles is the latest release at the time of writing. 
+In case there is a new release or you wish to display an older version of the map, you can check snapshots in https://maps.protomaps.com/builds/
