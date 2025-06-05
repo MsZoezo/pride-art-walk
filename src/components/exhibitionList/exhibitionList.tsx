@@ -49,6 +49,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
 					exhibition.title.toLowerCase().includes(lowerSearch) ||
 					exhibition.address?.toLowerCase().includes(lowerSearch) ||
 					exhibition.venue_name?.toLowerCase().includes(lowerSearch) ||
+					exhibition.description?.toLowerCase().includes(lowerSearch) ||
 					exhibition.artist_name?.some(artist =>
 						artist.toLowerCase().includes(lowerSearch),
 					),
