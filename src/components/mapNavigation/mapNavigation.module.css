@@ -59,7 +59,8 @@
 	height: 7.5rem;
 	left: -30%;
 
-	fill: rgb(208, 235, 252, 0.85);
+	fill: #ffde00;
+	fill-opacity: 0.8;
 	z-index: -1;
 }
 
