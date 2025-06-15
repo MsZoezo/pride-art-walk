@@ -11,7 +11,7 @@ export default function AboutContactArticle({ email }: Props) {
 			<p>You can contact us via:</p>
 			{email ? (
 				<div>
-					<ContactLink href="mailto:info@mbo-hub.amsterdam">
+					<ContactLink href={`mailto:${email}`}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
