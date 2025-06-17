@@ -35,11 +35,12 @@ export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
 				<ul className={styles.tags}>
 					{exhibition.tags.map((tag, i) => (
 						<Tag
-							key={`${exhibition.title}-tags-${i}`}
-							text={tag.name}
-							id={tag.id}
-							index={i}
-						/>
+						key={`${exhibition.title}-tags-${i}`}
+						text={tag.name}
+						image={tag.image}
+						id={tag.id}
+						index={i}
+					/>
 					))}
 				</ul>
 

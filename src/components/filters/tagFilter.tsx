@@ -2,6 +2,7 @@ import { CSSProperties, useMemo, useRef, useState } from "react";
 import styles from "./tagFilter.module.css";
 import useTags from "@/hooks/useTags";
 import { useListContext } from "@/context/ListContextProvider";
+import Tag from "@/components/tag/tag";
 
 interface Props {
 	contentType?: string;
@@ -38,14 +39,18 @@ export default function TagFilter({ contentType }: Props) {
 				ref={tagsRef}
 			>
 				{tags?.map((tag, i) => (
-					<button
-						key={`filter-${i}`}
+					<div
+						key={`filter-${tag.id}`}
 						onClick={() => onClick(tag.id)}
-						className={`${styles.button} ${selectedTags.includes(tag.id) ? styles.selected : ""}`}
 						style={{ "--stagger": `${i * 100}ms` } as CSSProperties}
 					>
-						{tag.name}
-					</button>
+						<Tag
+							id={tag.id}
+							text={tag.name}
+							image={tag.image}
+							index={i}
+						/>
+					</div>
 				))}
 			</div>
 		</div>

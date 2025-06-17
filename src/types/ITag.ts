@@ -6,5 +6,7 @@ export interface ITag {
 	id: number;
 
 	/** The name of the tag. */
-	name: string;
+	name: string | null;
+
+	image?: string | null;
 }

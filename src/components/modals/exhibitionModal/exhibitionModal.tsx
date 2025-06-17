@@ -103,12 +103,13 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
 
 			<ul className={styles.tags}>
 				{exhibition.tags.map((tag, i) => (
-					<Tag
-						key={`${exhibition.title}-tags-${i}`}
-						text={tag.name}
-						id={tag.id}
-						index={i}
-					/>
+				<Tag
+					key={`${exhibition.title}-tags-${i}`}
+					text={tag.name}
+					image={tag.image}
+					id={tag.id}
+					index={i}
+				/>
 				))}
 			</ul>
 
