@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-	title: "Pride Walk App",
+	title: "Pride Art Route",
 	description: "",
 };
 
