@@ -71,7 +71,7 @@ export default function ExhibitionList({ exhibitions }: Props) {
 						key={`${i}-${exhibition.id}`}
 						index={i}
 						exhibition={exhibition}
-						onClick={() => showModal(exhibition.id)}
+						onClick={() => showModal(exhibition.slug)}
 					/>
 				))}
 			</section>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 interface Unique {
 	id: number;
 	title: string;
+	slug: string;
 }
 
 /**
@@ -30,8 +31,8 @@ export default function useModalParams<T extends Unique>(
 	const { initialLoad } = useLoadContext()!;
 	const params = useSearchParams();
 
-	const showModal = (id: number) => {
-		window.history.pushState(null, "", `${baseUrl}?${key}=${id}`);
+	const showModal = (slug: string) => {
+		window.history.pushState(null, "", `${baseUrl}?${key}=${slug}`);
 	};
 
 	const closeModal = () => {
@@ -55,14 +56,17 @@ export default function useModalParams<T extends Unique>(
 	};
 
 	useEffect(() => {
-		const id = params.get(key);
+		const slug = params.get(key);
 
-		if (!id) {
+		if (!slug) {
 			close();
 			return;
 		}
 
-		const item = items.find(val => val.id === Number(id));
+		let item = items.find(val => val.slug === slug);
+
+		// If the slug is an id, we will look for id instead.
+		if(!item && !Number.isNaN(Number(slug))) item = items.find(val => val.id === Number(slug));
 
 		if (item === currentItem && isOpen) return;
 

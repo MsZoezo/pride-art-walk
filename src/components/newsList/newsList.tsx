@@ -59,7 +59,7 @@ export default function NewsList({ news }: Props) {
 						key={`${i}-${news.id}`}
 						index={i}
 						news={news}
-						onClick={() => showModal(news.id)}
+						onClick={() => showModal(news.slug)}
 					/>
 				))}
 			</section>
