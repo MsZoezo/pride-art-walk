@@ -9,6 +9,9 @@ export interface INews extends IDocument, IImage {
 	/** Title of the news item */
 	title: string;
 
+	/** Slug of the news item */
+	slug: string;
+
 	/** Publish date of the news item */
 	date: string;
 

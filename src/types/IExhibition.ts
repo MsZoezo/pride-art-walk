@@ -10,6 +10,9 @@ export interface IExhibition extends IDocument, IImage {
 	/** Title of the exhibition. */
 	title: string;
 
+	/** Slug of the exhibition. */
+	slug: string;
+
 	/** List of descriptive tags relevant to the exhibition. */
 	tags: ITag[];
 

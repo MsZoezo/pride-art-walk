@@ -9,7 +9,7 @@ import { colors } from "@/util/theme";
 interface Props {
 	exhibition: IExhibition;
 
-	onClick: (id: number) => void;
+	onClick: (slug: string) => void;
 
 	transparent: boolean;
 }
@@ -28,7 +28,7 @@ export default function ExhibitionMarker({ exhibition, onClick, transparent }: P
 			className={opened ? styles.opened : undefined}
 			latitude={exhibition.location[0]}
 			longitude={exhibition.location[1]}
-			onClick={() => onClick(exhibition.id)}
+			onClick={() => onClick(exhibition.slug)}
 		>
 			<svg
 				className={styles.marker}
