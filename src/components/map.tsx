@@ -60,7 +60,7 @@ export default function Map({ exhibitions, setIsMapLoading }: Props) {
 				initialViewState={initialViewState}
 				minZoom={minMapZoom}
 				maxZoom={maxMapZoom}
-				style={{ height: "100vh", width: "100%" }}
+				style={{ height: "100dvh", width: "100%" }}
 				maxBounds={mapBounds}
 				attributionControl={false}
 				reuseMaps={true}
