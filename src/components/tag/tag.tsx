@@ -2,7 +2,7 @@ import { useListContext } from "@/context/ListContextProvider";
 import styles from "./tag.module.css";
 
 interface Props {
-	text?: string;
+	text?: string | null;
 	image?: string | null;
 	id: number;
 	index?: number;
@@ -15,7 +15,6 @@ export default function Tag({ text, image, id, index }: Props) {
 	const { selectedTags } = useListContext() ?? {};
 	const background = colours[(index ?? 0) % colours.length];
 	const isSelected = selectedTags?.includes(id);
-	const imageBaseUrl = process.env.NEXT_PUBLIC_API_CONTENT_URL;
 
 	return (
 		<li
