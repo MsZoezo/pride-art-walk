@@ -105,7 +105,7 @@ export default function ExhibitionModal({ isOpen, onClose, exhibition }: Props) 
 				{exhibition.tags.map((tag, i) => (
 				<Tag
 					key={`${exhibition.title}-tags-${i}`}
-					text={tag.name}
+					text={tag.name ?? undefined}
 					image={tag.image}
 					id={tag.id}
 					index={i}

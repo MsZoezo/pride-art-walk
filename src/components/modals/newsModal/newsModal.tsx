@@ -64,7 +64,7 @@ export default function NewsModal({ isOpen, onClose, news }: Props) {
 				{news.tags.map((tag, i) => (
 					<Tag
 						key={`${news.title}-tags-${i}`}
-						text={tag.name}
+						text={tag.name ?? undefined}
 						id={tag.id}
 						index={i}
 					/>
