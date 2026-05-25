@@ -20,9 +20,9 @@ interface Cluster {
 }
 
 function clusterExhibitions(exhibitions: IExhibition[]): Cluster[] {
-	// Very small threshold - only cluster if almost exact same location
-	// ~0.0003 degrees = roughly 30 meters
-	const threshold = 0.0003;
+	// Cluster threshold - exhibitions within ~50 meters
+	// ~0.0005 degrees = roughly 50 meters
+	const threshold = 0.0005;
 
 	const clusters: Cluster[] = [];
 	const assigned = new Set<number>();
