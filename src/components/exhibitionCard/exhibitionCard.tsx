@@ -36,7 +36,7 @@ export default function ExhibitionCard({ exhibition, onClick, index }: Props) {
 					{exhibition.tags.map((tag, i) => (
 						<Tag
 						key={`${exhibition.title}-tags-${i}`}
-						text={tag.name}
+						text={tag.name ?? undefined}
 						image={tag.image}
 						id={tag.id}
 						index={i}
