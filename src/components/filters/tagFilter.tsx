@@ -46,7 +46,7 @@ export default function TagFilter({ contentType }: Props) {
 					>
 						<Tag
 							id={tag.id}
-							text={tag.name}
+							text={tag.name ?? undefined}
 							image={tag.image}
 							index={i}
 						/>
