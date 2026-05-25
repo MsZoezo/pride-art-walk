@@ -1,0 +1,8 @@
+.marker {
+	transition: opacity 250ms ease-in-out;
+	cursor: pointer;
+}
+
+.opened {
+	z-index: 2;
+}

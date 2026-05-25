@@ -39,4 +39,7 @@ export interface IExhibition extends IDocument, IImage {
 
 	/** If the exhibition is active & should be displayed. */
 	is_active: boolean;
+
+	/** If the marker should be displayed as a star instead of a circle. */
+	is_star: boolean;
 }

@@ -7,6 +7,7 @@ import LoadingScreen from "@/components/loadingScreen/loadingScreen";
 import { MapContextProvider } from "@/context/MapContextProvider";
 import NewsRibbon from "@/components/newsRibbon/newsRibbon";
 import MapFilters from "@/components/mapFilters/mapFilters";
+import TodayOpenButton from "@/components/todayOpenButton/todayOpenButton";
 import useExhibitions from "@/hooks/useExhibitions";
 import Mascot from "@/components/mascot/mascot";
 import Legend from "@/components/legend/legend";
@@ -60,6 +61,7 @@ export default function Home() {
 				<div className={styles.mapIcons}>
 					<Legend loaded={!loading} />
 					<MapFilters />
+					<TodayOpenButton />
 				</div>
 			</MapContextProvider>
 
