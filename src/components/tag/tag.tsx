@@ -9,7 +9,6 @@ interface Props {
 }
 
 const colours = ["#F7C3DC66", "#D0EBFC66", "#C3E1CC66", "#829FAE66"];
-const imageBaseUrl = process.env.NEXT_PUBLIC_API_CONTENT_URL;
 
 export default function Tag({ text, image, id, index }: Props) {
 	const { selectedTags } = useListContext() ?? {};

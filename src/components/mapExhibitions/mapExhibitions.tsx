@@ -5,7 +5,7 @@ import ExhibitionMarker from "../exhibitionMarker/exhibitionMarker";
 import ClusterMarker from "../clusterMarker/clusterMarker";
 import ExhibitionModal from "../modals/exhibitionModal/exhibitionModal";
 import ClusterSelectionModal from "../modals/clusterSelectionModal/clusterSelectionModal";
-import { useMemo, useRef, useState, useCallback, useEffect } from "react";
+import { useMemo, useRef, useState, useCallback } from "react";
 import { useMapContext } from "@/context/MapContextProvider";
 import { ZoomPercentageContextProvider } from "@/context/ZoomPercentageContext";
 import useModalParams from "@/hooks/useModalParams";
@@ -19,7 +19,7 @@ interface Cluster {
 	longitude: number;
 }
 
-function clusterExhibitions(exhibitions: IExhibition[], zoomLevel: number): Cluster[] {
+function clusterExhibitions(exhibitions: IExhibition[]): Cluster[] {
 	// Very small threshold - only cluster if almost exact same location
 	// ~0.0003 degrees = roughly 30 meters
 	const threshold = 0.0003;
@@ -78,23 +78,6 @@ export default function MapExhibitions({ exhibitions }: Props) {
 	// State for cluster selection modal
 	const [clusterModalOpen, setClusterModalOpen] = useState(false);
 	const [selectedCluster, setSelectedCluster] = useState<IExhibition[]>([]);
-
-	// Get current zoom level for clustering
-	const [zoomLevel, setZoomLevel] = useState(initialMapZoom);
-
-	// Update zoom level when map moves
-	useEffect(() => {
-		if (!map.current) return;
-
-		const updateZoom = () => {
-			setZoomLevel(map.current?.getZoom() ?? initialMapZoom);
-		};
-
-		map.current.on("zoom", updateZoom);
-		return () => {
-			map.current?.off("zoom", updateZoom);
-		};
-	}, [map.current]);
 
 	const onModalOpen = (item: IExhibition) => {
 		if (!map.current) return;
@@ -158,11 +141,11 @@ export default function MapExhibitions({ exhibitions }: Props) {
 		return shownExhibitions.map(ex => ex.id);
 	}, [exhibitions, selectedTags]);
 
-	// Cluster exhibitions based on zoom level
+	// Cluster exhibitions based on location proximity
 	const clusters = useMemo(() => {
 		if (!exhibitions) return [];
-		return clusterExhibitions(exhibitions, zoomLevel);
-	}, [exhibitions, zoomLevel]);
+		return clusterExhibitions(exhibitions);
+	}, [exhibitions]);
 
 	const handleClusterClick = useCallback((clusterExhibitions: IExhibition[]) => {
 		setSelectedCluster(clusterExhibitions);
