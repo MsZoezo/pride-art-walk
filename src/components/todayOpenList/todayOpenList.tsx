@@ -43,18 +43,26 @@ export default function TodayOpenList({ exhibitions }: Props) {
 			// Filter out exhibitions that have already ended
 			.filter(item => now <= item.todaySchedule.end_time);
 
-		// Sort: currently open first, then by start time
-		return exhibitionsWithSchedule.sort((a, b) => {
-			const aIsOpen = now >= a.todaySchedule.start_time && now <= a.todaySchedule.end_time;
-			const bIsOpen = now >= b.todaySchedule.start_time && now <= b.todaySchedule.end_time;
+		// Shuffle function
+		const shuffle = <T,>(array: T[]): T[] => {
+			const shuffled = [...array];
+			for (let i = shuffled.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+			}
+			return shuffled;
+		};
 
-			// Open exhibitions come first
-			if (aIsOpen && !bIsOpen) return -1;
-			if (!aIsOpen && bIsOpen) return 1;
+		// Separate open and upcoming exhibitions
+		const openExhibitions = exhibitionsWithSchedule.filter(
+			item => now >= item.todaySchedule.start_time && now <= item.todaySchedule.end_time
+		);
+		const upcomingExhibitions = exhibitionsWithSchedule.filter(
+			item => now < item.todaySchedule.start_time
+		);
 
-			// Within same group, sort by start time
-			return a.todaySchedule.start_time - b.todaySchedule.start_time;
-		});
+		// Shuffle each group and combine (open first, then upcoming)
+		return [...shuffle(openExhibitions), ...shuffle(upcomingExhibitions)];
 	}, [exhibitions]);
 
 	return (
